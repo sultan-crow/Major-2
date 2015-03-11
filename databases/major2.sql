@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2015 at 04:24 AM
+-- Generation Time: Mar 11, 2015 at 04:42 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -23,12 +23,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `research`
+--
+
+CREATE TABLE IF NOT EXISTS `research` (
+  `r_id` int(20) NOT NULL,
+  `r_text` text NOT NULL,
+  `t_user_name` text NOT NULL,
+  `link` varchar(1000) NOT NULL,
+  UNIQUE KEY `r_id` (`r_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_fac`
 --
 
 CREATE TABLE IF NOT EXISTS `user_fac` (
   `u_id` int(10) NOT NULL,
-  `user_name` varchar(25) NOT NULL,
+  `t_user_name` varchar(25) NOT NULL,
   `password` varchar(30) NOT NULL,
   `role` text NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -37,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `user_fac` (
   `qualification` text NOT NULL,
   `dob` varchar(12) NOT NULL,
   `email` varchar(50) NOT NULL,
-  PRIMARY KEY (`user_name`),
+  PRIMARY KEY (`t_user_name`),
   UNIQUE KEY `u_id` (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

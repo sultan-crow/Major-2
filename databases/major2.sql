@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2015 at 04:42 AM
+-- Generation Time: Mar 13, 2015 at 01:53 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `user_fac` (
   `role` text NOT NULL,
   `name` varchar(50) NOT NULL,
   `sex` char(1) NOT NULL,
+  `pic` varchar(250) NOT NULL,
   `designation` varchar(80) NOT NULL,
   `qualification` text NOT NULL,
   `dob` varchar(12) NOT NULL,
@@ -54,6 +55,13 @@ CREATE TABLE IF NOT EXISTS `user_fac` (
   PRIMARY KEY (`t_user_name`),
   UNIQUE KEY `u_id` (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_fac`
+--
+
+INSERT INTO `user_fac` (`u_id`, `t_user_name`, `password`, `role`, `name`, `sex`, `pic`, `designation`, `qualification`, `dob`, `email`) VALUES
+(1, 'rsrivastava', 'mathematics', 'faculty', 'Dr. R. Srivastava', 'm', 'http://people.dce.edu/faculty/userimages/rsrivastava.jpg', 'Assistant Professor', 'Phd.', '01-01-1980', 'r.srivastva@gmail.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

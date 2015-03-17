@@ -1,0 +1,139 @@
+body {
+
+	background: url("../images/slash_it.png");
+	font-family: 'Convergence', sans-serif;
+
+}
+
+.login_box {
+
+	background-color: #E2E0E2;
+	border: solid 3px #aba;
+	box-shadow: 0px 0px 50px #888888;
+	border-radius: 1px;
+	display:block;
+	margin-left: 27%;
+	margin-top: 5%;
+	margin-right: 30%;
+	padding: 20px;
+
+}
+
+.notice_box {
+
+	background-color: #E2E2E2;
+	border: solid 3px #aaa;
+	box-shadow: 0px 0px 50px #888888;
+	border-radius: 10px;
+	display:block;
+	margin-left: 25%;
+	margin-top: 5%;
+	width: 600px;
+	height: 410px;
+	padding: 20px;
+	overflow-y: scroll;
+
+}
+
+#all_notices {
+
+	background-color: #723823;
+	text-align: center;
+	border: solid 3px #aaa;
+	box-shadow: 0px 0px 50px #888888;
+	border-radius: 10px;
+	height: 410px;
+	padding: 20px;
+	width: 275px;
+	overflow-y: scroll;
+	overflow-x: scroll;
+	float:left;
+	margin-right: 25px;
+
+}
+
+#all_notices a, a:visited {
+
+	color:#000;
+	text-decoration: none;
+
+}
+
+
+#notices {
+
+	float:left;
+	
+}
+
+#details {
+
+	margin-top: 5%;
+	margin-left: 25%;
+
+}
+
+#button {
+
+	margin-left: 45%;
+	margin-top: 5%;
+	border: none;
+	background: url('../images/up.png') no-repeat top left;
+
+}
+
+#heading {
+
+	text-align: center;
+	color: #0B3861;
+	font-family
+
+}
+
+#logout {
+
+	float:right;
+	margin-top: -50px;
+	margin-right: -40px;
+
+}
+
+#main_heading {
+
+	display:box;
+	color:#fff;
+	font-size: 26px;
+	text-align:center;
+	margin-top:80px;
+
+}
+
+#main_body {
+
+	margin-left: 10%;
+
+}
+
+#add {
+
+	position:absolute;
+	top: 80px;
+	right: 325px;
+
+}
+
+#edit {
+
+	position:absolute;
+	top: 80px;
+	right: 275px;
+
+}
+
+#delete {
+
+	position:absolute;
+	top: 80px;
+	right: 225px;
+
+}

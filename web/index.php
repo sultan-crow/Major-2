@@ -1,6 +1,10 @@
 <?php
+session_start();
 require_once 'connection.php';
-
+if(!isset($_SESSION['t_user_name']))
+{
+	header('location:login.php');
+}
 
 require_once('connection.php');
 //$user=$list["user"];
@@ -73,6 +77,25 @@ $detail= mysql_fetch_array($res,0);
     margin-top: -3em;
 	background-color:red;
 	}
+	a{
+		color:666666;
+		
+	}
+	a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
 body{
 	background:#CCCCB2;
 	
@@ -82,14 +105,14 @@ body{
 <body>
 <div id="header">
 <span id="dp">
-<img src="<?php echo $detail[6]?>" alt="<?php echo $detail[4]?>" height="100" width="100"/>
+<img src="<?php echo $detail[6]?>" title="<?php echo $detail[4]?>" height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
 <h4>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Delhi Technological University</h4>
 </span>
 <span id="logo">
-<img src="images/logo.jpg"height="100" width="100"/>
+<img src="images/logo.jpg" title="DTU" height="100" width="100"/>
 </span>
 </div>
 
@@ -99,6 +122,7 @@ body{
 <a href="#">About</a><br>
 <a href="#">Research</a><br>
 <a href="#">Posts</a><br>
+<a href="logout.php">Logout</a><br>
 </span>
 <span id="detail">
 <table>
@@ -140,6 +164,9 @@ echo $detail[10];
 </span>
 </div>
 <div id="footer">
+<a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
+<a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
+<a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
 </div>
 
 

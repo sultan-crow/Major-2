@@ -16,33 +16,83 @@ $detail= mysql_fetch_array($res,0);
 <style>
 #header{
 	margin-top:0px;
-	width:150px;
+	height:100px;
+	background:#fffccc;
+
 	
 }
 #detail{
-	margin-left:300px;
-	margin-top:200px;
-	width:500px;
-	height:400px;
+	
+	
+	background-color: #E4E2E2;
+	border: solid 3px #aba;
+	box-shadow: 0px 0px 50px #888888;
+	display:block;
+	margin-left: 15%;
+	margin-top: 2%;
+	width: 800px;
+	height: 400px;
+	padding: 20px;
+	position:absolute;
 	
 }
 #links{
 	float:left;
-	margin-top:100px;
+	background-color: #E00002;
+	border: solid 3px #aba;
+	box-shadow: 0px 0px 50px #888888;
+	display:block;
+	margin-left: 1%;
+	margin-top: 2%;
+	width: 600px;
+	height: 400px;
+	padding: 20px;
 	
 }
 #dp{
 	
-	width:80px;
-	height:50px;
+	
+	margin-left:20px;
 }
+#title{
+	
+	position:absolute;
+	margin-left:250px;
+	
+}
+#logo{
+	
+	float:right;
+	}
+	
+#footer{
+	clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+	background-color:red;
+	}
+body{
+	background:#CCCCB2;
+	
+}
+
 </style>
 <body>
 <div id="header">
 <span id="dp">
-<img src="<?php echo $detail[6]?>" alt="<?php echo $detail[4]?>" ></span>
-<span id="logo"></span>
+<img src="<?php echo $detail[6]?>" alt="<?php echo $detail[4]?>" height="100" width="100"/>
+</span>
+<span id="title">
+<h1>Department of Applied Mathematics</h1>
+<h4>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Delhi Technological University</h4>
+</span>
+<span id="logo">
+<img src="images/logo.jpg"height="100" width="100"/>
+</span>
 </div>
+
 
 <div id="content">
 <span id="links">
@@ -91,6 +141,8 @@ echo $detail[10];
 </div>
 <div id="footer">
 </div>
+
+
 </body>
 
 </html>

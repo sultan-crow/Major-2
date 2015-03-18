@@ -8,7 +8,7 @@ if(!isset($_SESSION['t_user_name']))
 
 require_once('connection.php');
 //$user=$list["user"];
-$user='rsrivastava';
+$user=($_SESSION['t_user_name']);
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
@@ -119,49 +119,13 @@ body{
 
 <div id="content">
 <span id="links">
-<a href="#">About</a><br>
-<a href="#">Research</a><br>
-<a href="#">Posts</a><br>
+<a href="#" onclick="myfun(this.id)" id="about">About</a><br>
+<a href="#" onclick="myfun(this.id)" id="research">Research</a><br>
+<a href="#" onclick="myfun(this.id)" id="post">Posts</a><br>
 <a href="logout.php">Logout</a><br>
 </span>
 <span id="detail">
-<table>
-<tr>
-<td>Name: </td>
-<td><?php
-echo $detail[4];
-?></td>
-</tr>
-<tr>
-<td>Designation :</td>
-<td><?php
-echo $detail[7];
-?></td>
-</tr>
-<tr>
-<td>Sex:</td>
-<td><?php
-echo $detail[5];
-?></td>
-</tr>
-<tr>
-<td>Qualification:</td>
-<td><?php
-echo $detail[8];
-?></td>
-</tr><tr>
-<td>Date of Birth:</td>
-<td><?php
-echo $detail[9];
-?></td>
-</tr><tr>
-<td>Email :</td>
-<td><?php
-echo $detail[10];
-?></td>
-</tr>
-</table>
-</span>
+
 </div>
 <div id="footer">
 <a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
@@ -171,5 +135,15 @@ echo $detail[10];
 
 
 </body>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script>
+function myfun(res){
+	var result=res +".php";
+	$("#detail").load(result);
+	
+}
+
+</script>
 
 </html>

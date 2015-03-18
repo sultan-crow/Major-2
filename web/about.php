@@ -30,9 +30,9 @@ echo $detail[7];
 ?></td>
 </tr>
 <tr>
-<td>Sex:</td>
+<td>Gender:</td>
 <td><?php
-echo $detail[5];
+echo $detail[5]=='m'?"Male":"Female";
 ?></td>
 </tr>
 <tr>

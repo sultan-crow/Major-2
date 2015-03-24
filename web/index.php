@@ -99,22 +99,9 @@ body{
 	
 }
 
-#popup{
-	
-	z-index: 1000;
-	position: absolute;
-	background-color: #effcc;
-	border: 10px solid black;
-	width: 100px;
-	height: 400px;
-	display:block;	
-	
-}
+
 </style>
 <body>
-<div id="popup">
-<input type="text">
-</div>
 
 <div id="header">
 <span id="dp">
@@ -154,6 +141,8 @@ body{
 
 $("#detail").load("about.php");
 function myfun(res){
+		$("#popup").css("display","block");
+
 	var result=res +".php";
 	$("#detail").load(result);
 	

@@ -58,9 +58,25 @@ a:active {
 	float:top;
 	
 }
-
+#popup{
+	
+	z-index: 1000;
+	position: absolute;
+	background-color: #effcc;
+	margin-left:40%;
+	border: 1px solid black;
+	width: 250px;
+	height: 150px;
+	display:none;
+	
+}
 </style>
 <body>
+<div id="popup" >
+<label>Enter your password</label>
+<input type="password" >
+</div>
+
 <div id="title1">
 <center>Research Papers Published</center>
 </div>
@@ -84,7 +100,10 @@ for($i=0;$i<$count;$i++){?>
 
 <script>
 user= <?php echo $user?>
+
 function action(r_id,type){
+			$("#popup").css("display","block");
+
 	$.ajax({
 		url:'research_action.php',
 		type:'POST',

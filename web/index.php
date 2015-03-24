@@ -6,8 +6,6 @@ if(!isset($_SESSION['t_user_name']))
 	header('location:login.php');
 }
 
-require_once('connection.php');
-//$user=$list["user"];
 $user=($_SESSION['t_user_name']);
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
 $res=mysql_query($query,$con);
@@ -21,7 +19,7 @@ $detail= mysql_fetch_array($res,0);
 #header{
 	margin-top:0px;
 	height:100px;
-	background:#fffccc;
+	background:#af123c;
 
 	
 }
@@ -33,7 +31,7 @@ $detail= mysql_fetch_array($res,0);
 	box-shadow: 0px 0px 50px #888888;
 	display:block;
 	margin-left: 15%;
-	margin-top: 2%;
+	margin-top: 1%;
 	width: 800px;
 	height: 400px;
 	padding: 20px;
@@ -46,8 +44,8 @@ $detail= mysql_fetch_array($res,0);
 	border: solid 3px #aba;
 	box-shadow: 0px 0px 50px #888888;
 	display:block;
-	margin-left: 1%;
-	margin-top: 2%;
+	margin-left: 3%;
+	margin-top: 1%;
 	width: 600px;
 	height: 400px;
 	padding: 20px;
@@ -101,8 +99,23 @@ body{
 	
 }
 
+#popup{
+	
+	z-index: 1000;
+	position: absolute;
+	background-color: #effcc;
+	border: 10px solid black;
+	width: 100px;
+	height: 400px;
+	display:block;	
+	
+}
 </style>
 <body>
+<div id="popup">
+<input type="text">
+</div>
+
 <div id="header">
 <span id="dp">
 <img src="<?php echo $detail[6]?>" title="<?php echo $detail[4]?>" height="100" width="100"/>
@@ -119,9 +132,9 @@ body{
 
 <div id="content">
 <span id="links">
-<a href="#" onclick="myfun(this.id)" id="about">About</a><br>
-<a href="#" onclick="myfun(this.id)" id="research">Research</a><br>
-<a href="#" onclick="myfun(this.id)" id="post">Posts</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="about">About</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="research">Research</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="post">Posts</a><br>
 <a href="logout.php">Logout</a><br>
 </span>
 <span id="detail">
@@ -138,9 +151,12 @@ body{
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script>
+
+$("#detail").load("about.php");
 function myfun(res){
 	var result=res +".php";
 	$("#detail").load(result);
+	
 	
 }
 

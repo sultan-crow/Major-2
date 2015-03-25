@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 13, 2015 at 01:53 AM
+-- Generation Time: Mar 25, 2015 at 01:17 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -23,6 +23,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `posts`
+--
+
+CREATE TABLE IF NOT EXISTS `posts` (
+  `post_id` int(20) NOT NULL AUTO_INCREMENT,
+  `comment_id` varchar(20) NOT NULL,
+  `t_user_name` varchar(50) NOT NULL,
+  `comment_text` varchar(1000) NOT NULL,
+  `time` varchar(25) NOT NULL,
+  `date` varchar(25) NOT NULL,
+  PRIMARY KEY (`post_id`),
+  UNIQUE KEY `post_id` (`post_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`post_id`, `comment_id`, `t_user_name`, `comment_text`, `time`, `date`) VALUES
+(4, 'dd', '', 'byee', '', '2015-03-22'),
+(5, 'dd', '', 'ketan', '', '2015-03-22'),
+(6, 'dd', '', 'vj', '', '2015-03-22'),
+(7, 'dd', '', 'kk', '', '2015-03-22'),
+(8, 'dd', '', 'vj', '12:45:25', '2015-03-22'),
+(9, 'dd', '', 'dd', '21:24:27', '2015-03-22'),
+(10, 'dd', '', 'ddd', '21:25:12', '2015-03-22'),
+(11, 'dd', '', 'qq', '21:27:59', '2015-03-22'),
+(12, 'dd', '', 'hello', '21:28:11', '2015-03-22');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `research`
 --
 
@@ -33,6 +65,14 @@ CREATE TABLE IF NOT EXISTS `research` (
   `link` varchar(1000) NOT NULL,
   UNIQUE KEY `r_id` (`r_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `research`
+--
+
+INSERT INTO `research` (`r_id`, `r_text`, `t_user_name`, `link`) VALUES
+(1, 'wfqw', 'wqrqw', 'wrqw'),
+(2, 'dhKLH', 'rsrivastava', 'saa');
 
 -- --------------------------------------------------------
 

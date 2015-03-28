@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include('connection.php');
 
 $comment= $_POST['comment'];

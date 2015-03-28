@@ -21,7 +21,7 @@ $detail= mysql_fetch_array($res,0);
 
 <div id="header">
 <span id="dp">
-<img src="<?php echo $detail[6]?>" title="<?php echo $detail[4]?>" height="100" width="100"/>
+<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -35,10 +35,12 @@ $detail= mysql_fetch_array($res,0);
 
 <div id="content">
 <span id="links">
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="about">About</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="research">Research</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="post">Posts</a><br>
-<a href="logout.php">Logout</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">About</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="research" class="links">Research</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="post" class="links">Posts</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
+<a href="logout.php"class="links">Logout</a><br>
 </span>
 <span id="detail">
 
@@ -52,6 +54,7 @@ $detail= mysql_fetch_array($res,0);
 
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/style.js" type="text/javascript"></script>
 
 <script>
 

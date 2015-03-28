@@ -106,6 +106,9 @@ a:active {
 	float:top;
 	
 }
+.links{
+background-color:green;
+}
 #popup{
 	
 	z-index: 1000;
@@ -124,4 +127,13 @@ a:active {
 margin-left:150px	;
   display:inline-block;
 
+  }
+  #newpost{
+  border: solid 1px #aba;
+	box-shadow: 0px 0px 10px #111;
+	display:block;
+	width: 580px;
+	margin-top:5px;
+	height: 140px;
+	padding: 0px;
   }

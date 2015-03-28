@@ -12,13 +12,14 @@ $_SESSION['t_user_name'];
 <body>
 <table>
 <?php 
-$query="SELECT * FROM posts";
+$user=$_SESSION['t_user_name'];
+$query="SELECT * FROM posts WHERE t_user_name='$user'";
 $rows=mysql_query($query);
 $count=mysql_num_rows($rows);
 for($i=0;$i<$count;$i++)
 {?>
 	<tr>
-	<?php echo mysql_result($rows,$i,"comment_text") ?><br/>
+	<?php echo mysql_result($rows,$i,"post_text") ?><br/>
 	</tr>
 <?php
 }
@@ -38,8 +39,7 @@ $.ajax({
 	type:'POST',
 	data: 'comment='+ comment,
 	success:function(){
-		
-	$("#detail").load("post.php");
+		$("#detail").load("post.php");
 		//location.reload();
 	}
 });

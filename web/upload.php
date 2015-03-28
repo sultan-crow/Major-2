@@ -1,4 +1,5 @@
 <?php
+session_start();
 $target_path="pdfs/";
 
 $target_path=$target_path.basename($_FILES['researchPdf']['name']);

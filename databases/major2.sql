@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2015 at 01:17 AM
+-- Generation Time: Mar 28, 2015 at 10:37 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -23,34 +23,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` text NOT NULL,
+  `user_id` text NOT NULL,
+  `comments` text NOT NULL,
+  `date` text NOT NULL,
+  `time` text NOT NULL,
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
 CREATE TABLE IF NOT EXISTS `posts` (
   `post_id` int(20) NOT NULL AUTO_INCREMENT,
-  `comment_id` varchar(20) NOT NULL,
   `t_user_name` varchar(50) NOT NULL,
-  `comment_text` varchar(1000) NOT NULL,
+  `class` text NOT NULL,
+  `post_title` text NOT NULL,
+  `post_text` varchar(1000) NOT NULL,
   `time` varchar(25) NOT NULL,
   `date` varchar(25) NOT NULL,
   PRIMARY KEY (`post_id`),
   UNIQUE KEY `post_id` (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`post_id`, `comment_id`, `t_user_name`, `comment_text`, `time`, `date`) VALUES
-(4, 'dd', '', 'byee', '', '2015-03-22'),
-(5, 'dd', '', 'ketan', '', '2015-03-22'),
-(6, 'dd', '', 'vj', '', '2015-03-22'),
-(7, 'dd', '', 'kk', '', '2015-03-22'),
-(8, 'dd', '', 'vj', '12:45:25', '2015-03-22'),
-(9, 'dd', '', 'dd', '21:24:27', '2015-03-22'),
-(10, 'dd', '', 'ddd', '21:25:12', '2015-03-22'),
-(11, 'dd', '', 'qq', '21:27:59', '2015-03-22'),
-(12, 'dd', '', 'hello', '21:28:11', '2015-03-22');
+INSERT INTO `posts` (`post_id`, `t_user_name`, `class`, `post_title`, `post_text`, `time`, `date`) VALUES
+(13, 'rsrivastava', '2', '3', 'wq', '12:00:56', '2015-03-28'),
+(14, 'rsrivastava', '2', '3', 'wq', '12:01:28', '2015-03-28'),
+(15, 'rsrivastava', '2', '3', 'dw', '12:01:40', '2015-03-28'),
+(16, 'cpsingh', '2', '3', 'hhr', '21:58:56', '2015-03-28'),
+(17, 'cpsingh', '2', '3', 'cppccp', '21:59:05', '2015-03-28');
 
 -- --------------------------------------------------------
 
@@ -84,7 +97,6 @@ CREATE TABLE IF NOT EXISTS `user_fac` (
   `u_id` int(10) NOT NULL,
   `t_user_name` varchar(25) NOT NULL,
   `password` varchar(30) NOT NULL,
-  `role` text NOT NULL,
   `name` varchar(50) NOT NULL,
   `sex` char(1) NOT NULL,
   `pic` varchar(250) NOT NULL,
@@ -100,8 +112,10 @@ CREATE TABLE IF NOT EXISTS `user_fac` (
 -- Dumping data for table `user_fac`
 --
 
-INSERT INTO `user_fac` (`u_id`, `t_user_name`, `password`, `role`, `name`, `sex`, `pic`, `designation`, `qualification`, `dob`, `email`) VALUES
-(1, 'rsrivastava', 'mathematics', 'faculty', 'Dr. R. Srivastava', 'm', 'http://people.dce.edu/faculty/userimages/rsrivastava.jpg', 'Assistant Professor', 'Phd.', '01-01-1980', 'r.srivastva@gmail.com');
+INSERT INTO `user_fac` (`u_id`, `t_user_name`, `password`, `name`, `sex`, `pic`, `designation`, `qualification`, `dob`, `email`) VALUES
+(0, 'cpsingh', 'mathematics', 'Dr. C.P. Singh', 'm', '', 'Assistant Professor', 'PhD', '02-02-1960', 'cpsingh@dce.edu'),
+(1, 'rsrivastava', 'mathematics', 'Dr. R. Srivastava', 'm', 'http://people.dce.edu/faculty/userimages/rsrivastava.jpg', 'Assistant Professor', 'Phd.', '01-01-1980', 'r.srivastva@gmail.com'),
+(3, 'sangitakansal', 'mathematics', 'faculty', 'f', 'M', 'Assistant Professor', 'PhD', '02-02-1960', 'cpsingh@dce.edu');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -14,67 +14,13 @@ $count= mysql_num_rows($result);
 
 ?>
 <html>
-<style>
-#title1{
-	font-size:30px;
-}
-#content1{
-	background-color:white;
-	text-color:blue;
-	font-color:red;
-	overflow-y:scroll;
-	
-}
-#cc{
-	background-color:green;
-	padding:3%;
-	margin-bottom:1%;
-	border-radius:3px;
-	font-size:50px;
-	font-color:white;
-	
-	
-}a{
-		color:blue;
-		
-	}
-	a:link {
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:active {
-    text-decoration: underline;
-}
-#delete{
-	float:right;
-	float:top;
-	
-}
-#popup{
-	
-	z-index: 1000;
-	position: absolute;
-	background-color: #effcc;
-	margin-left:40%;
-	border: 1px solid black;
-	width: 250px;
-	height: 150px;
-	display:none;
-	
-}
-</style>
 <body>
+
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <div id="popup" >
 <label>Enter your password</label>
 <input type="password" >
+<input type="button" onclick="" >
 </div>
 
 <div id="title1">
@@ -96,13 +42,21 @@ for($i=0;$i<$count;$i++){?>
 <?php
 }?>
 </div>
+<div id="add_research">
+<form action="upload.php" method="post" enctype="multipart/form-data">
+<textarea name="" rows="2" cols="50"/>
+<span><input type="file" name="researchPdf"></input></span>
+<span><input type="submit" value="Add"></span>
+</form>
+</div>
+
 </body>
 
 <script>
 user= <?php echo $user?>
 
 function action(r_id,type){
-			$("#popup").css("display","block");
+			//$("#popup").css("display","block");
 
 	$.ajax({
 		url:'research_action.php',

@@ -15,97 +15,13 @@ $detail= mysql_fetch_array($res,0);
 
 <html>
 <title>The Network|MCE</title>
-<style>
-#header{
-	margin-top:0px;
-	height:100px;
-	background:#af123c;
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	
-}
-#detail{
-	
-	
-	background-color: #E4E2E2;
-	border: solid 3px #aba;
-	box-shadow: 0px 0px 50px #888888;
-	display:block;
-	margin-left: 15%;
-	margin-top: 1%;
-	width: 800px;
-	height: 400px;
-	padding: 20px;
-	position:absolute;
-	
-}
-#links{
-	float:left;
-	background-color: #E00002;
-	border: solid 3px #aba;
-	box-shadow: 0px 0px 50px #888888;
-	display:block;
-	margin-left: 3%;
-	margin-top: 1%;
-	width: 600px;
-	height: 400px;
-	padding: 20px;
-	
-}
-#dp{
-	
-	
-	margin-left:20px;
-}
-#title{
-	
-	position:absolute;
-	margin-left:250px;
-	
-}
-#logo{
-	
-	float:right;
-	}
-	
-#footer{
-	clear: both;
-    position: relative;
-    z-index: 10;
-    height: 3em;
-    margin-top: -3em;
-	background-color:red;
-	}
-	a{
-		color:666666;
-		
-	}
-	a:link {
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:active {
-    text-decoration: underline;
-}
-body{
-	background:#CCCCB2;
-	
-}
-
-
-</style>
 <body>
 
 <div id="header">
 <span id="dp">
-<img src="<?php echo $detail[6]?>" title="<?php echo $detail[4]?>" height="100" width="100"/>
+<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -119,10 +35,12 @@ body{
 
 <div id="content">
 <span id="links">
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="about">About</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="research">Research</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="post">Posts</a><br>
-<a href="logout.php">Logout</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">About</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="research" class="links">Research</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="post" class="links">Posts</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
+<a href="logout.php"class="links">Logout</a><br>
 </span>
 <span id="detail">
 
@@ -136,12 +54,13 @@ body{
 
 </body>
 <script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/style.js" type="text/javascript"></script>
 
 <script>
 
 $("#detail").load("about.php");
 function myfun(res){
-		$("#popup").css("display","block");
+		//$("#popup").css("display","block");
 
 	var result=res +".php";
 	$("#detail").load(result);

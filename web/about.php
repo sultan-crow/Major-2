@@ -10,7 +10,7 @@ require_once('connection.php');
 //$user=$list["user"];
 $user=($_SESSION['t_user_name']);
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
-$res=mysql_query($query,$con);
+$res=mysql_query($query,$con)or  die('Could not connect: ' . mysql_error());;
 $detail= mysql_fetch_array($res,0);
 //echo $detail[0];
 ?>

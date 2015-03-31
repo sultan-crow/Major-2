@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2015 at 10:37 PM
+-- Generation Time: Apr 01, 2015 at 07:01 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `major2`
+-- Database: `social_network`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,22 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `date` text NOT NULL,
   `time` text NOT NULL,
   PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `messages`
+--
+
+CREATE TABLE IF NOT EXISTS `messages` (
+  `message_id` int(50) NOT NULL AUTO_INCREMENT,
+  `sent_by` int(11) NOT NULL,
+  `recieved_by` int(11) NOT NULL,
+  `message` int(11) NOT NULL,
+  `time` text NOT NULL,
+  `date` text NOT NULL,
+  PRIMARY KEY (`message_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -61,9 +77,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
 INSERT INTO `posts` (`post_id`, `t_user_name`, `class`, `post_title`, `post_text`, `time`, `date`) VALUES
 (13, 'rsrivastava', '2', '3', 'wq', '12:00:56', '2015-03-28'),
 (14, 'rsrivastava', '2', '3', 'wq', '12:01:28', '2015-03-28'),
-(15, 'rsrivastava', '2', '3', 'dw', '12:01:40', '2015-03-28'),
-(16, 'cpsingh', '2', '3', 'hhr', '21:58:56', '2015-03-28'),
-(17, 'cpsingh', '2', '3', 'cppccp', '21:59:05', '2015-03-28');
+(15, 'rsrivastava', '3', '3', 'dw', '12:01:40', '2015-03-28'),
+(16, 'cpsingh', '1', '3', 'hhr', '21:58:56', '2015-03-28'),
+(17, 'cpsingh', '4', '3', 'cppccp', '21:59:05', '2015-03-28');
 
 -- --------------------------------------------------------
 

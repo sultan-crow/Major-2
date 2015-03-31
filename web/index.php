@@ -35,7 +35,9 @@ $detail= mysql_fetch_array($res,0);
 <img src="images/logo.jpg" title="DTU" height="100" width="100"/>
 </span>
 </div>
+<style>
 
+</style>
 
 <div id="content">
 <span id="links">
@@ -44,9 +46,11 @@ $detail= mysql_fetch_array($res,0);
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="post" class="links">Posts</a><br>
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="students" class="links">Students</a><br>
 <a href="logout.php"class="links">Logout</a><br>
 </span>
-<span id="detail">
+<span id="detail"></span>
+<span id="chat"></span>
 
 </div>
 <div id="footer">
@@ -56,6 +60,7 @@ $detail= mysql_fetch_array($res,0);
 </div>
 <script>
 $("#detail").load("about.php");
+$("#chat").load("chatbox2");
 function myfun(res){
 		//$("#popup").css("display","block");
 

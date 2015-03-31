@@ -14,5 +14,5 @@ date_default_timezone_set('Asia/Calcutta');
 	
 $query="INSERT INTO posts(post_id,t_user_name,class,post_title,post_text,time,date) VALUES ('dd','$user','$class','$title','$post','$time','$date')";
 
-mysql_query($query);
+mysql_query($query)or  die('Could not connect: ' . mysql_error());;
 ?>

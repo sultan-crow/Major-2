@@ -8,7 +8,7 @@ if(!isset($_SESSION['t_user_name']))
 $user = $_SESSION['t_user_name'];
 
 $query="SELECT * FROM research WHERE t_user_name='$user'";
-$result=mysql_query($query,$con);
+$result=mysql_query($query,$con)or  die('Could not connect: ' . mysql_error());;
 $count= mysql_num_rows($result);
 
 

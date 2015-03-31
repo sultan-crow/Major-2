@@ -71,6 +71,7 @@ body{
 	text-color:blue;
 	font-color:red;
 	overflow-y:scroll;
+	margin-top:1%;
 	
 }
 #cc{
@@ -80,9 +81,15 @@ body{
 	border-radius:3px;
 	font-size:50px;
 	font-color:white;
-	
-	
-}a{
+	}
+#ccc{
+display:block;
+background-color:#c24157;
+padding:1%;
+margin-bottom:1%;
+height:20px;
+}
+	a{
 		color:blue;
 		
 	}
@@ -137,3 +144,19 @@ margin-left:150px	;
 	height: 140px;
 	padding: 0px;
   }
+  
+  .ff{
+	background-color:#231;
+	float:right;
+	margin-right:3px;
+	padding:7;
+	border:none;
+	width:70px;
+}
+.classtab{
+	background-color:55550;
+	padding:2px;
+	border-radius:6px;
+margin-left:30px;
+margin-right:30px;
+}

@@ -8,6 +8,6 @@ $user = $_SESSION['t_user_name'];
 if($pass=$passs){
 $query="DELETE FROM research where t_user_name='$user' && r_id='$r_id'";
 }
-$result=mysql_query($query);
+$result=mysql_query($query)or  die('Could not connect: ' . mysql_error());;
 //echo mysql_result($result,0,"link");
 ?>

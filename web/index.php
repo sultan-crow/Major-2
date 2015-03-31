@@ -17,8 +17,12 @@ $detail= mysql_fetch_array($res,0);
 <title>The Network|MCE</title>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 
-<body>
+<head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/style.js" type="text/javascript"></script>
 
+</head>
+<body>
 <div id="header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
@@ -50,14 +54,7 @@ $detail= mysql_fetch_array($res,0);
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
 </div>
-
-
-</body>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script src="js/style.js" type="text/javascript"></script>
-
 <script>
-
 $("#detail").load("about.php");
 function myfun(res){
 		//$("#popup").css("display","block");
@@ -67,7 +64,8 @@ function myfun(res){
 	
 	
 }
-
 </script>
+</body>
+
 
 </html>

@@ -33,8 +33,17 @@ $result=mysql_query($query);
 
 <script>
 function loadclass(classid){
-	var classroom='classrooms/'+classid+'.php';
-	$('#content1').load(classroom);
+var classroom='classrooms/'+classid+'.php';
+	
+
+	$.ajax({
+		url:'classroom_action.php',
+		type:'post',
+		data:'classs='+classid,
+		success:function(ss){
+				$('#content1').load('classroom_posts.php');
+		}
+	});
 	
 }
 </script>

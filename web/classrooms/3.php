@@ -9,12 +9,11 @@ $user=$_SESSION['s_user_name'];
 
 }
 else {
-	header('location:logout.php');
+	header('location:../logout.php');
 }
 
-include('connection.php');
-include('classroom_posts.php');
-$query="SELECT * FROM posts WHERE  class='$classid'";
+include('../connection.php');
+$query="SELECT * FROM posts WHERE  class='3'";
 $result=mysql_query($query,$con)or  die('Could not connect: ' . mysql_error());
 ;
 

@@ -13,7 +13,8 @@ else {
 }
 
 include('connection.php');
-include('classroom_posts.php');
+
+$classid=$_SESSION['class'];
 $query="SELECT * FROM posts WHERE  class='$classid'";
 $result=mysql_query($query,$con)or  die('Could not connect: ' . mysql_error());
 ;

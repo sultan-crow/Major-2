@@ -4,6 +4,7 @@ include('connection.php');
 $user=$_SESSION['t_user_name'];
 $query="SELECT * FROM posts";
 $result=mysql_query($query);
+$_SESSION['class']='2';
 ?>
 <html>
 <link rel="stylesheet" type="text/css" href="css/style.css	"/>
@@ -32,9 +33,10 @@ $result=mysql_query($query);
 </div>
 
 <script>
+	$('#content1').load('classroom_posts.php');
+
 function loadclass(classid){
 var classroom='classrooms/'+classid+'.php';
-	
 
 	$.ajax({
 		url:'classroom_action.php',

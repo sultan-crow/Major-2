@@ -6,8 +6,6 @@ if(!isset($_SESSION['t_user_name']))
 	header('location:login.php');
 }
 
-require_once('connection.php');
-//$user=$list["user"];
 $user=($_SESSION['t_user_name']);
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
 $res=mysql_query($query,$con);
@@ -17,95 +15,17 @@ $detail= mysql_fetch_array($res,0);
 
 <html>
 <title>The Network|MCE</title>
-<style>
-#header{
-	margin-top:0px;
-	height:100px;
-	background:#fffccc;
+<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	
-}
-#detail{
-	
-	
-	background-color: #E4E2E2;
-	border: solid 3px #aba;
-	box-shadow: 0px 0px 50px #888888;
-	display:block;
-	margin-left: 15%;
-	margin-top: 2%;
-	width: 800px;
-	height: 400px;
-	padding: 20px;
-	position:absolute;
-	
-}
-#links{
-	float:left;
-	background-color: #E00002;
-	border: solid 3px #aba;
-	box-shadow: 0px 0px 50px #888888;
-	display:block;
-	margin-left: 1%;
-	margin-top: 2%;
-	width: 600px;
-	height: 400px;
-	padding: 20px;
-	
-}
-#dp{
-	
-	
-	margin-left:20px;
-}
-#title{
-	
-	position:absolute;
-	margin-left:250px;
-	
-}
-#logo{
-	
-	float:right;
-	}
-	
-#footer{
-	clear: both;
-    position: relative;
-    z-index: 10;
-    height: 3em;
-    margin-top: -3em;
-	background-color:red;
-	}
-	a{
-		color:666666;
-		
-	}
-	a:link {
-    text-decoration: none;
-}
+<head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/style.js" type="text/javascript"></script>
 
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:active {
-    text-decoration: underline;
-}
-body{
-	background:#CCCCB2;
-	
-}
-
-</style>
+</head>
 <body>
 <div id="header">
 <span id="dp">
-<img src="<?php echo $detail[6]?>" title="<?php echo $detail[4]?>" height="100" width="100"/>
+<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -115,16 +35,22 @@ body{
 <img src="images/logo.jpg" title="DTU" height="100" width="100"/>
 </span>
 </div>
+<style>
 
+</style>
 
 <div id="content">
 <span id="links">
-<a href="#" onclick="myfun(this.id)" id="about">About</a><br>
-<a href="#" onclick="myfun(this.id)" id="research">Research</a><br>
-<a href="#" onclick="myfun(this.id)" id="post">Posts</a><br>
-<a href="logout.php">Logout</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">About</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="research" class="links">Research</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="post" class="links">Posts</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="students" class="links">Students</a><br>
+<a href="logout.php"class="links">Logout</a><br>
 </span>
-<span id="detail">
+<span id="detail"></span>
+<span id="chat"></span>
 
 </div>
 <div id="footer">
@@ -132,18 +58,19 @@ body{
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
 </div>
-
-
-</body>
-<script type="text/javascript" src="js/jquery.js"></script>
-
 <script>
+$("#detail").load("about.php");
+$("#chat").load("chatbox2");
 function myfun(res){
+		//$("#popup").css("display","block");
+
 	var result=res +".php";
 	$("#detail").load(result);
 	
+	
 }
-
 </script>
+</body>
+
 
 </html>

@@ -10,7 +10,7 @@ require_once('connection.php');
 //$user=$list["user"];
 $user=($_SESSION['t_user_name']);
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
-$res=mysql_query($query,$con);
+$res=mysql_query($query,$con)or  die('Could not connect: ' . mysql_error());;
 $detail= mysql_fetch_array($res,0);
 //echo $detail[0];
 ?>
@@ -20,38 +20,38 @@ $detail= mysql_fetch_array($res,0);
 <tr>
 <td>Name: </td>
 <td><?php
-echo $detail[4];
+echo $detail[3];
 ?></td>
 </tr>
 <tr>
 <td>Designation :</td>
 <td><?php
-echo $detail[7];
+echo $detail[6];
 ?></td>
 </tr>
 <tr>
 <td>Gender:</td>
 <td><?php
-echo $detail[5]=='m'?"Male":"Female";
+echo $detail[4]=='m'?"Male":"Female";
 ?></td>
 </tr>
 <tr>
 <td>Qualification:</td>
 <td><?php
-echo $detail[8];
+echo $detail[7];
 ?></td>
 </tr><tr>
 <td>Date of Birth:</td>
 <td><?php
-echo $detail[9];
+echo $detail[8];
 ?></td>
 </tr><tr>
 <td>Email :</td>
 <td><?php
-echo $detail[10];
+echo $detail[9];
 ?></td>
 </tr>
 </table>
 </span>
 </body>
-</html>
+</html>	

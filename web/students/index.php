@@ -1,13 +1,13 @@
 <?php
 session_start();
-require_once 'connection.php';
-if(!isset($_SESSION['t_user_name']))
+require_once '../connection.php';
+if(!isset($_SESSION['s_user_name']))
 {
 	header('location:login.php');
 }
 
-$user=($_SESSION['t_user_name']);
-$query="SELECT * FROM user_fac WHERE t_user_name='$user'";
+$user=($_SESSION['s_user_name']);
+$query="SELECT * FROM user_student WHERE s_user_name='$user'";
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
 //echo $detail[0];
@@ -15,11 +15,11 @@ $detail= mysql_fetch_array($res,0);
 
 <html>
 <title>The Network|MCE</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <head>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script src="js/style.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script src="..js/style.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -41,15 +41,18 @@ $detail= mysql_fetch_array($res,0);
 
 <div id="content">
 <span id="links">
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">About</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="research" class="links">Research</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="post" class="links">Posts</a><br>
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="classmates" class="links">Classmates</a><br>
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="students" class="links">Students</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="profile" class="links">Profile</a><br>
+<a href="javascript:void(0);" onclick="myfun(this.id)" id="timetable" class="links">Time Table</a><br>
 <a href="logout.php"class="links">Logout</a><br>
 </span>
 <span id="detail"></span>
+<div id="_classroom">
+
+</div>
+
 <span id="chat"></span>
 
 </div>

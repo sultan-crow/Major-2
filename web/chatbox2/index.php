@@ -5,9 +5,9 @@
 	<head>
 		<title>Chatbox</title>
 		
-		<link rel="stylesheet" type="text/css" href="chat.css">
+		<link rel="stylesheet" type="text/css" href="../chatbox2/chat.css">
 		
-		<script src = "jquery.js" type = "text/javascript"></script>
+		<script src = "../js/jquery.js" type = "text/javascript"></script>
 		<script type = "text/javascript">
 		
 			function submitChat() {
@@ -15,6 +15,7 @@
 				if(chat.uname.value == '' || chat.msg.value == '') {
 					alert("All fields are mandatory!!");
 					return;
+					alert("h");
 				}
 				
 				chat.uname.readOnly = true;
@@ -32,9 +33,9 @@
 						$('#imageload').hide();
 					}
 				}
-				xmlhttp.open('GET', 'insert.php?uname=' + uname + '&msg=' + msg, true);
+				xmlhttp.open('GET', '../chatbox2/insert.php?receiver=' + uname + '&message=' + msg, true);
 				xmlhttp.send();
-				
+				alert(msg);
 				chat.msg.value = "";
 			}
 			
@@ -42,9 +43,9 @@
 				
 				$.ajaxSetup({cache:false});
 				
-				setInterval(function() {
+				/*setInterval(function() {
 					$('#chatlogs').load('logs.php');
-				}, 2000);
+				}, 2000);*/
 				
 			});
 		
@@ -68,7 +69,7 @@
 		</div>
 		
 		<div id = "chatlogs">
-			LOADING CHATLOGS....... PLEASE WAIT <image src = "load.gif"/>
+			LOADING CHATLOGS....... PLEASE WAIT <image src = "../chatbox2/load.gif"/>
 		</div>
 	
 	</body>

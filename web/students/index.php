@@ -8,6 +8,8 @@ if(!isset($_SESSION['s_user_name']))
 
 $user=($_SESSION['s_user_name']);
 $query="SELECT * FROM user_student WHERE s_user_name='$user'";
+$class=mysql_result(mysql_query("SELECT class FROM user_student WHERE s_user_name='$user'"),0,0);
+$faculty=mysql_query("SELECT * FROM user_fac");
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
 //echo $detail[0];
@@ -32,8 +34,13 @@ $("#classroom_").fadeIn();
 function myfun(res){
 	
 if(res=="classroom"){
-		$(".aa").fadeOut();	
-		
+		$(".aa").fadeOut();	<?php
+		$user=$_SESSION['s_user_name'];
+//Query for finding the class of logged in student
+$query="SELECT * FROM posts WHERE class='$class'";
+$classroom=mysql_query($query) or die( mysql_error());
+
+?>
 		$("#classroom_").fadeIn();
 
 	}
@@ -44,7 +51,6 @@ if(res=="about"){
 if(res=="classmates"){
 		$(".aa").fadeOut();
 		<?php
-		$class=$_SESSION['class'];
 //Details of all classmates
 $classmates=mysql_query("SELECT * FROM user_student WHERE class='$class'");
 //No. of classmates
@@ -94,7 +100,7 @@ if(res=="timetable"){
 <div id="content1">
 <?php 
 $count_post=mysql_num_rows($classroom);
-for( $i=0;$i<$count;$i++){
+for( $i=0;$i<$count_post;$i++){
 echo mysql_result($classroom,$i,4);
 echo mysql_result($classroom,$i,5);
 echo mysql_result($classroom,$i,6);
@@ -105,8 +111,43 @@ echo mysql_result($classroom,$i,6);
 
 </div >
 <div  id="about_" class="aa">
-helloa
-</div >
+<table>
+<tr>
+<td>Name: </td>
+<td><?php
+echo $detail[3];
+?></td>
+</tr>
+<tr>
+<td>Year :</td>
+<td><?php
+echo $detail[6];
+?></td>
+</tr>
+<tr>
+<td>Gender:</td>
+<td><?php
+echo $detail[4]=='m'?"Male":"Female";
+?></td>
+</tr>
+<tr>
+<td>Group:</td>
+<td><?php
+echo $detail[7];
+?></td>
+</tr><tr>
+<td>Date of Birth:</td>
+<td><?php
+echo $detail[8];
+?></td>
+</tr><tr>
+<td>Email :</td>
+<td><?php
+echo $detail[9];
+?></td>
+</tr>
+</table>
+</span></div >
 <div  id="classmates_"class="aa">
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
 
@@ -144,8 +185,40 @@ for($i=0;$i<$count;$i++){
 ?>
 </div >
 <div  id="faculty_" class="aa" >
-hellof
-</div >
+<center><h3>List of Faculty</h3></center>
+
+<?php
+for($i=0;$i<$count;$i++){
+	$receiver=mysql_result($faculty,$i,"t_user_name");?>
+<a href="javascript:void(0)" >
+<!--Function to call messaging -->
+<div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
+<span style="float:left;">
+<!--table for printing detail of classmates-->
+<table cellspacing="4" cellpadding="2">
+<tr>
+<td>Name:</td>
+<td><?php echo mysql_result($faculty,$i,"name");?></td>
+</tr>
+<tr>
+<td>Qualification:</td>
+<td><?php echo mysql_result($faculty,$i,"qualification");?></td>
+<td>Designation:</td>
+<td><?php echo mysql_result($faculty,$i,"designation");?></td>
+
+<td>Email-id:</td>
+<td><?php echo mysql_result($faculty,$i,"email");?></td>
+</tr>
+</table>
+</span>
+<span style="float:right;">
+<img src="../images/passport.jpg" width="70px" height="70px"/>
+</span>
+</div>
+</a>
+<?php
+}
+?></div >
 <div  id="time_table" class="aa">
 hello
 </div >

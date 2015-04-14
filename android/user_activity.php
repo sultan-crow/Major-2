@@ -72,7 +72,7 @@
 		if(mysql_num_rows($result) > 0) {
 		
 			$response['error'] = 2;
-			$response['error_message'] = "User Already Exists";
+			$response['error_message'] = "User Already Exists.\n Please use a different Email ID.";
 			echo json_encode($response);
 			
 		} else {
@@ -91,7 +91,7 @@
 			} else {
 				
 				$response['error'] = 1;
-				$response['error_msg'] = "Error occurred during Registration";
+				$response['error_message'] = "Error occurred during Registration";
 				
 				echo json_encode($response);
 				

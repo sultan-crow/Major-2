@@ -7,12 +7,24 @@ if(!isset($_SESSION['s_user_name']))
 }
 
 $user=($_SESSION['s_user_name']);
+$class=($_SESSION['class']);
+
+//Query for finding the class of logged in student
+$query="SELECT * FROM posts WHERE class='$class'";
+$classroom=mysql_query($query) or die( mysql_error());
+
 $query="SELECT * FROM user_student WHERE s_user_name='$user'";
 $class=mysql_result(mysql_query("SELECT class FROM user_student WHERE s_user_name='$user'"),0,0);
+
 $faculty=mysql_query("SELECT * FROM user_fac");
+$fac_count=mysql_num_rows($faculty);
+
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
-//echo $detail[0];
+
+$classmates=mysql_query("SELECT * FROM user_student WHERE class='$class'");
+//No. of classmates
+$classmate_count=mysql_num_rows($classmates);
 ?>
 
 <html>
@@ -21,54 +33,59 @@ $detail= mysql_fetch_array($res,0);
 
 <head>
 <script type="text/javascript" src="../js/jquery.js"></script>
-<script src="../js/style.js" type="text/javascript"></script>
+<script type="text/javascript">
 
+	$(function() {
+		
+		$('.aa').fadeOut();
+		//$('.aa').css('display', 'block');
+		$('#classroom_').fadeIn();
+	});
+
+</script>
+<script src="../js/style.js" type="text/javascript"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script >
+
+	function myfun(res){
+	
+		if(res=="classroom"){
+				$(".aa").fadeOut();
+				$("#classroom_").fadeIn();
+
+			}
+		if(res=="about"){
+				$(".aa").fadeOut();
+				$("#about_").fadeIn();
+			}
+		if(res=="classmates"){
+				$(".aa").fadeOut();
+				$("#classmates_").fadeIn();
+			}
+		if(res=="faculty"){
+				$(".aa").fadeOut();
+				$("#faculty_").fadeIn();
+			}
+		if(res=="timetable"){		
+				$(".aa").fadeOut();
+				$("#time_table").fadeIn();
+		}
+
+	}
+
+
+</script>
+<style>
+
+</style>
 </head>
 <body>
-<script>
-$(".aa").fadeOut();
-$(".aa").css("display","block");
-$("#classroom_").fadeIn();
 
-
-function myfun(res){
-	
-if(res=="classroom"){
-		$(".aa").fadeOut();	<?php
-		$user=$_SESSION['s_user_name'];
-//Query for finding the class of logged in student
-$query="SELECT * FROM posts WHERE class='$class'";
-$classroom=mysql_query($query) or die( mysql_error());
-
-?>
-		$("#classroom_").fadeIn();
-
-	}
-if(res=="about"){
-		$(".aa").fadeOut();
-		$("#about_").fadeIn();
-	}
-if(res=="classmates"){
-		$(".aa").fadeOut();
-		<?php
-//Details of all classmates
-$classmates=mysql_query("SELECT * FROM user_student WHERE class='$class'");
-//No. of classmates
-$count=mysql_num_rows($classmates);
-?>
-		$("#classmates_").fadeIn();
-	}
-if(res=="faculty"){
-		$(".aa").fadeOut();
-		$("#faculty_").fadeIn();
-	}
-if(res=="timetable"){		
-		$(".aa").fadeOut();
-		$("#time_table").fadeIn();
-	}
-
-}
-</script>
 <div id="header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
@@ -96,8 +113,14 @@ if(res=="timetable"){
 </span>
 <span id="detail">
 <div id="classroom_" class="aa">
+<div id="newpost">
+<input type="text" id="post_title"></input>
+<textarea id="post_text" cols="80" rows="7" style="resize:none"></textarea>
+  <input type="button" value="Post" class="ff" onclick="post('<?php
+  echo $class?>')"/>
+</div>
 
-<div id="content1">
+<div id="content1" >
 <?php 
 $count_post=mysql_num_rows($classroom);
 for( $i=0;$i<$count_post;$i++){
@@ -108,8 +131,27 @@ echo mysql_result($classroom,$i,6);
 ?>
 
 </div>
-
+<script>
+function post(posted_by,classid){
+var classroom='classrooms/'+classid+'.php';
+var post_title=$("#post_title").val();
+var post_text= $("#post_text").val();
+	$.ajax({
+		url:'post_action.php',
+		type:'post',
+		data:'posted_by='+ '&class='+classid+'&post_title='+post_title'&post_text='+post_text,
+		success:function(ss){
+				$('#content1').load('classroom_posts.php');
+		}
+	});
+	
+}
+</script>
 </div >
+
+
+
+
 <div  id="about_" class="aa">
 <table>
 <tr>
@@ -152,7 +194,7 @@ echo $detail[9];
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
 
 <?php
-for($i=0;$i<$count;$i++){
+for($i=0;$i<$classmate_count;$i++){
 	$receiver=mysql_result($classmates,$i,"s_user_name");?>
 <a href="javascript:void(0)" >
 <!--Function to call messaging -->
@@ -188,7 +230,7 @@ for($i=0;$i<$count;$i++){
 <center><h3>List of Faculty</h3></center>
 
 <?php
-for($i=0;$i<$count;$i++){
+for($i=0;$i<$fac_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");?>
 <a href="javascript:void(0)" >
 <!--Function to call messaging -->
@@ -231,10 +273,6 @@ hello
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
 </div>
-<script>
-//$(".aa").css("display","block");
-$("#classroom_").fadeIn();
-</script>
 </body>
 
 

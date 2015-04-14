@@ -18,23 +18,34 @@
 		$query = "SELECT * FROM user_student WHERE email = '$email' && password = '$password'";
 		$result = mysql_query($query, $con);
 		
+		$query_admin = "SELECT * FROM user_fac WHERE t_user_name = '$email' && password = '$password'";
+		$result_admin = mysql_query($query_admin, $con);
+		
 		if(mysql_num_rows($result) == 1) {
 		
 			$response['success'] = 1;
 			$response['user']['name'] = mysql_result($result, 0, "name");
 			$response['user']['email'] = mysql_result($result, 0, "email");
 			$response['user']['year'] = mysql_result($result, 0, "year");
+			$response['user']['role'] = 0;
 			
-			echo json_encode($response);
-		
+		} else if(mysql_num_rows($result_admin) == 1) {
+			
+			$response['success'] = 1;
+			$response['user']['name'] = mysql_result($result_admin, 0, "name") or die("Hello:".mysql_error());
+			$response['user']['email'] = mysql_result($result_admin, 0, "email");
+			$response['user']['year'] = 0;
+			$response['user']['role'] = 1;
+			
 		} else {
 		
 			$response['error'] = 1;
 			$response['error_message'] = "Incorrect Email or Password";
 			
-			echo json_encode($response);
-		
 		}
+		
+		echo json_encode($response);
+		
 	} 
 	
 	if($tag == 'register') {
@@ -73,6 +84,7 @@
 				$response['user']['name'] = $name;
 				$response['user']['email'] = $email;
 				$response['user']['year'] = $year;
+				$response['user']['role'] = 0;
 				
 				echo json_encode($response);
 			

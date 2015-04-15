@@ -11,7 +11,7 @@ $class=($_SESSION['class']);
 
 //Query for finding the class of logged in student
 $query="SELECT * FROM posts WHERE class='$class'";
-$classroom=mysql_query($query) or die( mysql_error());
+$posts=mysql_query($query) or die( mysql_error());
 
 $query="SELECT * FROM user_student WHERE s_user_name='$user'";
 $class=mysql_result(mysql_query("SELECT class FROM user_student WHERE s_user_name='$user'"),0,0);
@@ -30,9 +30,11 @@ $classmate_count=mysql_num_rows($classmates);
 <html>
 <title>The Network|MCE</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
-
+<link rel="stylesheet" type="text/css" href="../css/contact.css">
 <head>
 <script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/contact.js"></script>
+<script type="text/javascript" src="../js/jquery.simplemodal.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -80,13 +82,11 @@ $classmate_count=mysql_num_rows($classmates);
 
 
 </script>
-<style>
 
-</style>
 </head>
 <body>
 
-<div id="header">
+<div id="page-header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
@@ -98,11 +98,8 @@ $classmate_count=mysql_num_rows($classmates);
 <img src="../images/logo.jpg" title="DTU" height="100" width="100"/>
 </span>
 </div>
-<style>
 
-</style>
-
-<div id="content">
+<div id="container">
 <span id="links">
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
 <a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">Profile</a><br>
@@ -113,25 +110,41 @@ $classmate_count=mysql_num_rows($classmates);
 </span>
 <span id="detail">
 <div id="classroom_" class="aa">
-<div id="newpost">
-<input type="text" id="post_title"></input>
-<textarea id="post_text" cols="80" rows="7" style="resize:none"></textarea>
-  <input type="button" value="Post" class="ff" onclick="post('<?php
-  echo $class?>')"/>
+<div>
+	<input type="button" value="New Post "  id="newpost" ></input>
 </div>
-
-<div id="content1" >
-<?php 
-$count_post=mysql_num_rows($classroom);
-for( $i=0;$i<$count_post;$i++){
-echo mysql_result($classroom,$i,4);
-echo mysql_result($classroom,$i,5);
-echo mysql_result($classroom,$i,6);
-}
-?>
-
+	<div id="content1">
+	<?php 
+	$count_post=mysql_num_rows($posts);
+	for( $i=0;$i<$count_post;$i++){
+	$posted_by= mysql_result($posts,$i,1);
+	$post_title= mysql_result($posts,$i,3);
+	$post_text=mysql_result($posts,$i,4);
+	$post_time=mysql_result($posts,$i,5);
+	$post_date=mysql_result($posts,$i,6);
+	?>
+	
+	<div class="post">
+	
+	<table>
+	<tbody>
+		<tr>
+			<th><?php echo mysql_result($posts,$i,3);?></th>
+		</tr>
+		<tr>
+			<td><?php echo mysql_result($posts,$i,4);?></td>
+		</tr>
+		<tr>
+			<td><?php echo mysql_result($posts,$i,1);?></td>
+		</tr>
+	</tbody>
+	</table>
+	</div>
+	<?php }
+	?>
 </div>
-<script>
+	
+	</div><script>
 function post(posted_by,classid){
 var classroom='classrooms/'+classid+'.php';
 var post_title=$("#post_title").val();
@@ -139,19 +152,15 @@ var post_text= $("#post_text").val();
 	$.ajax({
 		url:'post_action.php',
 		type:'post',
-		data:'posted_by='+ '&class='+classid+'&post_title='+post_title'&post_text='+post_text,
+		data:'posted_by='+posted_by+ '&class='+classid+'&post_title='+post_title+'&post_text='+post_text,
 		success:function(ss){
-				$('#content1').load('classroom_posts.php');
+				$('#content1').load();
 		}
 	});
 	
 }
 </script>
 </div >
-
-
-
-
 <div  id="about_" class="aa">
 <table>
 <tr>
@@ -189,7 +198,7 @@ echo $detail[9];
 ?></td>
 </tr>
 </table>
-</span></div >
+</div >
 <div  id="classmates_"class="aa">
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
 
@@ -274,6 +283,4 @@ hello
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
 </div>
 </body>
-
-
 </html>

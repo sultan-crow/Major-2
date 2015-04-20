@@ -1,6 +1,6 @@
 #header{
 	margin-top:0px;
-	height:100px;
+	height:20%;
 	background:#af123c;
 
 	
@@ -8,28 +8,27 @@
 #detail{
 	
 	
-	background-color: #E4E2E2;
-	border: solid 3px #aba;
-	box-shadow: 0px 0px 50px #888888;
+	background-color: #E0E0D6;
+	
 	display:block;
 	margin-left: 15%;
 	margin-top: 1%;
 	width: 800px;
-	height: 400px;
+	height: 70%;
 	padding: 20px;
 	position:absolute;
 	
 }
 #links{
 	float:left;
-	background-color: #E00002;
-	border: solid 3px #aba;
+	background-color: #C2AD99;
+	border: solid 1px #aba;
 	box-shadow: 0px 0px 50px #888888;
 	display:block;
 	margin-left: 3%;
 	margin-top: 1%;
-	width: 600px;
-	height: 400px;
+	width: 160px;
+	height: 70%;
 	padding: 20px;
 	
 }
@@ -62,8 +61,8 @@
     position: relative;
     z-index: 10;
     height: 3em;
-    margin-top: -3em;
-	background-color:red;
+	bottom:0;
+	background-color:#E6E6F0;
 	}
 	
 body{
@@ -116,7 +115,8 @@ a:active {
 	
 }
 .links{
-background-color:green;
+background-color:#99FFCC;
+
 }
 #popup{
 	

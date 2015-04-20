@@ -101,17 +101,19 @@ $classmate_count=mysql_num_rows($classmates);
 
 <div id="container">
 <span id="links">
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">Profile</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="classmates" class="links">Classmates</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a><br>
-<a href="javascript:void(0);" onclick="myfun(this.id)" id="timetable" class="links">Time Table</a><br>
-<a href="logout.php"class="links">Logout</a><br>
+<div class="nav nav-pills nav-stacked">
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">Profile</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classmates" class="links">Classmates</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="timetable" class="links">Time Table</a></li>
+<li><a href="logout.php"class="links">Logout</a></li>
+</div>
 </span>
 <span id="detail">
 <div id="classroom_" class="aa">
 <div>
-	<input type="button" value="New Post "  id="newpost" ></input>
+	<input type="button" value="New Post "  class="btn btn-primary btn-xs" id="newpost" ></input>
 </div>
 	<div id="content1">
 	<?php 
@@ -126,16 +128,18 @@ $classmate_count=mysql_num_rows($classmates);
 	
 	<div class="post">
 	
-	<table>
+	<table class="table">
 	<tbody>
-		<tr>
+		
 			<th><?php echo mysql_result($posts,$i,3);?></th>
-		</tr>
+		
 		<tr>
 			<td><?php echo mysql_result($posts,$i,4);?></td>
 		</tr>
 		<tr>
-			<td><?php echo mysql_result($posts,$i,1);?></td>
+			<label id="text-muted"><td>posted by:<?php echo mysql_result($posts,$i,1);?></td>
+			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
+			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
 		</tr>
 	</tbody>
 	</table>
@@ -160,40 +164,40 @@ var post_text= $("#post_text").val();
 	
 }
 </script>
-</div >
 <div  id="about_" class="aa">
-<table>
+<table class="table">
 <tr>
-<td>Name: </td>
+<th>Name: </th>
 <td><?php
 echo $detail[3];
 ?></td>
 </tr>
 <tr>
-<td>Year :</td>
+<th>Year :</th>
 <td><?php
 echo $detail[6];
 ?></td>
 </tr>
 <tr>
-<td>Gender:</td>
+<th>Gender:</th>
 <td><?php
 echo $detail[4]=='m'?"Male":"Female";
 ?></td>
 </tr>
 <tr>
-<td>Group:</td>
+<th>Group:</th>
 <td><?php
 echo $detail[7];
 ?></td>
 </tr><tr>
-<td>Date of Birth:</td>
+<th>Date of Birth:</th>
 <td><?php
 echo $detail[8];
 ?></td>
 </tr><tr>
-<td>Email :</td>
-<td><?php
+<th>Email :</th>
+<td><a href="mailto:"
+<?php
 echo $detail[9];
 ?></td>
 </tr>
@@ -274,10 +278,9 @@ for($i=0;$i<$fac_count;$i++){
 hello
 </div >
 </span>
-
-
 </div>
-<div id="footer">
+
+  <div id="footer">
 <a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>

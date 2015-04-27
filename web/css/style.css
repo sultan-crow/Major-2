@@ -108,6 +108,7 @@ a:hover {
 
 a:active {
     text-decoration: underline;
+	background-color: yellow;
 }
 #delete{
 	float:right;
@@ -169,9 +170,10 @@ margin-right:30px;
 display:none;	
 }
 .user_detail{
-	background-color: #123456;
+	background-color: #D1FFE0;
+	border:2px;
 	width: 750px;
-	height: 70px;
+	height: 80px;
 	margin-top:1%;}
 td{
 	color:300456;

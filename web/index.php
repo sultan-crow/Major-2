@@ -89,7 +89,7 @@ $count=mysql_num_rows($students);
 }
 </script>
 
-<div id="header">
+<div id="page-header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>

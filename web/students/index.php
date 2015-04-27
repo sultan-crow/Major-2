@@ -7,6 +7,7 @@ if(!isset($_SESSION['s_user_name']))
 }
 
 $user=($_SESSION['s_user_name']);
+$_SESSION['user']=$user;
 $class=($_SESSION['class']);
 
 //Query for finding the class of logged in student
@@ -112,13 +113,15 @@ $classmate_count=mysql_num_rows($classmates);
 </span>
 <span id="detail">
 <div id="classroom_" class="aa">
-<div>
+<div>	
+	<center><label>Classroom</label></center>
 	<input type="button" value="New Post "  class="btn btn-primary btn-xs" id="newpost" ></input>
 </div>
 	<div id="content1">
 	<?php 
 	$count_post=mysql_num_rows($posts);
 	for( $i=0;$i<$count_post;$i++){
+	$post_id= mysql_result($posts,$i,0);
 	$posted_by= mysql_result($posts,$i,1);
 	$post_title= mysql_result($posts,$i,3);
 	$post_text=mysql_result($posts,$i,4);
@@ -126,15 +129,19 @@ $classmate_count=mysql_num_rows($classmates);
 	$post_date=mysql_result($posts,$i,6);
 	?>
 	
-	<div class="post">
-	
+	<div class="post" >
+	<a  href="../comments.php?id=<?php echo $post_id ?>" target="_blank">
 	<table class="table">
 	<tbody>
 		
 			<th><?php echo mysql_result($posts,$i,3);?></th>
+			<th/>
+			<th/>
 		
 		<tr>
 			<td><?php echo mysql_result($posts,$i,4);?></td>
+			<td/>
+			<td/>
 		</tr>
 		<tr>
 			<label id="text-muted"><td>posted by:<?php echo mysql_result($posts,$i,1);?></td>
@@ -143,12 +150,18 @@ $classmate_count=mysql_num_rows($classmates);
 		</tr>
 	</tbody>
 	</table>
+	</a>
 	</div>
 	<?php }
 	?>
 </div>
 	
 	</div><script>
+	function comments(post_id){
+		alert(post_id);
+		
+		
+	}
 function post(posted_by,classid){
 var classroom='classrooms/'+classid+'.php';
 var post_title=$("#post_title").val();
@@ -165,6 +178,8 @@ var post_text= $("#post_text").val();
 }
 </script>
 <div  id="about_" class="aa">
+	<center><label>Profile</label></center>
+
 <table class="table">
 <tr>
 <th>Name: </th>
@@ -196,14 +211,17 @@ echo $detail[8];
 ?></td>
 </tr><tr>
 <th>Email :</th>
-<td><a href="mailto:"
+<td><a href="mailto:<?php
+echo $detail[9];
+?>" target="_blank" title="mail to">
 <?php
 echo $detail[9];
-?></td>
+?></a></td>
 </tr>
 </table>
 </div >
 <div  id="classmates_"class="aa">
+
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
 
 <?php
@@ -214,10 +232,10 @@ for($i=0;$i<$classmate_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table cellspacing="4" cellpadding="2">
+<table class="table" class="table-striped" class="table-bordered">
 <tr>
 <td>Name:</td>
-<td><?php echo mysql_result($classmates,$i,"name");?></td>
+<td><?php echo mysql_result($classmates,$i,"name");?></td><td/><td/><td/><td/>
 </tr>
 <tr>
 <td>Year:</td>
@@ -250,16 +268,20 @@ for($i=0;$i<$fac_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table cellspacing="4" cellpadding="2">
+<table  cellspacing="2" >
+<tr><td/>
 <tr>
 <td>Name:</td>
-<td><?php echo mysql_result($faculty,$i,"name");?></td>
+<td><?php echo mysql_result($faculty,$i,"name");?></td><td/>
+<td>Designation:</td>
+<td><?php echo mysql_result($faculty,$i,"designation");?></td>
+		
 </tr>
+</tr>
+<tr><td></td></tr>
 <tr>
 <td>Qualification:</td>
 <td><?php echo mysql_result($faculty,$i,"qualification");?></td>
-<td>Designation:</td>
-<td><?php echo mysql_result($faculty,$i,"designation");?></td>
 
 <td>Email-id:</td>
 <td><?php echo mysql_result($faculty,$i,"email");?></td>
@@ -275,7 +297,7 @@ for($i=0;$i<$fac_count;$i++){
 }
 ?></div >
 <div  id="time_table" class="aa">
-hello
+	<center><label>Time Table</label></center>
 </div >
 </span>
 </div>

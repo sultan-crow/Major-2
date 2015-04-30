@@ -72,8 +72,9 @@ jQuery(function ($) {
 								dataType: 'html',
 								success: function (data) {
 									$('#contact-container .contact-loading').fadeOut(200, function () {
-										$('#contact-container .contact-title').html('Thank you!');
+										$('#contact-container .contact-title').html('Thank you!<br>Your Post has been submitted successfully');
 										msg.html(data).fadeIn(200);
+										console.log("Hello" + data);
 									});
 								},
 								error: contact.error
@@ -121,9 +122,13 @@ jQuery(function ($) {
 		validate: function () {
 			
 			
-
-			if (!$('#contact-container #contact-message').val()) {
-				contact.message += 'Message is required.';
+contact.message="";
+			if (!$('#contact-container #contact-text').val()) {
+				contact.message = 'Message is required.';
+			}
+			
+			if (!$('#contact-container #contact-title').val()) {
+				contact.message = 'Title is required.';
 			}
 
 			if (contact.message.length > 0) {

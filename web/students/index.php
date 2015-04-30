@@ -268,8 +268,7 @@ for($i=0;$i<$fac_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table  cellspacing="2" >
-<tr><td/>
+<table  cellspacing="2" class="table" >
 <tr>
 <td>Name:</td>
 <td><?php echo mysql_result($faculty,$i,"name");?></td><td/>

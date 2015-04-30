@@ -1,29 +1,6 @@
 <?php
 
-/*
- * SimpleModal Contact Form
- * http://simplemodal.com
- *
- * Copyright (c) 2013 Eric Martin - http://ericmmartin.com
- *
- * Licensed under the MIT license:
- *   http://www.opensource.org/licenses/mit-license.php
- */
-
-date_default_timezone_set('America/Los_Angeles');
-
-// User settings
-$to = "user@yourdomain.com";
-$subject = "SimpleModal Contact Form";
-
-// Include extra form fields and/or submitter data?
-// false = do not include
-$extra = array(
-	"form_subject"	=> true,
-	"form_cc"		=> true,
-	"ip"			=> true,
-	"user_agent"	=> true
-);
+date_default_timezone_set('Asia/Kolkata');
 
 // Process
 $action = isset($_POST["action"]) ? $_POST["action"] : "";

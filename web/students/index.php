@@ -241,7 +241,7 @@ for($i=0;$i<$classmate_count;$i++){
 <td>Year:</td>
 <td><?php echo mysql_result($classmates,$i,"class");?></td>
 <td>Group:</td>
-<td><?php echo mysql_result($classmates,$i,"group");?></td>
+<td><?php echo mysql_result($classmates,$i,"group_");?></td>
 
 <td>Email-id:</td>
 <td><?php echo mysql_result($classmates,$i,"email");?></td>
@@ -268,7 +268,7 @@ for($i=0;$i<$fac_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table  cellspacing="2" class="table" >
+<table  cellspacing="2" class="tab	le" >
 <tr>
 <td>Name:</td>
 <td><?php echo mysql_result($faculty,$i,"name");?></td><td/>

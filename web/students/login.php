@@ -26,7 +26,7 @@
 
 <body>
 <div id="fb-root"></div>
-<script>
+<script>/*
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '1035140129833047',
@@ -41,35 +41,55 @@
          js = d.createElement(s); js.id = id;
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
+       }(document, 'script', 'facebook-jssdk'));*/
     </script>
+	
+	<script src="../js/md5.js">//Script file for password hashing</script>
+
+<script>
+function login(){
+	var username=$('#username').val();
+	var password=$('#password').val();
+	password=hex_md5(password);
+	$.ajax({
+		url:'action_student.php',
+		type:'post',
+		data:'s_user_name='+username+'&password='+password,
+		success:function(e){
+			if(e=="Success"){
+				location.reload();
+			}else
+			alert(e);
+		}
+	});
+	
+}
+</script>
 <center><p id="main_heading">The Network|MCE</p></center>
 
 <div class = "login_box">
 
 <h2 id="heading">Students Login</h2>
 
-<form action="action_student.php" method="post">
 
 <table border="0" id="details" cellspacing="2" cellpadding="2">
 
 <tr align="center">
-<td>User Name:</td><td> <input type="text" name="s_user_name"></td>
+<td>User Name:</td><td> <input type="text" name="s_user_name" id="username"></td>
 </tr>
 <tr align="center">
-<td>Password:</td><td> <input type="password" name="password"></td>
+<td>Password:</td><td> <input type="password" name="password" id="password"></td>
 </tr>
 
 </table>
 
-<input type="submit" value="Submit" id="button">
+<input type="submit" value="Submit" id="button" onclick="login()">
 
-</form>
 <div class="sign-up">
 <a href="form">Register</a>
 </div>
 </div>
-
+  
 </body>
 
 </html>

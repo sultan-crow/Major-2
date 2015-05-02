@@ -230,10 +230,16 @@
 			  type:'POST',
 			  data:'name='+name+'&username='+username+'&password='+password+'&gender='+gender+'&dob='+dob+'&year='+year+'&email='+email+'&group='+group+'&pic='+pic,
 			  success:function(e){
-				  alert(e+"registered successfully");
+				  alert(e);
+				  if(e=="loggedin"){
+				 window.location = "../login.php";
+				  }
+				  else {alert("Registration failed due to internal error..Try again!");
+					  location.reload();}
 			  }
 			  
-		  });}
+		  });
+		  }
       }
     });
 

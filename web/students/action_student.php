@@ -20,8 +20,8 @@
 		$_SESSION['s_user_name'] = $user_name;
 		$_SESSION['class'] = mysql_result($result, 0, "class");
 		$_SESSION['role'] = "student";
-		
-		header('location:index.php');
+		echo "Success";
+		//header('location:index.php');
 	
 	} else {
 	

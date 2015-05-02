@@ -65,7 +65,9 @@
 <input type="submit" value="Submit" id="button">
 
 </form>
-<div class="fb-login-button"></div>
+<div class="sign-up">
+<a href="form">Register</a>
+</div>
 </div>
 
 </body>

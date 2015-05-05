@@ -71,6 +71,7 @@ function login(){
 
 <h2 id="heading">Students Login</h2>
 
+<form>
 
 <table border="0" id="details" cellspacing="2" cellpadding="2">
 
@@ -84,7 +85,7 @@ function login(){
 </table>
 
 <input type="submit" value="Submit" id="button" onclick="login()">
-
+</form>
 <div class="sign-up">
 <a href="form">Register</a>
 </div>

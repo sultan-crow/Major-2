@@ -25,13 +25,13 @@ if (empty($action)) {
 		<div class='contact-message' style='display:none'></div>
 		<form action='#' style='display:none'>
 			<label for='contact-title'>*Title:</label>
-			<input type='text' id='contact-title' class='contact-input' name='title' tabindex='1001' />"
+			<input type='text' style='color:#000;' id='contact-title' class='contact-input' name='title' tabindex='1001' />"
 			;
 	
 
 	$output .= "
 			<label for='contact-text'>*Text:</label>
-			<textarea id='contact-text' class='contact-input' name='text' cols='40' rows='4' tabindex='1004'></textarea>
+			<textarea id='contact-text' style='color:#000;' class='contact-input' name='text' cols='40' rows='4' tabindex='1004'></textarea>
 			<br/>";
 
 	

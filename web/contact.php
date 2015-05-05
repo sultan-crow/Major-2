@@ -12,9 +12,9 @@ if (empty($action)) {
 		<div class='contact-message' style='display:none'></div>
 		<form action='#' style='display:none'>
 			<label for='contact-title'>*Title:</label>
-			<input type='text' id='contact-title' class='contact-input' name='title' tabindex='1001' />
+			<input type='text' id='contact-title' style='color:#000;' class='contact-input' name='title' tabindex='1001' />
 			<label>Year</label>
-			<select id='contact-year' class='contact-input' name='year' tabindex='1002'>
+			<select style='color:#000;' id='contact-year' class='contact-input' name='year' tabindex='1002'>
 				<option value=\"1\">First</option>
 				<option value=\"2\">Second</option>
 				<option value=\"3\">Third</option>
@@ -26,7 +26,7 @@ if (empty($action)) {
 
 	$output .= "
 			<label for='contact-text'>*Text:</label>
-			<textarea id='contact-text' class='contact-input' name='text' cols='40' rows='4' tabindex='1004'></textarea>
+			<textarea id='contact-text' style='color:#000;' class='contact-input' name='text' cols='40' rows='4' tabindex='1004'></textarea>
 			<br/>";
 
 	

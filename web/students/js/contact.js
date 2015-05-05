@@ -74,7 +74,6 @@ jQuery(function ($) {
 									$('#contact-container .contact-loading').fadeOut(200, function () {
 										$('#contact-container .contact-title').html('Thank you!<br>Your Post has been submitted successfully');
 										msg.html(data).fadeIn(200);
-										console.log("Hello" + data);
 									});
 								},
 								error: contact.error
@@ -111,6 +110,8 @@ jQuery(function ($) {
 					dialog.container.fadeOut(200, function () {
 						dialog.overlay.fadeOut(200, function () {
 							$.modal.close();
+							location.reload();
+
 						});
 					});
 				});

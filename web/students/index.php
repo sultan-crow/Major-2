@@ -11,7 +11,7 @@ $_SESSION['user']=$user;
 $class=($_SESSION['class']);
 
 //Query for finding the class of logged in student
-$query="SELECT * FROM posts WHERE class='$class'";
+$query="SELECT a.post_title,a.post_text,a.time,a.date, b.name FROM posts AS a, user_student AS b WHERE (a.posted_by = s_user_name) AND a.class='Second' ORDER BY a.post_id DESC";
 $posts=mysql_query($query) or die( mysql_error());
 
 $query="SELECT * FROM user_student WHERE s_user_name='$user'";
@@ -35,6 +35,31 @@ $classmate_count=mysql_num_rows($classmates);
 
 
 <head>
+<style>
+#notice{
+	width:580px;
+	height:600px;
+	z-index:100;
+	position:fixed;
+	top:450px;
+	left:1100px;
+}
+
+#notice_text {
+	
+		z-index:101;
+		position:fixed;
+		top:470px;
+		width:120px;
+		color:#000;
+		height:120px;
+		overflow:hidden;
+		left:1120px;
+		-webkit-transform: rotate(340deg);
+		transform: rotate(350deg);
+	
+}
+</style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
 <script type="text/javascript" src="../js/jquery.simplemodal.js"></script>
@@ -92,7 +117,9 @@ $classmate_count=mysql_num_rows($classmates);
 
 </head>
 <body>
-
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice"><img src="sticky.png" width="30%"></div></a>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text"><i>severely affecting the nation. As a result, over 2,500 people were killed, with thousands more injured and ultimately displaced. Several aftershocks were registered in the days since, adding more trouble to a nation already being affected by a national </i></div>
+</a>
 <div id="page-header">
 <span id="dp">
 <img src="<?php echo "upload/".$detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
@@ -285,40 +312,13 @@ for($i=0;$i<$fac_count;$i++){
 	<center><label>Time Table</label></center>
 </div >
 </span>
-<!--Feedback Form HTML START 
-<span>
-	<div id="mrova-feedback">
-		<div id="mrova-contact-thankyou" style="display: none;">
-			Thank you.  We'hv received your feedback.
-		</div>
-		<div id="mrova-form">
-			<form id="mrova-contactform" action="#" method="post">
-				<ul >
-					<li>
-						<label for="mrova-name">Your Name*</label> <input type="text" name="mrova-name" class="required" id="mrova-name" value="">
-					</li>
-					<li>
-						<label for="mrova-email">Email*</label> <input type="text" name="mrova-email" class="required" id="mrova-email" value="">
-					</li>
-					<li>
-						<label for="mrova-message">Message*</label>
-						<textarea class="required" id="mrova-message" name="mrova-message"  rows="8" cols="30"></textarea>
-					</li>
-				</ul>
-				<input type="submit" value="Send" id="mrova-sendbutton" name="mrova-sendbutton">
-			</form>
-		</div>
-		<div id="mrova-img-control"></div>
-	</div>
-	// Feedback Form HTML END -->
-	</span>
-	<span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
+<span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
 
 	</span>
 </div>
 	
 
-<div id="footer">
+<div id="footer" style="padding-top:10px">
 <a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>

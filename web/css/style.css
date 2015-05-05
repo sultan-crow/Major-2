@@ -169,12 +169,19 @@ margin-right:30px;
 .aa{
 display:none;	
 }
+.scroll{
+	overflow-y:scroll;
+	height:400px;
+
+}
 .user_detail{
 	background-color: #D1FFE0;
 	border:2px;
-	width: 750px;
-	height: 80px;
-	margin-top:1%;}
+	width: 740px;
+	height: 90px;
+	margin-top:1%;
+
+	}
 td{
 	color:300456;
 }

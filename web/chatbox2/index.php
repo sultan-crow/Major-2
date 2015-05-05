@@ -35,7 +35,6 @@
 				}
 				xmlhttp.open('GET', '../chatbox2/insert.php?receiver=' + uname + '&message=' + msg, true);
 				xmlhttp.send();
-				alert(msg);
 				chat.msg.value = "";
 			}
 			
@@ -43,9 +42,9 @@
 				
 				$.ajaxSetup({cache:false});
 				
-				/*setInterval(function() {
+				setInterval(function() {
 					$('#chatlogs').load('logs.php');
-				}, 2000);*/
+				}, 2000);
 				
 			});
 		

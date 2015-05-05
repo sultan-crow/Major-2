@@ -113,10 +113,10 @@
             <div class="field">
               <label class="main">Year:</label>
               <p class="group">
-                <label><input name="hobbies" type="radio" value="first">First</label>
-                <label><input name="hobbies" type="radio" value="second">Second</label>
-                <label><input name="hobbies" type="radio" value="third">Third</label>
-                <label><input name="hobbies" type="radio" value="fourth">Fourth</label>
+                <label><input name="hobbies" type="radio" value="1">First</label>
+                <label><input name="hobbies" type="radio" value="2">Second</label>
+                <label><input name="hobbies" type="radio" value="3">Third</label>
+                <label><input name="hobbies" type="radio" value="4">Fourth</label>
               </p>
               <span class="error"></span>
             </div>

@@ -5,9 +5,11 @@ $post_id=$_GET['id'];
 $post=mysql_query("SELECT * FROM posts WHERE post_id=$post_id");
 $user_class=$_SESSION['class'];
 $post_class=mysql_result($post,0,"class");
+if(!isset($_SESSION['t_user_name'])){
 if($post_class!=$user_class){
 	
 	header('location:login.php');
+}
 }
 $query="SELECT * FROM comments where post_id=$post_id";
 $comments=mysql_query($query);

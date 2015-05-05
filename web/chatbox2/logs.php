@@ -1,5 +1,5 @@
 <?php
-include('../connections.php');
+include('../connection.php');
 	
 	$query = "SELECT * FROM messages ORDER BY message_id DESC";
 	$result = mysql_query($query, $con);

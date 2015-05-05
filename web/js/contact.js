@@ -5,9 +5,8 @@ jQuery(function ($) {
 		init: function () {
 			$('#newpost').click(function (e) {
 				e.preventDefault();
-
 				// load the contact form using ajax
-				$.get("../students/contact.php", function(data){
+				$.get("contact.php", function(data){
 					// create a modal dialog with the data
 					$(data).modal({
 						closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
@@ -65,7 +64,7 @@ jQuery(function ($) {
 					}, function () {
 						$('#contact-container .contact-loading').fadeIn(200, function () {
 							$.ajax({
-								url: '../students/contact.php',
+								url: 'contact.php',
 								data: $('#contact-container form').serialize() + '&action=send',
 								type: 'post',
 								cache: false,

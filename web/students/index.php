@@ -32,10 +32,17 @@ $classmate_count=mysql_num_rows($classmates);
 <title>The Network|MCE</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="stylesheet" type="text/css" href="../css/contact.css">
+
+
 <head>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
 <script type="text/javascript" src="../js/jquery.simplemodal.js"></script>
+<!--For feedback
+!-->
+<script src="feedback/mrova-feedback-form.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="feedback/mrova-feedback-form.css" type="text/css"/>
+	
 <script type="text/javascript">
 
 	$(function() {
@@ -46,7 +53,6 @@ $classmate_count=mysql_num_rows($classmates);
 	});
 
 </script>
-<script src="../js/style.js" type="text/javascript"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -156,27 +162,7 @@ $classmate_count=mysql_num_rows($classmates);
 	?>
 </div>
 	
-	</div><script>
-	function comments(post_id){
-		alert(post_id);
-		
-		
-	}
-function post(posted_by,classid){
-var classroom='classrooms/'+classid+'.php';
-var post_title=$("#post_title").val();
-var post_text= $("#post_text").val();
-	$.ajax({
-		url:'post_action.php',
-		type:'post',
-		data:'posted_by='+posted_by+ '&class='+classid+'&post_title='+post_title+'&post_text='+post_text,
-		success:function(ss){
-				$('#content1').load();
-		}
-	});
-	
-}
-</script>
+	</div>
 <div  id="about_" class="aa">
 	<center><label>Profile</label></center>
 
@@ -223,7 +209,7 @@ echo $detail[9];
 <div  id="classmates_"class="aa">
 
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
-
+<div class="scroll">
 <?php
 for($i=0;$i<$classmate_count;$i++){
 	$receiver=mysql_result($classmates,$i,"s_user_name");?>
@@ -232,7 +218,7 @@ for($i=0;$i<$classmate_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table class="table" class="table-striped" class="table-bordered">
+<table class="table" class="table table-bordered">
 <tr>
 <td>Name:</td>
 <td><?php echo mysql_result($classmates,$i,"name");?></td><td/><td/><td/><td/>
@@ -257,9 +243,10 @@ for($i=0;$i<$classmate_count;$i++){
 }
 ?>
 </div >
+</div>
 <div  id="faculty_" class="aa" >
 <center><h3>List of Faculty</h3></center>
-
+<div  class="scroll">
 <?php
 for($i=0;$i<$fac_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");?>
@@ -268,7 +255,7 @@ for($i=0;$i<$fac_count;$i++){
 <div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table  cellspacing="2" class="tab	le" >
+<table class="table" class="table table-bordered">
 <tr>
 <td>Name:</td>
 <td><?php echo mysql_result($faculty,$i,"name");?></td><td/>
@@ -276,8 +263,6 @@ for($i=0;$i<$fac_count;$i++){
 <td><?php echo mysql_result($faculty,$i,"designation");?></td>
 		
 </tr>
-</tr>
-<tr><td></td></tr>
 <tr>
 <td>Qualification:</td>
 <td><?php echo mysql_result($faculty,$i,"qualification");?></td>
@@ -288,20 +273,49 @@ for($i=0;$i<$fac_count;$i++){
 </table>
 </span>
 <span style="float:right;">
-<img src="../images/passport.jpg" width="70px" height="70px"/>
+<img src="../images/passport.jpg" width="90px" height="90px"/>
 </span>
 </div>
 </a>
 <?php
 }
-?></div >
+?>
+</div>
+</div >
 <div  id="time_table" class="aa">
 	<center><label>Time Table</label></center>
 </div >
 </span>
+<!--Feedback Form HTML START 
+<span>
+	<div id="mrova-feedback">
+		<div id="mrova-contact-thankyou" style="display: none;">
+			Thank you.  We'hv received your feedback.
+		</div>
+		<div id="mrova-form">
+			<form id="mrova-contactform" action="#" method="post">
+				<ul >
+					<li>
+						<label for="mrova-name">Your Name*</label> <input type="text" name="mrova-name" class="required" id="mrova-name" value="">
+					</li>
+					<li>
+						<label for="mrova-email">Email*</label> <input type="text" name="mrova-email" class="required" id="mrova-email" value="">
+					</li>
+					<li>
+						<label for="mrova-message">Message*</label>
+						<textarea class="required" id="mrova-message" name="mrova-message"  rows="8" cols="30"></textarea>
+					</li>
+				</ul>
+				<input type="submit" value="Send" id="mrova-sendbutton" name="mrova-sendbutton">
+			</form>
+		</div>
+		<div id="mrova-img-control"></div>
+	</div>
+	// Feedback Form HTML END -->
+	</span>
 </div>
 
-  <div id="footer">
+<div id="footer">
 <a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
 <a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>

@@ -16,7 +16,7 @@ $user=mysql_query("SELECT * FROM user_student WHERE s_user_name='$username' and 
 	session_start();
 	$_SESSION['s_user_name']=$username;
 	$_SESSION['class']=$year;
-	echo "loggedin";
+	echo "Logged in";
 	}
 	else echo "failed"
 ?>

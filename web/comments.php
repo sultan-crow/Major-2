@@ -71,7 +71,7 @@ function post_comment(id){
 	//alert(id);
 	$.ajax({
 		type:"POST",
-		url:"action.php",
+		url:"comment_action.php",
 		data:"text="+text+"&id="+id,
 		success:function(e){
 			location.reload();		}

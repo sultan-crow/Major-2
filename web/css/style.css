@@ -5,6 +5,29 @@
 
 	
 }
+#clock{
+	float:right;	
+}
+#floatMenu {
+    position:absolute;
+    top:150px;
+    left:50%;
+    margin-left:235px;
+    width:200px;
+}
+
+#floatMenu ul {
+    margin-bottom:20px;
+}
+#floatMenu ul li a {
+    display:block;
+    border:1px solid #999;
+    background-color:#222;
+    border-left:6px solid #999;
+    text-decoration:none;
+    color:#ccc;
+    padding:5px 5px 5px 25px;
+}
 #detail{
 	
 	
@@ -59,6 +82,8 @@
 #footer{
 	clear: both;
     position: relative;
+	padding-top:25px;
+	top:4%;
     z-index: 10;
     height: 3em;
 	bottom:0;

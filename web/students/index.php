@@ -65,24 +65,24 @@ $classmate_count=mysql_num_rows($classmates);
 	
 		if(res=="classroom"){
 				$(".aa").fadeOut();
-				$("#classroom_").fadeIn();
+				$("#classroom_").delay(500).fadeIn(500);
 
 			}
 		if(res=="about"){
 				$(".aa").fadeOut();
-				$("#about_").fadeIn();
+				$("#about_").delay(500).fadeIn(500);
 			}
 		if(res=="classmates"){
 				$(".aa").fadeOut();
-				$("#classmates_").fadeIn();
+				$("#classmates_").delay(500).fadeIn(500);
 			}
 		if(res=="faculty"){
 				$(".aa").fadeOut();
-				$("#faculty_").fadeIn();
+				$("#faculty_").delay(500).fadeIn(500);
 			}
 		if(res=="timetable"){		
 				$(".aa").fadeOut();
-				$("#time_table").fadeIn();
+				$("#time_table").delay(500).fadeIn(500);
 		}
 
 	}
@@ -95,7 +95,7 @@ $classmate_count=mysql_num_rows($classmates);
 
 <div id="page-header">
 <span id="dp">
-<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
+<img src="<?php echo "upload/".$detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -120,7 +120,7 @@ $classmate_count=mysql_num_rows($classmates);
 <span id="detail">
 <div id="classroom_" class="aa">
 <div>	
-	<center><label>Classroom</label></center>
+	<center><h2><u>Classroom</u></h2></center>
 	<input type="button" value="New Post "  class="btn btn-primary btn-xs" id="newpost" ></input>
 </div>
 	<div id="content1">
@@ -138,23 +138,20 @@ $classmate_count=mysql_num_rows($classmates);
 	<div class="post" >
 	<a  href="../comments.php?id=<?php echo $post_id ?>" target="_blank">
 	<table class="table">
-	<tbody>
+	
 		
 			<th><?php echo mysql_result($posts,$i,3);?></th>
-			<th/>
-			<th/>
+			
 		
 		<tr>
 			<td><?php echo mysql_result($posts,$i,4);?></td>
-			<td/>
-			<td/>
+			
 		</tr>
 		<tr>
 			<label id="text-muted"><td>posted by:<?php echo mysql_result($posts,$i,1);?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
 		</tr>
-	</tbody>
 	</table>
 	</a>
 	</div>
@@ -210,6 +207,7 @@ echo $detail[9];
 
 <center><h3>Students of <?php echo $class ?> Year</h3></center>
 <div class="scroll">
+
 <?php
 for($i=0;$i<$classmate_count;$i++){
 	$receiver=mysql_result($classmates,$i,"s_user_name");?>
@@ -247,6 +245,7 @@ for($i=0;$i<$classmate_count;$i++){
 <div  id="faculty_" class="aa" >
 <center><h3>List of Faculty</h3></center>
 <div  class="scroll">
+
 <?php
 for($i=0;$i<$fac_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");?>
@@ -313,7 +312,11 @@ for($i=0;$i<$fac_count;$i++){
 	</div>
 	// Feedback Form HTML END -->
 	</span>
+	<span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
+
+	</span>
 </div>
+	
 
 <div id="footer">
 <a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>

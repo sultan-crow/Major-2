@@ -46,6 +46,15 @@ textarea{
 	background-color:#000;
 	margin-top:2px;	
 }
+body{
+	background-image:url('images/background.jpg');
+}
+.foot{
+	margin-bottom:1%;
+	padding-right:50px;
+	margin-left:50px;
+	margin-top:20px;
+}
 </style>
 
 </head>
@@ -112,6 +121,8 @@ $count=mysql_num_rows($students);
 
 }
 </script>
+<body >
+<div style="position:fixed;top:80%;right:10%;background-color:#000;width:50px;height:50px;z-index:100px"></div>
 <div id="page-header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
@@ -360,14 +371,18 @@ for($i=0;$i<$students_count;$i++){
 ?>
 </div >
 </div>
+</span>
+<span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
+</span>
 </div>
 
-</span>
-<div id="footer">
-<a  href="#" style="padding-right:50px; padding-left:300px;">About Us</a>
-<a href="#" style="padding-right:50px; padding-left:50px;">Team</a>
-<a href="#" style="padding-right:50px; padding-left:50px;">Contact us</a>
+<div id="footer" >
+<div style="margin-top:-1em">
+<span class="foot" style="margin-left:350px"><a  href="#">About Us</a></span>
+<span class="foot"><a href="#" >Team</a></span>
+<span class="foot"><a href="#" >Contact us</a></span>
 </div>
+<div>
 </body>
 
 </html>

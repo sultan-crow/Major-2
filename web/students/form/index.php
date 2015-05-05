@@ -44,6 +44,39 @@
     height: 0;
   }
 </style>
+<script type="text/javascript">
+  
+	$(function() {
+		$("#pic").change(function() {
+			$("#message").empty(); // To remove the previous error message
+			var file = this.files[0];
+			var imagefile = file.type;
+			var match= ["image/jpeg","image/png","image/jpg"];
+			if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+			{
+				$('#previewing').attr('src','noimage.png');
+				$("#message").html("<p id='error'>Please Select A valid Image File</p>"+"<h4>Note</h4>"+"<span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
+				return false;
+			}
+			else
+			{
+				var reader = new FileReader();
+				reader.onload = imageIsLoaded;
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	});
+	
+	
+	function imageIsLoaded(e) {
+		$("#file").css("color","green");
+		$('#image_preview').css("display", "block");
+		$('#previewing').attr('src', e.target.result);
+		$('#previewing').attr('width', '250px');
+		$('#previewing').attr('height', '230px');
+	};
+  
+  </script>
 </head>
 <body>
 
@@ -53,7 +86,7 @@
 
       <nav class="idealsteps-nav"></nav>
 
-      <form action="" novalidate autocomplete="off" class="idealforms">
+      <form action="" novalidate autocomplete="off" class="idealforms" enctype="multipart/form-data" id="form1">
 
         <div class="idealsteps-wrap">
 
@@ -113,10 +146,10 @@
             <div class="field">
               <label class="main">Year:</label>
               <p class="group">
-                <label><input name="hobbies" type="radio" value="1">First</label>
-                <label><input name="hobbies" type="radio" value="2">Second</label>
-                <label><input name="hobbies" type="radio" value="3">Third</label>
-                <label><input name="hobbies" type="radio" value="4">Fourth</label>
+                <label><input name="year" type="radio" value="1">First</label>
+                <label><input name="year" type="radio" value="2">Second</label>
+                <label><input name="year" type="radio" value="3">Third</label>
+                <label><input name="year" type="radio" value="4">Fourth</label>
               </p>
               <span class="error"></span>
             </div>
@@ -143,7 +176,7 @@
 
             <div class="field">
               <label class="main">Group:</label>
-              <select name="options" id="group">
+              <select name="group">
                 <option value="default">&ndash; Select an option &ndash;</option>
                 <option value="R1">R1</option>
                 <option value="R2">R2</option>
@@ -154,9 +187,11 @@
 
            <div class="field">
               <label class="main">Picture:</label>
-              <input id="picture" name="picture" type="file" multiple>
+              <input id="pic" name="pic" type="file" accept="image/*">
               <span class="error"></span>
+			  <div id="image_preview"><img id="previewing" src="noimage.png" /></div>
             </div>
+			
 
             <div class="field buttons">
               <label class="main">&nbsp;</label>
@@ -173,13 +208,46 @@
       </form>
 
     </div>
-
+<div><a href="../login.php">Already Registered? Login</a></div>
   </div>
 
   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="js/md5.js">//Script file for password hashing</script>
   <script src="js/out/jquery.idealforms.js"></script>
+  <script type="text/javascript">
+  
+	$(function() {
+		$("#pic").change(function() {
+			$("#message").empty(); // To remove the previous error message
+			var file = this.files[0];
+			var imagefile = file.type;
+			var match= ["image/jpeg","image/png","image/jpg"];
+			if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2])))
+			{
+				$('#previewing').attr('src','noimage.png');
+				$("#message").html("<p id='error'>Please Select A valid Image File</p>"+"<h4>Note</h4>"+"<span id='error_message'>Only jpeg, jpg and png Images type allowed</span>");
+				return false;
+			}
+			else
+			{
+				var reader = new FileReader();
+				reader.onload = imageIsLoaded;
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+	});
+	
+	
+	function imageIsLoaded(e) {
+		$("#file").css("color","green");
+		$('#image_preview').css("display", "block");
+		$('#previewing').attr('src', e.target.result);
+		$('#previewing').attr('width', '250px');
+		$('#previewing').attr('height', '230px');
+	};
+  
+  </script>
   <!--<script src="js/out/jquery.idealforms.min.js"></script>-->
   <script>
 
@@ -225,17 +293,25 @@
 			  var email=$('#email').val();
 			  var group=$('#group').val();
 			  var pic = "kk";
+			console.log();
 		  $.ajax({
 			  url:'../register.php',
 			  type:'POST',
-			  data:'name='+name+'&username='+username+'&password='+password+'&gender='+gender+'&dob='+dob+'&year='+year+'&email='+email+'&group='+group+'&pic='+pic,
+			  data: new FormData($('form')[0]), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+				contentType: false,       // The content type used when sending data to the server.
+				cache: false,             // To unable request pages to be cached
+				processData:false,  
+			  //data: 'name='+name+'&username='+username+'&password='+password+'&gender='+gender+'&dob='+dob+'&year='+year+'&email='+email+'&group='+group+'&pic='+pic,
 			  success:function(e){
-				  alert(e);
-				  if(e=="loggedin"){
-				 window.location = "../login.php";
+				  if(e=="Logged in"){
+					alert(e);	
+
+
 				  }
-				  else {alert("Registration failed due to internal error..Try again!");
-					  location.reload();}
+				  else {
+					  alert(e);
+
+				  }
 			  }
 			  
 		  });
@@ -260,6 +336,7 @@
       $('form.idealforms').idealforms('nextStep');
     });
 
+	
   </script>
 </body>
 </html>

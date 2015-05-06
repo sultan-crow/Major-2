@@ -110,7 +110,6 @@ jQuery(function ($) {
 					dialog.container.fadeOut(200, function () {
 						dialog.overlay.fadeOut(200, function () {
 							$.modal.close();
-							location.reload();
 
 						});
 					});

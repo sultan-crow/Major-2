@@ -11,7 +11,8 @@ $_SESSION['user']=$user;
 $class=($_SESSION['class']);
 
 //Query for finding the class of logged in student
-$query="SELECT a.post_title,a.post_text,a.time,a.date, b.name FROM posts AS a, user_student AS b WHERE (a.posted_by = s_user_name) AND a.class='Second' ORDER BY a.post_id DESC";
+//$query="SELECT a.post_title,a.post_text,a.time,a.date, b.name FROM posts AS a, user_student AS b WHERE (a.posted_by = s_user_name) AND a.class='Second' ORDER BY a.post_id DESC";
+$query="SELECT * FROM posts WHERE class LIKE '$class' ORDER BY post_id DESC";
 $posts=mysql_query($query) or die( mysql_error());
 
 $query="SELECT * FROM user_student WHERE s_user_name='$user'";
@@ -23,7 +24,7 @@ $fac_count=mysql_num_rows($faculty);
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
 
-$classmates=mysql_query("SELECT * FROM user_student WHERE class='$class'");
+$classmates=mysql_query("SELECT * FROM user_student WHERE class = '$class'");
 //No. of classmates
 $classmate_count=mysql_num_rows($classmates);
 ?>
@@ -59,6 +60,10 @@ $classmate_count=mysql_num_rows($classmates);
 		transform: rotate(350deg);
 	
 }
+body{
+		background-image:url('../images/background.jpg');
+
+}
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
@@ -71,7 +76,15 @@ $classmate_count=mysql_num_rows($classmates);
 <script type="text/javascript">
 
 	$(function() {
-		
+		$.ajax({
+			type:"POST",
+			url:'http://www.vnb.dcetech.com/android/get_data.php',
+			data:'year='+<?php echo $class; ?>,
+		    dataType: 'json',
+			success:function(e){
+				$('#notice_text').html(e.data[1].subject);
+			}
+		});
 		$('.aa').fadeOut();
 		//$('.aa').css('display', 'block');
 		$('#classroom_').fadeIn();
@@ -117,8 +130,8 @@ $classmate_count=mysql_num_rows($classmates);
 
 </head>
 <body>
-<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice"><img src="sticky.png" width="30%"></div></a>
-<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text"><i>severely affecting the nation. As a result, over 2,500 people were killed, with thousands more injured and ultimately displaced. Several aftershocks were registered in the days since, adding more trouble to a nation already being affected by a national </i></div>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board" ><img src="sticky.png" width="30%"></div></a>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a>
 <div id="page-header">
 <span id="dp">
@@ -129,7 +142,7 @@ $classmate_count=mysql_num_rows($classmates);
 <h4><center>Delhi Technological University</center></h4>
 </span>
 <span id="logo">
-<img src="../images/logo.jpg" title="DTU" height="100" width="100"/>
+<img src="http://www.troika.dcetech.com/img/hover/dce_logo.svg" title="DTU" height="100" width="100"/>
 </span>
 </div>
 
@@ -278,7 +291,7 @@ for($i=0;$i<$fac_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");?>
 <a href="javascript:void(0)" >
 <!--Function to call messaging -->
-<div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
+<div class="user_detail" style="width:750px"id="<?php echo $receiver ?>"onclick="message(this.id)">
 <span style="float:left;">
 <!--table for printing detail of classmates-->
 <table class="table" class="table table-bordered">
@@ -299,7 +312,7 @@ for($i=0;$i<$fac_count;$i++){
 </table>
 </span>
 <span style="float:right;">
-<img src="../images/passport.jpg" width="90px" height="90px"/>
+<!--img src="images/passport.jpg" width="90px" height="90px"/!-->
 </span>
 </div>
 </a>

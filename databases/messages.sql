@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2015 at 02:52 PM
+-- Generation Time: May 06, 2015 at 03:48 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -34,7 +34,18 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `time` text NOT NULL,
   `date` text NOT NULL,
   PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `sent_by`, `received_by`, `message`, `time`, `date`) VALUES
+(1, 0, 'vdvfsd', 0, '00:59:40', '2015-05-05'),
+(2, 0, 'gsrg', 0, '01:00:19', '2015-05-05'),
+(3, 0, 'gsrg', 0, '01:00:34', '2015-05-05'),
+(4, 0, 'sdfsw', 0, '01:03:29', '2015-05-05'),
+(5, 0, '', 0, '01:18:30', '2015-05-05');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

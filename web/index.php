@@ -13,7 +13,7 @@ $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
 $students=mysql_query("SELECT * FROM user_student");
 $faculty=mysql_query("SELECT * FROM user_fac");
-$posts=mysql_query("SELECT * FROM posts");
+$posts=mysql_query("SELECT * FROM posts ORDER BY post_id DESC");
 $posts_by=mysql_query("SELECT * FROM posts WHERE posted_by='$user'");
 $research=mysql_query("SELECT * FROM research");
 //echo $detail[0];
@@ -55,6 +55,29 @@ body{
 	margin-left:50px;
 	margin-top:20px;
 }
+#notice{
+	width:580px;
+	height:600px;
+	z-index:100;
+	position:fixed;
+	top:450px;
+	left:1100px;
+}
+
+#notice_text {
+	
+		z-index:101;
+		position:fixed;
+		top:470px;
+		width:120px;
+		color:#000;
+		height:120px;
+		overflow:hidden;
+		left:1120px;
+		-webkit-transform: rotate(340deg);
+		transform: rotate(350deg);
+	
+}
 </style>
 
 </head>
@@ -65,6 +88,16 @@ function message(e){
 
 
 	$(function() {
+		//Sending request to vnb for latest notice
+		$.ajax({
+			type:"POST",
+			url:'http://www.vnb.dcetech.com/android/get_data.php',
+			data:'year=',
+		    dataType: 'json',
+			success:function(e){
+				$('#notice_text').html(e.data[1].subject);
+			}
+		});
 		$(".aa").fadeOut();
 //$(".aa").css("display","block");
 $("#about_").fadeIn();
@@ -122,8 +155,9 @@ $count=mysql_num_rows($students);
 }
 </script>
 <body >
-<div style="position:fixed;top:80%;right:10%;background-color:#000;width:50px;height:50px;z-index:100px"></div>
-<div id="page-header">
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board"><img src="sticky.png" width="30%"></div></a>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
+</a><div id="page-header">
 <span id="dp">
 <img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
 </span>
@@ -132,7 +166,7 @@ $count=mysql_num_rows($students);
 <h4>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Delhi Technological University</h4>
 </span>
 <span id="logo">
-<img src="images/logo.jpg" title="DTU" height="100" width="100"/>
+<img src="http://www.troika.dcetech.com/img/hover/dce_logo.svg" title="DTU" height="100" width="100"/>
 </span>
 </div>
 <div id="container">

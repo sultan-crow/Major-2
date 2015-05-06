@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2015 at 02:52 PM
+-- Generation Time: May 06, 2015 at 03:48 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `date` text NOT NULL,
   `time` text NOT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `comments`
@@ -43,14 +43,16 @@ CREATE TABLE IF NOT EXISTS `comments` (
 INSERT INTO `comments` (`comment_id`, `post_id`, `user_id`, `comments`, `date`, `time`) VALUES
 (1, '13', 'jrfjrt', 'jtjtjte', 'ghdth', 'tdued'),
 (2, '13', '64e', 'dyu', 'dye', 'ueu'),
-(3, '', '', 'ss', '2015-04-27', '23:16:19'),
-(4, '', 'ketan', 'dvd', '2015-04-27', '23:17:05'),
 (5, '13', 'ketan', 'dvd', '2015-04-27', '23:17:34'),
 (6, '13', 'ketan', 'dvd', '2015-04-27', '23:22:55'),
 (7, '13', 'ketan', 'gd', '2015-04-27', '23:23:05'),
 (8, '13', 'ketan', 'gr', '2015-04-27', '23:23:48'),
 (9, '13', 'ketan', 'dd', '2015-04-27', '23:35:53'),
-(10, '13', 'ketan', 'rgr', '2015-04-27', '23:37:53');
+(10, '13', 'ketan', 'rgr', '2015-04-27', '23:37:53'),
+(11, '38', 'rishuindce', 'dfas', '2015-05-03', '12:26:54'),
+(12, '38', 'rishuindce', 'cscscs', '2015-05-03', '12:27:01'),
+(13, '17', 'rishuindce', 'cscsc', '2015-05-03', '12:27:08'),
+(14, '16', 'cpsingh', 'dv', '2015-05-04', '00:10:44');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

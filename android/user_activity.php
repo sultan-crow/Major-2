@@ -15,10 +15,10 @@
 		$email = $_POST['email'];
 		$password = md5($_POST['password']);
 		
-		$query = "SELECT * FROM user_student WHERE email = '$email' && password = '$password'";
+		$query = "SELECT * FROM user_student WHERE (email = '$email' OR s_user_name = '$email') AND password = '$password'";
 		$result = mysql_query($query, $con);
 		
-		$query_admin = "SELECT * FROM user_fac WHERE t_user_name = '$email' && password = '$password'";
+		$query_admin = "SELECT * FROM user_fac WHERE (email = '$email' OR t_user_name = '$email') AND password = '$password'";
 		$result_admin = mysql_query($query_admin, $con);
 		
 		if(mysql_num_rows($result) == 1) {
@@ -26,7 +26,8 @@
 			$response['success'] = 1;
 			$response['user']['name'] = mysql_result($result, 0, "name");
 			$response['user']['email'] = mysql_result($result, 0, "email");
-			$response['user']['year'] = mysql_result($result, 0, "year");
+			$response['user']['username'] = mysql_result($result, 0, "s_user_name");
+			$response['user']['year'] = mysql_result($result, 0, "class");
 			$response['user']['role'] = 0;
 			
 		} else if(mysql_num_rows($result_admin) == 1) {
@@ -34,6 +35,7 @@
 			$response['success'] = 1;
 			$response['user']['name'] = mysql_result($result_admin, 0, "name") or die("Hello:".mysql_error());
 			$response['user']['email'] = mysql_result($result_admin, 0, "email");
+			$response['user']['username'] = mysql_result($result_admin, 0, "t_user_name");
 			$response['user']['year'] = 0;
 			$response['user']['role'] = 1;
 			
@@ -52,6 +54,7 @@
 	
 		$name = $_POST['name'];
 		$email = $_POST['email'];
+		$username = $_POST['username'];
 		$year_temp = $_POST['year'];
 		
 		if($year_temp == "First")
@@ -69,20 +72,30 @@
 		$query = "SELECT * FROM user_student WHERE email = '$email'";
 		$result = mysql_query($query, $con);
 		
+		$query_2 = "SELECT * FROM user_student WHERE s_user_name = '$username'";
+		$result_2 = mysql_query($query_2);
+		
 		if(mysql_num_rows($result) > 0) {
 		
 			$response['error'] = 2;
-			$response['error_message'] = "User Already Exists.\n Please use a different Email ID.";
+			$response['error_message'] = "The Email ID already exists. Please scroll down to login.";
+			echo json_encode($response);
+			
+		} else if(mysql_num_rows($result_2) > 0) {
+			
+			$response['error'] = 3;
+			$response['error_message'] = "The username is already taken. Please enter another.";
 			echo json_encode($response);
 			
 		} else {
 		
-			$query = "INSERT INTO user_student (name, email, password, gcm_id, year) VALUES ('$name', '$email', '$password', '$gcmRegID', '$year')";
+			$query = "INSERT INTO user_student (name, email, s_user_name, password, gcm_id, class) VALUES ('$name', '$email', '$username', '$password', '$gcmRegID', '$year')";
 			if(mysql_query($query)) {
 			
 				$response['success'] = 1;
 				$response['user']['name'] = $name;
 				$response['user']['email'] = $email;
+				$response['user']['username'] = $username;
 				$response['user']['year'] = $year;
 				$response['user']['role'] = 0;
 				
@@ -91,7 +104,7 @@
 			} else {
 				
 				$response['error'] = 1;
-				$response['error_message'] = "Error occurred during Registration";
+				$response['error_message'] = "Could not connect to server.";
 				
 				echo json_encode($response);
 				

@@ -67,7 +67,7 @@
 			
 			//Finally, we add all posts
 			
-			$query = "SELECT post_id, posted_by, post_title FROM posts WHERE class='$year' ORDER BY post_id DESC";
+			$query = "SELECT post_id, posted_by, post_title, date, time FROM posts WHERE class LIKE '%$year%' ORDER BY post_id DESC";
 			$result = mysql_query($query, $con) or die(mysql_error());
 			
 			if(mysql_num_rows($result) > 0) {
@@ -76,6 +76,8 @@
 					$response['posts'][$i]['post_id'] = mysql_result($result, $i, "post_id");
 					$response['posts'][$i]['post_title'] = mysql_result($result, $i, "post_title");
 					$response['posts'][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][$i]['time'] = mysql_result($result, $i, "time");
 				}
 				
 			} else
@@ -135,16 +137,81 @@
 			
 			//Finally, we add all posts
 			
-			$query = "SELECT post_id, posted_by, post_title,class FROM posts ORDER BY post_id DESC";
+			$query = "SELECT post_id, posted_by, post_title, date, time, class FROM posts WHERE class = '1' ORDER BY post_id DESC";
 			$result = mysql_query($query, $con) or die(mysql_error());
 			
 			if(mysql_num_rows($result) > 0) {
 				
 				for($i = 0; $i < mysql_num_rows($result); $i ++) {
-					$response['posts'][$i]['post_id'] = mysql_result($result, $i, "post_id");
-					$response['posts'][$i]['post_title'] = mysql_result($result, $i, "post_title");
-					$response['posts'][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
-					$response['posts'][$i]['year'] = mysql_result($result, $i, "class");
+					$response['posts'][1][$i]['post_id'] = mysql_result($result, $i, "post_id");
+					$response['posts'][1][$i]['post_title'] = mysql_result($result, $i, "post_title");
+					$response['posts'][1][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][1][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][1][$i]['time'] = mysql_result($result, $i, "time");
+				}
+				
+			} else
+				$error = 1;
+			
+			$query = "SELECT post_id, posted_by, post_title, date, time, class FROM posts WHERE class = '2' ORDER BY post_id DESC";
+			$result = mysql_query($query, $con) or die(mysql_error());
+			
+			if(mysql_num_rows($result) > 0) {
+				
+				for($i = 0; $i < mysql_num_rows($result); $i ++) {
+					$response['posts'][2][$i]['post_id'] = mysql_result($result, $i, "post_id");
+					$response['posts'][2][$i]['post_title'] = mysql_result($result, $i, "post_title");
+					$response['posts'][2][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][2][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][2][$i]['time'] = mysql_result($result, $i, "time");
+				}
+				
+			} else
+				$error = 1;
+			
+			$query = "SELECT post_id, posted_by, post_title, date, time, class FROM posts WHERE class = '3' ORDER BY post_id DESC";
+			$result = mysql_query($query, $con) or die(mysql_error());
+			
+			if(mysql_num_rows($result) > 0) {
+				
+				for($i = 0; $i < mysql_num_rows($result); $i ++) {
+					$response['posts'][3][$i]['post_id'] = mysql_result($result, $i, "post_id");
+					$response['posts'][3][$i]['post_title'] = mysql_result($result, $i, "post_title");
+					$response['posts'][3][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][3][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][3][$i]['time'] = mysql_result($result, $i, "time");
+				}
+				
+			} else
+				$error = 1;
+			
+			$query = "SELECT post_id, posted_by, post_title, date, time, class FROM posts WHERE class = '4' ORDER BY post_id DESC";
+			$result = mysql_query($query, $con) or die(mysql_error());
+			
+			if(mysql_num_rows($result) > 0) {
+				
+				for($i = 0; $i < mysql_num_rows($result); $i ++) {
+					$response['posts'][4][$i]['post_id'] = mysql_result($result, $i, "post_id");
+					$response['posts'][4][$i]['post_title'] = mysql_result($result, $i, "post_title");
+					$response['posts'][4][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][4][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][4][$i]['time'] = mysql_result($result, $i, "time");
+				}
+				
+			} else
+				$error = 1;
+			
+			$query = "SELECT post_id, posted_by, post_title, date, time, class FROM posts WHERE class LIKE '%5%' ORDER BY post_id DESC";
+			$result = mysql_query($query, $con) or die(mysql_error());
+			
+			if(mysql_num_rows($result) > 0) {
+				
+				for($i = 0; $i < mysql_num_rows($result); $i ++) {
+					$response['posts'][5][$i]['post_id'] = mysql_result($result, $i, "post_id");
+					$response['posts'][5][$i]['post_title'] = mysql_result($result, $i, "post_title");
+					$response['posts'][5][$i]['posted_by'] = mysql_result($result, $i, "posted_by");
+					$response['posts'][5][$i]['date'] = mysql_result($result, $i, "date");
+					$response['posts'][5][$i]['time'] = mysql_result($result, $i, "time");
 				}
 				
 			} else

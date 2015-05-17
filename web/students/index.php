@@ -64,6 +64,13 @@ body{
 		background-image:url('../images/background.jpg');
 
 }
+#box{
+	width:100px;
+	height:120px;
+	background-color:#123aaa;
+	margin:1%;
+	float:left;
+}
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
@@ -91,9 +98,9 @@ body{
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 <script >
 
@@ -248,31 +255,16 @@ echo $detail[9];
 
 <?php
 for($i=0;$i<$classmate_count;$i++){
-	$receiver=mysql_result($classmates,$i,"s_user_name");?>
+	$receiver=mysql_result($classmates,$i,"s_user_name");
+	//Check on if user it itself
+	if($_SESSION['user']==$receiver ) {$i=$i+1; if($i>=$classmate_count) break;}?>
+	
 <a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->
-<div class="user_detail" >
-<span style="float:left;">
-<!--table for printing detail of classmates-->
-<table class="table" class="table table-bordered" width="200px">
-<tr>
-<td>Name:</td>
-<td><?php echo mysql_result($classmates,$i,"name");?></td>
-</tr>
-<tr>
-<td>Year:</td>
-<td><?php echo mysql_result($classmates,$i,"class");?></td>
-<td>Group:</td>
-<td><?php echo mysql_result($classmates,$i,"group_");?></td>
 
-<td>Email-id:</td>
-<td><?php echo mysql_result($classmates,$i,"email");?></td>
-</tr>
-</table>
-</span>
-<span style="float:right;">
-<img src="../images/passport.jpg" width="70px" height="70px"/>
-</span>
+<div id="box">
+<div><img src="upload/<?php echo mysql_result($classmates,$i,"pic"); ?>"  onerror ="this.src='../images/passport.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><?php echo explode(" ", mysql_result($classmates,$i,"name"))[0]; ?></div>
 </div>
 </a>
 <?php

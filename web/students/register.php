@@ -31,7 +31,7 @@ include('../connection.php');
 					$targetPath = "upload/".$_FILES['pic']['name']; // Target path where file is to be stored
 					move_uploaded_file($sourcePath,$targetPath) ; // Moving Uploaded file
 							$pic=$_FILES['pic']['name'];
-							echo $pic;
+							//echo $pic;
 
 				}
 			}

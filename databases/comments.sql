@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2015 at 03:48 PM
+-- Generation Time: May 18, 2015 at 12:13 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `date` text NOT NULL,
   `time` text NOT NULL,
   PRIMARY KEY (`comment_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `comments`
@@ -52,7 +52,11 @@ INSERT INTO `comments` (`comment_id`, `post_id`, `user_id`, `comments`, `date`, 
 (11, '38', 'rishuindce', 'dfas', '2015-05-03', '12:26:54'),
 (12, '38', 'rishuindce', 'cscscs', '2015-05-03', '12:27:01'),
 (13, '17', 'rishuindce', 'cscsc', '2015-05-03', '12:27:08'),
-(14, '16', 'cpsingh', 'dv', '2015-05-04', '00:10:44');
+(14, '16', 'cpsingh', 'dv', '2015-05-04', '00:10:44'),
+(15, '50', 'sagnik', 'scs', '2015-05-18', '03:27:51'),
+(16, '51', 'sagnik', 'wsdwd', '2015-05-18', '03:36:08'),
+(17, '51', 'sagnik', 'dwdw', '2015-05-18', '03:36:16'),
+(18, '51', 'sagnik', 'wsw', '2015-05-18', '03:36:28');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

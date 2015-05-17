@@ -5,7 +5,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
-<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.3/normalize.css">
+<link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/jquery.idealforms.css">
 <meta charset=utf-8 />
 <title>Registartion Form</title>
@@ -189,7 +189,7 @@
               <label class="main">Picture:</label>
               <input id="pic" name="pic" type="file" accept="image/*">
               <span class="error"></span>
-			  <div id="image_preview"><img id="previewing" src="noimage.png" /></div>
+			  <div id="image_preview"><img id="previewing" src='../../images/anonymous.jpg'/></div>
             </div>
 			
 
@@ -303,12 +303,12 @@
 			  success:function(e){
 				  if(e=="Logged in"){
 					alert(e);	
-					window.location.href="../login.php"
+					window.location.href="../login.php";
 
 
 				  }
 				  else {
-					  alert(e);
+					  alert("Registration failed..!! Try Again..!!");
 
 				  }
 			  }

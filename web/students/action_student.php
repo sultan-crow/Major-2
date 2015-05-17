@@ -27,7 +27,6 @@
 		session_destroy();
 		echo "Invalid Email/Password.";
 		
-		header('location:login.php');
 
 	
 	}

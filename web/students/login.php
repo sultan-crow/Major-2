@@ -38,7 +38,7 @@
 					if(e=="Success"){
 						location.reload();
 					}else
-					alert(e);
+					alert("Invalid UserName/Password");
 				}
 			});
 			return false;

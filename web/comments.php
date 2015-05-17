@@ -44,9 +44,10 @@ Comments
 }
 </style>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 
-<div id="page-header"><h1>
+<div id="page-header">
+<h1>
 <center>
 <?php echo mysql_result($post,0,"post_title");?>
 </center>
@@ -55,13 +56,22 @@ Comments
 
 <div id="comments">
 <?php
+
 for($i=0;$i<$no_of_comments;$i++){
-echo mysql_result( $comments,$i,"comments");?><br><?php
+	$user= mysql_result( $comments,$i,"user_id");
+	$comm=mysql_result( $comments,$i,"comments");
+	$res=mysql_query("SELECT name FROM user_student WHERE s_user_name = '$user'");
+	$name = mysql_result($res,0,"name");
+
+	echo "<div class=\"receiver\"><span class=\"uname\">" . explode(" ", $name)[0]. ":</span> <span class=\"msg\">" . $comm. "</span></div>";
+
 }
 ?>
-<input type="text" name="comment" id="comment"></input>
+<form>
+<input type="text" name="comment" id="comment" style="width:300px; height:30px; resize:none"></textarea>
 <input type="submit" value="Comment" onclick="post_comment('<?php echo $post_id?>')"></input>
 </div>
+</form>
 </body>
 
 
@@ -74,7 +84,8 @@ function post_comment(id){
 		url:"comment_action.php",
 		data:"text="+text+"&id="+id,
 		success:function(e){
-			location.reload();		}
+			location.reload();		
+		}
 		
 	});
 	

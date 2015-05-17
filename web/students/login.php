@@ -21,7 +21,33 @@
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link href="//fonts.googleapis.com/css?family=Convergence&subset=latin" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript">
 
+	$(function() {
+		
+		$('#button').click(function() {
+			
+			var username=$('#username').val();
+			var password=$('#password').val();
+			password=password;
+			$.ajax({
+				url:'action_student.php',
+				type:'post',
+				data:'s_user_name='+username+'&password='+password,
+				success:function(e){
+					if(e=="Success"){
+						location.reload();
+					}else
+					alert(e);
+				}
+			});
+			return false;
+			
+		});
+		
+	});
+
+</script>
 </head>
 
 <body>
@@ -44,34 +70,14 @@
        }(document, 'script', 'facebook-jssdk'));*/
     </script>
 	
-	<script src="../js/md5.js">//Script file for password hashing</script>
 
-<script>
-function login(){
-	var username=$('#username').val();
-	var password=$('#password').val();
-	password=hex_md5(password);
-	$.ajax({
-		url:'action_student.php',
-		type:'post',
-		data:'s_user_name='+username+'&password='+password,
-		success:function(e){
-			if(e=="Success"){
-				location.reload();
-			}else
-			alert(e);
-		}
-	});
-	
-}
-</script>
 <center><p id="main_heading">The Network|MCE</p></center>
 
 <div class = "login_box">
 
 <h2 id="heading">Students Login</h2>
 
-<form>
+<form method="post">
 
 <table border="0" id="details" cellspacing="2" cellpadding="2">
 
@@ -84,7 +90,8 @@ function login(){
 
 </table>
 
-<input type="submit" value="Submit" id="button" onclick="login()">
+<input type="submit" value="Submit" id="button">
+
 </form>
 <div class="sign-up">
 <a href="form">Register</a>

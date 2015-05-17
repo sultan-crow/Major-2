@@ -70,8 +70,6 @@ body{
 <script type="text/javascript" src="../js/jquery.simplemodal.js"></script>
 <!--For feedback
 !-->
-<script src="feedback/mrova-feedback-form.js" type="text/javascript"></script>
-	<link rel="stylesheet" href="feedback/mrova-feedback-form.css" type="text/css"/>
 	
 <script type="text/javascript">
 
@@ -251,15 +249,15 @@ echo $detail[9];
 <?php
 for($i=0;$i<$classmate_count;$i++){
 	$receiver=mysql_result($classmates,$i,"s_user_name");?>
-<a href="javascript:void(0)" >
+<a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->
-<div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
+<div class="user_detail" >
 <span style="float:left;">
 <!--table for printing detail of classmates-->
-<table class="table" class="table table-bordered">
+<table class="table" class="table table-bordered" width="200px">
 <tr>
 <td>Name:</td>
-<td><?php echo mysql_result($classmates,$i,"name");?></td><td/><td/><td/><td/>
+<td><?php echo mysql_result($classmates,$i,"name");?></td>
 </tr>
 <tr>
 <td>Year:</td>

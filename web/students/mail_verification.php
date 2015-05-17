@@ -1,7 +1,7 @@
 <?php
-$to='saurabhshahpur@gmail.com';
-$from='nandini29@gmail.com';
-$sub='I Like you a lot';
-$msg='Call me';
-mail($to,$from,$sub,$msg);
+$to='sagnik.sinharoy@gmail.com';
+$header='From:admin@mcenetwork.com';
+$sub='Hey';
+$msg='major';
+mail($to,$sub,$msg,$header);
 ?>

@@ -303,6 +303,7 @@
 			  success:function(e){
 				  if(e=="Logged in"){
 					alert(e);	
+					window.location.href="../login.php"
 
 
 				  }

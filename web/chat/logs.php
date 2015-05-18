@@ -9,7 +9,8 @@
 	$query = "SELECT * FROM messages WHERE sent_by IN ('$sender', '$receiver') AND received_by IN ('$sender', '$receiver') ORDER BY message_id ASC";
 	$result = mysql_query($query, $con) or die(mysql_error());
 	
-	
+	$update="UPDATE messages SET read_='1' WHERE sent_by='$sender' and received_by='$receiver'";
+	mysql_query($update)or die(mysql_error());
 	while($extract = mysql_fetch_array($result)) {
 				//echo "<br/>";
 			$user=$extract['sent_by'];

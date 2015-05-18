@@ -19,7 +19,7 @@ $query="SELECT * FROM user_student WHERE s_user_name='$user'";
 $class=mysql_result(mysql_query("SELECT class FROM user_student WHERE s_user_name='$user'"),0,0);
 
 $faculty=mysql_query("SELECT * FROM user_fac");
-$fac_count=mysql_num_rows($faculty);
+$faculty_count=mysql_num_rows($faculty);
 
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
@@ -27,6 +27,14 @@ $detail= mysql_fetch_array($res,0);
 $classmates=mysql_query("SELECT * FROM user_student WHERE class = '$class'");
 //No. of classmates
 $classmate_count=mysql_num_rows($classmates);
+
+//NO. OF UNREAD MESSAGES
+
+$msg_sender=mysql_query("SELECT DISTINCT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+$sender_count=mysql_num_rows($msg_sender);
+$msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+$unread_count=mysql_num_rows($msg_);
+
 ?>
 
 <html>
@@ -65,11 +73,18 @@ body{
 
 }
 #box{
-	width:100px;
-	height:120px;
-	background-color:#123aaa;
+	width:150px;
+	height:150px;
 	margin:1%;
 	float:left;
+}
+#msg_count{
+		background-color:red;
+		border-radius:400px;
+		margin-left:5px;
+		color:white;
+		padding:8px;
+		
 }
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
@@ -79,7 +94,9 @@ body{
 !-->
 	
 <script type="text/javascript">
-
+	$(document).ready(function(){
+		
+	});
 	$(function() {
 		$.ajax({
 			type:"POST",
@@ -127,6 +144,10 @@ body{
 				$(".aa").fadeOut();
 				$("#time_table").delay(500).fadeIn(500);
 		}
+		if(res=="message"){		
+				$(".aa").fadeOut();
+				$("#messages").delay(500).fadeIn(500);
+		}
 
 	}
 
@@ -140,7 +161,7 @@ body{
 </a>
 <div id="page-header">
 <span id="dp">
-<img src="<?php echo "upload/".$detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
+<img src="<?php echo "upload/".$detail[5]?>" title="<?php echo $detail[3]?>" style="margin:2px;" onerror="this.src='../images/anonymous.jpg'"height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -154,11 +175,12 @@ body{
 <div id="container">
 <span id="links">
 <div class="nav nav-pills nav-stacked">
-<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom"  class="links" style="a:active;">Classroom</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="about" class="links">Profile</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classmates" class="links">Classmates</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="timetable" class="links">Time Table</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="message" class="links">Messages<?php if($unread_count){echo "<span id=\"msg_count\"><b>".$unread_count."</b></span>";} ?></a></li>
 <li><a href="logout.php"class="links">Logout</a></li>
 </div>
 </span>
@@ -172,16 +194,18 @@ body{
 	<?php 
 	$count_post=mysql_num_rows($posts);
 	for( $i=0;$i<$count_post;$i++){
-	$post_id= mysql_result($posts,$i,0);
-	$posted_by= mysql_result($posts,$i,1);
-	$post_title= mysql_result($posts,$i,3);
-	$post_text=mysql_result($posts,$i,4);
-	$post_time=mysql_result($posts,$i,5);
-	$post_date=mysql_result($posts,$i,6);
+		$posted_by= mysql_result($posts,$i,1);
+		$user=mysql_query("SELECT name FROM user_student WHERE s_user_name='$posted_by'");
+		if(mysql_num_rows($user)==0){
+			$user=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$posted_by'");
+
+		}
+		$name=mysql_result($user,0,"name");
+	
 	?>
 	
 	<div class="post" >
-	<a  href="../comments.php?id=<?php echo $post_id ?>" target="_blank">
+	<a  href="../comments.php?id=<?php echo mysql_result($posts,0,"post_id" );?>" target="_blank">
 	<table class="table">
 	
 		
@@ -193,7 +217,7 @@ body{
 			
 		</tr>
 		<tr>
-			<label id="text-muted"><td>posted by:<?php echo mysql_result($posts,$i,1);?></td>
+			<label id="text-muted"><td>posted by:<?php echo $name;?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
 		</tr>
@@ -263,7 +287,7 @@ for($i=0;$i<$classmate_count;$i++){
 <!--Function to call messaging -->
 
 <div id="box">
-<div><img src="upload/<?php echo mysql_result($classmates,$i,"pic"); ?>"  onerror ="this.src='../images/passport.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><img src="upload/<?php echo mysql_result($classmates,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
 <div><?php echo explode(" ", mysql_result($classmates,$i,"name"))[0]; ?></div>
 </div>
 </a>
@@ -274,46 +298,56 @@ for($i=0;$i<$classmate_count;$i++){
 </div>
 <div  id="faculty_" class="aa" >
 <center><h3>List of Faculty</h3></center>
-<div  class="scroll">
+<center><h3>Students of <?php echo $class ?> Year</h3></center>
+<div class="scroll">
 
 <?php
-for($i=0;$i<$fac_count;$i++){
-	$receiver=mysql_result($faculty,$i,"t_user_name");?>
-<a href="javascript:void(0)" >
+for($i=0;$i<$faculty_count;$i++){
+	$receiver=mysql_result($faculty,$i,"t_user_name");
+	//Check on if user it itself
+	if($_SESSION['user']==$receiver ) {$i=$i+1; if($i>=$classmate_count) break;}?>
+	
+<a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->
-<div class="user_detail" style="width:750px"id="<?php echo $receiver ?>"onclick="message(this.id)">
-<span style="float:left;">
-<!--table for printing detail of classmates-->
-<table class="table" class="table table-bordered">
-<tr>
-<td>Name:</td>
-<td><?php echo mysql_result($faculty,$i,"name");?></td><td/>
-<td>Designation:</td>
-<td><?php echo mysql_result($faculty,$i,"designation");?></td>
-		
-</tr>
-<tr>
-<td>Qualification:</td>
-<td><?php echo mysql_result($faculty,$i,"qualification");?></td>
 
-<td>Email-id:</td>
-<td><?php echo mysql_result($faculty,$i,"email");?></td>
-</tr>
-</table>
-</span>
-<span style="float:right;">
-<!--img src="images/passport.jpg" width="90px" height="90px"/!-->
-</span>
+<div id="box">
+<div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
 <?php
 }
 ?>
-</div>
+</div >
 </div >
 <div  id="time_table" class="aa">
 	<center><label>Time Table</label></center>
 </div >
+<div id="messages" class="aa">
+<center><h3>Messages from <?php echo $sender_count ?> people</h3></center>
+<div class="scroll">
+
+<?php
+for($i=0;$i<$sender_count;$i++){
+	$receiver=mysql_result($msg_sender,$i,"sent_by");
+	?>
+<a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
+<!--Function to call messaging -->
+
+<div id="box">
+<?php 
+$rec=mysql_query("SELECT name, pic FROM user_student WHERE s_user_name='$receiver'");
+?>
+<div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><?php echo explode(" ", mysql_result($rec,0,"name"))[0]; ?></div>
+</div>
+</a>
+<?php
+}
+?>
+</div >
+
+</div>
 </span>
 <span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
 

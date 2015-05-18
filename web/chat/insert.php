@@ -26,7 +26,7 @@
 }
 	
 	
-	$query = "INSERT INTO messages (sent_by, received_by ,message, time, date) VALUES ('$sent_by','$uname', '$msg','$time','$date')";
+	$query = "INSERT INTO messages (sent_by, received_by ,message, time, date, read_) VALUES ('$sent_by','$uname', '$msg','$time','$date', '0')";
 	mysql_query($query, $con) or die(mysql_error());
 	$query = "SELECT * FROM messages WHERE sent_by IN ('$sent_by', '$uname') AND received_by IN ('$uname', '$sent_by') ORDER BY message_id ASC";
 	$result = mysql_query($query, $con) or die(mysql_error());

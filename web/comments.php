@@ -106,16 +106,7 @@ Comments
 
 
 <script>
-$(document).ready(function(){
-	load_comments();
-	$('form').submit(function(){
-		post_comment('<?php echo $post_id?>');
-		return false;
-	});
-	var h=$('#comments').prop('scrollHeight');
-	$('#comments').scrollTop(h+5);
-	
-});
+
 function load_comments(){
 
 	var id= "<?php echo $post_id ?>";
@@ -140,6 +131,7 @@ function load_comments(){
 			}
 		}
 	});
+	$('#comment').val('');
 	$('#comments').scrollTop(h+25);
 
 var h=$('#comments').prop('scrollHeight');
@@ -159,5 +151,16 @@ function post_comment(id){
 	$('#comments').scrollTop(h+25);
 	
 }
+
+$(document).ready(function(){
+	load_comments();
+	$('form').submit(function(){
+		post_comment('<?php echo $post_id?>');
+		return false;
+	});
+	var h=$('#comments').prop('scrollHeight');
+	$('#comments').scrollTop(h+5);
+	
+});
 </script>
 </html>

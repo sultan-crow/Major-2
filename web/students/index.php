@@ -35,6 +35,7 @@ $sender_count=mysql_num_rows($msg_sender);
 $msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
 $unread_count=mysql_num_rows($msg_);
 
+$word_num=array("Zero", "First", "Second", "Third", "Fourth");
 ?>
 
 <html>
@@ -274,7 +275,7 @@ echo $detail[9];
 </div >
 <div  id="classmates_"class="aa">
 
-<center><h3>Students of <?php echo $class ?> Year</h3></center>
+<center><h3>Students of <?php echo $word_num[$class] ?> Year</h3></center>
 <div class="scroll">
 
 <?php
@@ -288,7 +289,7 @@ for($i=0;$i<$classmate_count;$i++){
 
 <div id="box">
 <div><img src="upload/<?php echo mysql_result($classmates,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
-<div><?php echo explode(" ", mysql_result($classmates,$i,"name"))[0]; ?></div>
+<div style="margin-left:25px;"><?php echo explode(" ", mysql_result($classmates,$i,"name"))[0]; ?></div>
 </div>
 </a>
 <?php
@@ -312,7 +313,7 @@ for($i=0;$i<$faculty_count;$i++){
 
 <div id="box">
 <div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
-<div><?php echo mysql_result($faculty,$i,"name"); ?></div>
+<div style="margin-left:25px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
 <?php
@@ -324,7 +325,7 @@ for($i=0;$i<$faculty_count;$i++){
 	<center><label>Time Table</label></center>
 </div >
 <div id="messages" class="aa">
-<center><h3>Messages from <?php echo $sender_count ?> people</h3></center>
+<center><h3><?php if($sender_count){echo "Messages from ".$sender_count." people";} else {echo"No new message";}?> </h3></center>
 <div class="scroll">
 
 <?php
@@ -338,8 +339,8 @@ for($i=0;$i<$sender_count;$i++){
 <?php 
 $rec=mysql_query("SELECT name, pic FROM user_student WHERE s_user_name='$receiver'");
 ?>
-<div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
-<div><?php echo explode(" ", mysql_result($rec,0,"name"))[0]; ?></div>
+<div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to start chatting"></img></div>
+<div style="margin-left:25px;"><?php echo explode(" ", mysql_result($rec,0,"name"))[0]; ?></div>
 </div>
 </a>
 <?php

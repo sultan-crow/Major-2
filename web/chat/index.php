@@ -9,6 +9,10 @@ $name = mysql_result($res,0,"name");
 	<head>
 		<title>Chatbox</title>
 		<style>
+		body{
+		background-image:url('../images/background.jpg');
+
+}
 	#chat1{
 		
 	background-color:#fff1;
@@ -21,6 +25,7 @@ $name = mysql_result($res,0,"name");
 		width:500px;
 		height:80%;
 		padding:2px;
+		background-color:white;
 	}
 	.box{
 		margin-bottom:1px;

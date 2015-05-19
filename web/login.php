@@ -31,7 +31,7 @@
 
 <h2 id="heading">Faculty Login</h2>
 
-<form action="action_student.php" method="post">
+<form action="action_faculty.php" method="post">
 
 <table border="0" id="details" cellspacing="2" cellpadding="2">
 

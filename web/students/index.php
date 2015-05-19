@@ -28,14 +28,14 @@ $classmates=mysql_query("SELECT * FROM user_student WHERE class = '$class'");
 //No. of classmates
 $classmate_count=mysql_num_rows($classmates);
 
-//NO. OF UNREAD MESSAGES
+	//NO. OF UNREAD MESSAGES
 
-$msg_sender=mysql_query("SELECT DISTINCT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
-$sender_count=mysql_num_rows($msg_sender);
-$msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
-$unread_count=mysql_num_rows($msg_);
-
-$word_num=array("Zero", "First", "Second", "Third", "Fourth");
+	$msg_sender=mysql_query("SELECT DISTINCT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+	$sender_count=mysql_num_rows($msg_sender);
+	$msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+	$unread_count=mysql_num_rows($msg_);
+	//converting digit to word
+	$word_num=array("Zero", "First", "Second", "Third", "Fourth");
 ?>
 
 <html>
@@ -243,7 +243,7 @@ echo $detail[3];
 <tr>
 <th>Year :</th>
 <td><?php
-echo $detail[6];
+echo $word_num[$detail[6]];
 ?></td>
 </tr>
 <tr>
@@ -282,7 +282,13 @@ echo $detail[9];
 for($i=0;$i<$classmate_count;$i++){
 	$receiver=mysql_result($classmates,$i,"s_user_name");
 	//Check on if user it itself
-	if($_SESSION['user']==$receiver ) {$i=$i+1; if($i>=$classmate_count) break;}?>
+	if($_SESSION['user']==$receiver ) {
+		$i=$i+1; 
+			if($i>=$classmate_count) break;
+			else {
+				$receiver=mysql_result($classmates,$i,"s_user_name");
+			}
+	}?>
 	
 <a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->
@@ -298,22 +304,19 @@ for($i=0;$i<$classmate_count;$i++){
 </div >
 </div>
 <div  id="faculty_" class="aa" >
-<center><h3>List of Faculty</h3></center>
-<center><h3>Students of <?php echo $class ?> Year</h3></center>
+<center><h3><u>List of Faculty</u></h3></center>
 <div class="scroll">
 
 <?php
 for($i=0;$i<$faculty_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");
-	//Check on if user it itself
-	if($_SESSION['user']==$receiver ) {$i=$i+1; if($i>=$classmate_count) break;}?>
-	
+	?>
 <a href="../chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->
 
 <div id="box">
 <div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
-<div style="margin-left:25px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
+<div style="margin-left:5px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
 <?php
@@ -337,10 +340,14 @@ for($i=0;$i<$sender_count;$i++){
 
 <div id="box">
 <?php 
-$rec=mysql_query("SELECT name, pic FROM user_student WHERE s_user_name='$receiver'");
+$rec=mysql_query("SELECT name, pic FROM user_student WHERE s_user_name='$receiver'")or die(mysql_error());
+if(mysql_num_rows($rec)==0){
+	$rec=mysql_query("SELECT name, pic FROM user_fac WHERE t_user_name='$receiver'")or die(mysql_error());
+
+}
 ?>
 <div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to start chatting"></img></div>
-<div style="margin-left:25px;"><?php echo explode(" ", mysql_result($rec,0,"name"))[0]; ?></div>
+<div style="margin-left:10px;"><?php echo mysql_result($rec,0,"name"); ?></div>
 </div>
 </a>
 <?php

@@ -2,6 +2,10 @@
 include('../connection.php');
 $name=$_GET['id'];
 $res=mysql_query("SELECT name FROM user_student WHERE s_user_name='$name'" );
+if(mysql_num_rows($res)==0){
+	$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$name'" );
+
+}
 $name = mysql_result($res,0,"name");
 ?>
 

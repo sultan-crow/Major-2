@@ -11,12 +11,26 @@ $_SESSION['user']=$user;
 $query="SELECT * FROM user_fac WHERE t_user_name='$user'";
 $res=mysql_query($query,$con);
 $detail= mysql_fetch_array($res,0);
-$students=mysql_query("SELECT * FROM user_student");
-$faculty=mysql_query("SELECT * FROM user_fac");
+
+$students=mysql_query("SELECT name, s_user_name, pic FROM user_student");
+$student_count=mysql_num_rows($students);
+
+$faculty=mysql_query("SELECT name, t_user_name, pic FROM user_fac");
+$faculty_count=mysql_num_rows($faculty);
+
 $posts=mysql_query("SELECT * FROM posts ORDER BY post_id DESC");
 $posts_by=mysql_query("SELECT * FROM posts WHERE posted_by='$user'");
 $research=mysql_query("SELECT * FROM research");
-//echo $detail[0];
+
+//NO. OF UNREAD MESSAGES
+
+$msg_sender=mysql_query("SELECT DISTINCT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+$sender_count=mysql_num_rows($msg_sender);
+$msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
+$unread_count=mysql_num_rows($msg_);
+//converting digit to word
+$word_num=array("Zero", "First", "Second", "Third", "Fourth");
+
 ?>
 
 <html>
@@ -45,9 +59,6 @@ textarea{
 	height:20px;
 	background-color:#000;
 	margin-top:2px;	
-}
-body{
-	background-image:url('images/background.jpg');
 }
 .foot{
 	margin-bottom:1%;
@@ -78,6 +89,34 @@ body{
 		transform: rotate(350deg);
 	
 }
+body{
+		background-image:url('images/background.jpg');
+
+}
+#box{
+	width:150px;
+	height:150px;
+	margin:1%;
+	float:left;
+}
+
+#msg_count{
+		background-color:red;
+		border-radius:400px;
+		margin-left:5px;
+		color:white;
+		padding:8px;
+		
+}
+#msg_count_{
+		background-color:red;
+		border-radius:400px;
+		margin-left:-1px;
+		color:white;
+		padding:5px;
+		float:top;
+		
+}
 </style>
 
 </head>
@@ -107,49 +146,36 @@ $("#about_").fadeIn();
 function myfun(res){
 	if(res=="about"){
 		$(".aa").fadeOut();
-		$("#about_").fadeIn();
+		$("#about_").delay(500).fadeIn();
 	}
 	
 	if(res=="research"){		
 		$(".aa").fadeOut();
-
-		$("#research_").fadeIn();
+		$("#research_").delay(500).fadeIn();
 	}
 	if(res=="post"){		
 		$(".aa").fadeOut();
-
-		$("#post_").fadeIn();
+		$("#post_").delay(500).fadeIn();
 	}
 if(res=="classroom"){
-		$(".aa").fadeOut();	<?php
-		$user=$_SESSION['t_user_name'];
-		//Query for finding the class of logged in student
-		$query="SELECT * FROM posts";// WHERE class='$class'"; Add conditions
-		$classroom=mysql_query($query) or die( mysql_error());
-
-?>
-		$("#classroom_").fadeIn();
+		$(".aa").fadeOut();	
+		$("#classroom_").delay(500).fadeIn();
 
 	}
 
 
 if(res=="faculty"){
 		$(".aa").fadeOut();
-		$("#faculty_").fadeIn();
+		$("#faculty_").delay(500).fadeIn();
 	}
 
-	if(res=="students"){
+if(res=="students"){
 		$(".aa").fadeOut();
-		<?php
-//Details of all classmates
-$students=mysql_query("SELECT * FROM user_student");
-//No. of classmates
-$count=mysql_num_rows($students);
-	
-
-?>
-	
-	$("#students_").fadeIn();
+		$("#students_").delay(500).fadeIn();
+	}
+if(res=="message"){
+		$(".aa").fadeOut();
+		$("#messages").delay(500).fadeIn();
 	}
 
 }
@@ -159,7 +185,7 @@ $count=mysql_num_rows($students);
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a><div id="page-header">
 <span id="dp">
-<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" height="100" width="100"/>
+<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -179,6 +205,7 @@ $count=mysql_num_rows($students);
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="classroom" class="links">Classroom</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="faculty" class="links">Faculty</a></li>
 <li><a href="javascript:void(0);" onclick="myfun(this.id)" id="students" class="links">Students</a></li>
+<li><a href="javascript:void(0);" onclick="myfun(this.id)" id="message" class="links">Messages<?php if($unread_count){echo "<span id=\"msg_count\"><b>".$unread_count."</b></span>";} ?></a></li>
 <li><a href="logout.php"class="links">Logout</a></li>
 </div>
 </span>
@@ -329,81 +356,83 @@ for($i=0;$i<$count_res;$i++){ ?>
 </div>
 </div>
 <div id="faculty_" class="aa">
-<center><h3>List of Faculty</h3></center>
-<div  class="scroll">
-<?php
-$fac_count=mysql_num_rows($faculty);
-for($i=0;$i<$fac_count;$i++){
-	$receiver=mysql_result($faculty,$i,"t_user_name");?>
-<a href="javascript:void(0)" >
-<!--Function to call messaging -->
-<div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
-<span style="float:left;">
-<!--table for printing detail of classmates-->
-<table class="table" class="table table-bordered">
-<tr>
-<td>Name:</td>
-<td><?php echo mysql_result($faculty,$i,"name");?></td><td/>
-<td>Designation:</td>
-<td><?php echo mysql_result($faculty,$i,"designation");?></td>
-		
-</tr>
-<tr>
-<td>Qualification:</td>
-<td><?php echo mysql_result($faculty,$i,"qualification");?></td>
-
-<td>Email-id:</td>
-<td><?php echo mysql_result($faculty,$i,"email");?></td>
-</tr>
-</table>
-</span>
-<span style="float:right;">
-<img src="../images/passport.jpg" width="80px" height="80px"/>
-</span>
-</div>
-</a>
-<?php
-}
-?>
-</div>
-</div>
-<div id="students_" class="aa">
-<center><h3><u>Students</u></h3></center>
+<center><h3><u>List of Faculty</u></h3></center>
 <div class="scroll">
-<?php
-$students_count=mysql_num_rows($students);
-for($i=0;$i<$students_count;$i++){
-	$receiver=mysql_result($students,$i,"s_user_name");?>
-<a href="javascript:void(0)" >
-<!--Function to call messaging -->
-<div class="user_detail" id="<?php echo $receiver ?>"onclick="message(this.id)">
-<span style="float:left;">
-<!--table for printing detail of classmates-->
-<table class="table" class="table table-bordered">
-<tr>
-<td>Name:</td>
-<td><?php echo mysql_result($students,$i,"name");?></td><td/><td/><td/><td/>
-</tr>
-<tr>
-<td>Year:</td>
-<td><?php echo mysql_result($students,$i,"class");?></td>
-<td>Group:</td>
-<td><?php echo mysql_result($students,$i,"group_");?></td>
 
-<td>Email-id:</td>
-<td><?php echo mysql_result($students,$i,"email");?></td>
-</tr>
-</table>
-</span>
-<span style="float:right;">
-<img src="../images/passport.jpg" width="90px" height="90px"/>
-</span>
+<?php
+for($i=0;$i<$faculty_count;$i++){
+	$receiver=mysql_result($faculty,$i,"t_user_name");
+	//Check on if user it itself
+	if($_SESSION['user']==$receiver ) {$i=$i+1; 	$receiver=mysql_result($faculty,$i,"t_user_name");
+if($i>=$faculty_count) break;}?>
+	
+<a href="chat/index.php?id=<?php echo $receiver?>" target="_blank">
+<!--Function to call messaging -->
+
+<div id="box">
+<div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div style="margin-left:5px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
 <?php
 }
 ?>
 </div >
+</div>
+<div id="students_" class="aa">
+<center><h3><u>List of Students</u></h3></center>
+<div class="scroll">
+
+<?php
+for($i=0;$i<$student_count;$i++){
+	$receiver=mysql_result($students,$i,"s_user_name");
+	?>
+<a href="chat/index.php?id=<?php echo $receiver?>" target="_blank">
+<!--Function to call messaging -->
+
+<div id="box">
+<div><img src="students/upload/<?php echo mysql_result($students,$i,"pic"); ?>"  onerror ="this.src='images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div style="margin-left:25px;"><?php echo explode(" ", mysql_result($students,$i,"name"))[0]; ?></div>
+</div>
+</a>
+<?php
+}
+?>
+</div >
+</div>
+<div id="messages" class="aa">
+<center><h3><?php if($sender_count){echo "Messages from ".$sender_count." people";} else {echo"No new message";}?> </h3></center>
+<div class="scroll">
+
+<?php
+for($i=0;$i<$sender_count;$i++){
+	$receiver=mysql_result($msg_sender,$i,"sent_by");
+	?>
+<a href="chat/index.php?id=<?php echo $receiver?>" target="_blank">
+<!--Function to call messaging -->
+
+<div id="box">
+<?php 
+$rec=mysql_query("SELECT name, pic FROM user_student WHERE s_user_name='$receiver'")or die(mysql_error());
+if(mysql_num_rows($rec)==0){
+	$rec=mysql_query("SELECT name, pic FROM user_fac WHERE t_user_name='$receiver'")or die(mysql_error());
+
+}
+// count messages from each sender
+$count_each=mysql_query("SELECT * FROM messages WHERE received_by='$user' and sent_by='$receiver' and read_='0'")or die(mysql_error());
+$count_=mysql_num_rows($count_each);
+?>
+<div><span><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='images/anonymous.jpg'" width="100px" height="100px" title="Click to start chatting"></img></span>
+<span id="msg_count_"><?php echo $count_ ?></span>
+</div>
+<div style="margin-left:10px;"><?php echo mysql_result($rec,0,"name"); ?></div>
+</div>
+</a>
+<?php
+}
+?>
+</div >
+
 </div>
 </span>
 <span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>

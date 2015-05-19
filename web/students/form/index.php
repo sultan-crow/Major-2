@@ -211,9 +211,8 @@
 <div><a href="../login.php">Already Registered? Login</a></div>
   </div>
 
-  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-  <script src="js/md5.js">//Script file for password hashing</script>
+  <script src="js/jquery-2.1.0.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script src="js/out/jquery.idealforms.js"></script>
   <script type="text/javascript">
   
@@ -262,7 +261,7 @@
         'password': 'required pass',        
         'confirmpass': 'required equalto:password',
         'date': 'required date',
-        'pic': 'required extension:jpg:png',
+        //'pic': 'required extension:jpg:png',
         'year': 'minoption:1',
         'sex': 'minoption:1',
         'group': 'select:default',

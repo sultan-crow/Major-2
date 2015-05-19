@@ -15,13 +15,17 @@
 				//echo "<br/>";
 			$user=$extract['sent_by'];
 			$res=mysql_query("SELECT name FROM user_student WHERE s_user_name = '$user'");
+				if(mysql_num_rows($res)==0){
+				$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$user'" );
+
+				}
 			$name = mysql_result($res,0,"name");
 			if($user==$_SESSION['user']){
-					echo "<div class=\"sender\"><span class=\"uname\">" . explode(" ", $name)[0]. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
+					echo "<div class=\"sender\"><span class=\"uname\">"  .$name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 
 			}
 			else{
-					echo "<div class=\"receiver\"><span class=\"uname\">" . explode(" ", $name)[0]. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
+					echo "<div class=\"receiver\"><span class=\"uname\">" .  $name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 			}
 	}
 	

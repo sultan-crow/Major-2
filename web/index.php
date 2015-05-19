@@ -254,7 +254,7 @@ echo $detail[9];
 <table>
 <tr><td>Title:</td><td><input type="text"></input></td></tr>
 <tr><td>Abstract:</td><td><textarea></textarea></td>
-<td><input type="button" value="Post"></input></td>
+<td><input type="button" value="Post" class=""></input></td>
 </tr>
 </table>
 </form>

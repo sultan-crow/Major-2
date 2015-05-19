@@ -304,7 +304,7 @@ for($i=0;$i<$classmate_count;$i++){
 
 <div id="box">
 <div><img src="upload/<?php echo mysql_result($classmates,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
-<div style="margin-left:25px;"><?php echo explode(" ", mysql_result($classmates,$i,"name"))[0]; ?></div>
+<div style="margin-left:25px;"><?php $aa=mysql_result($classmates,$i,"name"); $a1=explode(" ",$aa ); echo $a1[0]; ?></div>
 </div>
 </a>
 <?php

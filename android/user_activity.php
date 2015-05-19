@@ -14,6 +14,7 @@
 		
 		$email = $_POST['email'];
 		$password = md5($_POST['password']);
+		$regId = $_POST['regId'];
 		
 		$query = "SELECT * FROM user_student WHERE (email = '$email' OR s_user_name = '$email') AND password = '$password'";
 		$result = mysql_query($query, $con);
@@ -29,6 +30,9 @@
 			$response['user']['username'] = mysql_result($result, 0, "s_user_name");
 			$response['user']['year'] = mysql_result($result, 0, "class");
 			$response['user']['role'] = 0;
+
+			$query = "UPDATE user_student SET gcm_id = '$regId' WHERE email = '$email' OR s_user_name = '$email'";
+			mysql_query($query, $con);
 			
 		} else if(mysql_num_rows($result_admin) == 1) {
 			

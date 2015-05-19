@@ -119,6 +119,21 @@
 			$response['error'] = 1;
 			$response['error_message'] = "Could not submit post due to some internal error.";
 		}
+
+		require_once('gcm.php');
+
+		$gcm_ids = array();
+
+		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year'";
+		$result = mysql_query($query);
+
+		for($i = 0; $i < mysql_num_rows($result); $i++)
+			$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+
+		$message = array("tag" => 0, "content" => $title);
+
+		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
+		print_r($gcm_ids);
 		
 	} else {
 	

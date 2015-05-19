@@ -87,6 +87,15 @@ body{
 		padding:8px;
 		
 }
+#msg_count_{
+		background-color:red;
+		border-radius:400px;
+		margin-left:-1px;
+		color:white;
+		padding:5px;
+		float:top;
+		
+}
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
@@ -345,8 +354,14 @@ if(mysql_num_rows($rec)==0){
 	$rec=mysql_query("SELECT name, pic FROM user_fac WHERE t_user_name='$receiver'")or die(mysql_error());
 
 }
+$count_each=mysql_query("SELECT * FROM messages WHERE received_by='$user' and sent_by='$receiver' and read_='0'")or die(mysql_error());
+$count_=mysql_num_rows($count_each);
+
 ?>
-<div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to start chatting"></img></div>
+<div><img src="upload/<?php echo mysql_result($rec,0,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to start chatting"></img>
+<span id="msg_count_"><?php echo $count_ ?></span>
+
+</div>
 <div style="margin-left:10px;"><?php echo mysql_result($rec,0,"name"); ?></div>
 </div>
 </a>

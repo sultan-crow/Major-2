@@ -126,7 +126,13 @@
 
 		$gcm_ids = array();
 
-		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
+		if($year == "5")
+			$query = "SELECT gcm_id FROM user_fac WHERE t_user_name <> '$username' AND gcm_id <> ''";
+		else if($year == "12345")
+			$query = "SELECT gcm_id FROM user_student WHERE gcm_id <> ''";
+		else
+			$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
+		
 		$result = mysql_query($query);
 
 		for($i = 0; $i < mysql_num_rows($result); $i++)

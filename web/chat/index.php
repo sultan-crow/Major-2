@@ -1,6 +1,10 @@
 <?php
 include('../connection.php');
 $name=$_GET['id'];
+/*if(!isset($_SESSION['user'])){
+		//header('location:../login.php');
+	}
+	*/
 $res=mysql_query("SELECT name FROM user_student WHERE s_user_name='$name'" );
 if(mysql_num_rows($res)==0){
 	$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$name'" );

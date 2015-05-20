@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+session_start();
+session_destroy();
+?>
 <html lang="en">
 
 <head>
@@ -39,6 +43,9 @@
 
   .idealforms.adaptive .field.buttons label {
     height: 0;
+  }
+  .loading{
+	  
   }
 </style>
   <script src="../../js/jquery.js"></script>
@@ -195,7 +202,7 @@
             <div class="field buttons">
               <label class="main">&nbsp;</label>
               <button type="button" class="prev">&laquo; Prev</button>
-              <button type="submit" class="submit">Submit</button>
+              <button type="submit" class="submit" id="submit1">Submit</button>
             </div>
 
           </section>
@@ -277,9 +284,9 @@
         $('#invalid')
           .show()
           .toggleClass('valid', ! invalid)
-          .text(invalid ? (invalid +' invalid fields') : 'All good!');
+          .text(invalid ? (invalid +' invalid fields') : 'All good..Logging in..!');
 		  if(!invalid){
-			  var name=$('#name').val();
+			  /*var name=$('#name').val();
 			  var username=$('#username').val();
 			  var password=$('#password').val();
 			  var gender=$('input[name="sex"]:checked').val();
@@ -288,7 +295,9 @@
 			  var email=$('#email').val();
 			  var group=$('#group').val();
 			  var pic = "kk";
-			console.log();
+			  */
+			  $('#submit1').attr('disabled',true);
+			  $('#message').html('<span class=\"error\">dd</span>')
 		  $.ajax({
 			  url:'../register.php',
 			  type:'POST',

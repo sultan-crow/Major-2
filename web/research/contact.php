@@ -19,8 +19,8 @@ if (empty($action)) {
 			<label for='contact-keywords'>*Keywords:</label>
 			<input type='text' id='contact-keywords' class='contact-input' name='keyword' tabindex='1003' />
 			
-			<label for='contact-pdf'>*PDF Upload:</label>
-			<input type='file' id='contact-pdf' class='contact-input' name='pdf' tabindex='1004' />";
+			<label for='contact-pdf'>*PDF Link</label>
+			<input type='text' id='contact-pdf' class='contact-input' name='pdf' tabindex='1004' />";
 
 	
 
@@ -42,12 +42,15 @@ else if ($action == "send") {
 	$keyword = isset($_POST["keyword"]) ? $_POST["keyword"] : "";
 	$pdf= isset($_POST["pdf"]) ? $_POST["pdf"] : "";
 	
+	
 	include('../connection.php');
 	session_start();
 	$user=$_SESSION['t_user_name'];
 	$query = "INSERT INTO research(user_name, title, abstract, keyword, link) values('$user', '$title', '$abstract', '$keyword', '$pdf')";
 	mysql_query($query)or die(mysql_error());
+	
 }
+
 
 	
 ?>

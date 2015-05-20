@@ -45,7 +45,9 @@
 		}
 
 		$name = mysql_result($res,0,"name");
-
+		$name_ = mysql_result($res,0,"name");
+			$name__=explode(" ",$name_);
+			$name=$name__[0];
 		if($user==$_SESSION['user']){
 					echo "<div class=\"sender\"><span class=\"uname\">" .  $name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 

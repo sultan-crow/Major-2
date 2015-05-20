@@ -4,7 +4,9 @@
 	include('../connection.php');
 
 	$sender = $_GET['id'];
+	
 	$receiver = $_SESSION['user'];
+
 	
 	$query = "SELECT * FROM messages WHERE sent_by IN ('$sender', '$receiver') AND received_by IN ('$sender', '$receiver') ORDER BY message_id ASC";
 	$result = mysql_query($query, $con) or die(mysql_error());
@@ -19,7 +21,9 @@
 				$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$user'" );
 
 				}
-			$name = mysql_result($res,0,"name");
+			$name_ = mysql_result($res,0,"name");
+			$name__=explode(" ",$name_);
+			$name=$name__[0];
 			if($user==$_SESSION['user']){
 					echo "<div class=\"sender\"><span class=\"uname\">"  .$name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 

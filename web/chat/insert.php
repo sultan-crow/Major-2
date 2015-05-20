@@ -40,14 +40,16 @@
 	while($extract = mysql_fetch_array($result)) {
 		$user=$extract['sent_by'];
 		$res=mysql_query("SELECT name FROM user_student WHERE s_user_name = '$user'");
-		if(mysql_num_rows($res)==0){
+		if(mysql_num_rows($res)!=0){
+					$name_ = mysql_result($res,0,"name");
+					$name__=explode(" ",$name_);
+					$name=$name__[0];
+				}
+				if(mysql_num_rows($res)==0){
 				$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$user'" );
-		}
+						$name = mysql_result($res,0,"name");
 
-		$name = mysql_result($res,0,"name");
-		$name_ = mysql_result($res,0,"name");
-			$name__=explode(" ",$name_);
-			$name=$name__[0];
+				}
 		if($user==$_SESSION['user']){
 					echo "<div class=\"sender\"><span class=\"uname\">" .  $name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 

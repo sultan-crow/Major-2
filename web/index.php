@@ -29,7 +29,7 @@ $sender_count=mysql_num_rows($msg_sender);
 $msg_=mysql_query("SELECT sent_by FROM messages WHERE received_by='$user' AND read_='0'")or die(mysql_error());
 $unread_count=mysql_num_rows($msg_);
 //converting digit to word
-$word_num=array("Zero", "First", "Second", "Third", "Fourth");
+$word_num=array("Zero", "First", "Second", "Third", "Fourth","Faculty");
 
 ?>
 
@@ -52,6 +52,16 @@ $word_num=array("Zero", "First", "Second", "Third", "Fourth");
 
 
 <style>
+.header{
+	color:#990000;
+	font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+	
+}
 textarea{
 	width:500px;
 	height:100px;
@@ -128,9 +138,6 @@ body{
 
 </head>
 <script type="text/javascript">
-function message(e){
-	alert(e);
-}
 
 
 	$(function() {
@@ -146,7 +153,7 @@ function message(e){
 		});
 		$(".aa").fadeOut();
 //$(".aa").css("display","block");
-$("#about_").fadeIn();
+$("#classroom_").fadeIn();
 	});
 
 
@@ -190,7 +197,7 @@ if(res=="message"){
 <body >
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board"><img src="images/sticky.png" width="30%"></div></a>
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
-</a><div id="page-header">
+</a><div id="page-header" class="header">
 <span id="dp">
 <img src="images/<?php echo $detail[1].'.jpg'?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
 </span>
@@ -357,7 +364,8 @@ for($i=0;$i<$count_res;$i++){
 		<tr>
 			<label id="text-muted"><td><?php echo mysql_result($nam,0,"name");?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
-			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
+			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td>
+			<td class="text-muted"><?php if(mysql_result($posts,$i,2)=='1234') echo "For All";else echo $word_num[mysql_result($posts,$i,2)];?></td></label>
 		</tr>
 	</tbody>
 	</table>
@@ -451,7 +459,7 @@ $count_=mysql_num_rows($count_each);
 <div><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe></div>
 
 <div><a href="images/anonymous.jpg" download="app.jpg" title="Click to download android app"><img src="images/download.png"></img></a></div>
-<div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.vnb" target="_blank" title="Find our apps on Play store"><img src="images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
+<div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.mcenetwork" target="_blank" title="Find our apps on Play store"><img src="images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
 
 </span>
 </div>

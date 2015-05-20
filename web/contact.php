@@ -49,17 +49,17 @@ else if ($action == "send") {
 	// Send the email
 	$title = isset($_POST["title"]) ? $_POST["title"] : "";
 	$text = isset($_POST["text"]) ? $_POST["text"] : "";
-	$class = isset($_POST["year"]) ? $_POST["year"] : "";
+	$year = isset($_POST["year"]) ? $_POST["year"] : "";
 		
 	$date = date('Y-m-d', time());
 	$time = date('H:i:s', time());
 	
 	//TODO: Insert to database
 	
-	$query = "INSERT INTO posts (posted_by,class,post_title,post_text,time,date) VALUES ('$user','$class','$title','$text','$time','$date')";
+	$query = "INSERT INTO posts (posted_by,class,post_title,post_text,time,date) VALUES ('$user','$year','$title','$text','$time','$date')";
 	$res=mysql_query($query, $con) or die (mysql_error());
 	if($res){
-		require_once('../../android/gcm.php');
+		require_once('../android/gcm.php');
 
 		$gcm_ids = array();
 

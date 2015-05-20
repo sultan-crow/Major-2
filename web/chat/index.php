@@ -5,17 +5,39 @@ $name=$_GET['id'];
 		//header('location:../login.php');
 	}
 	*/
-$res=mysql_query("SELECT name FROM user_student WHERE s_user_name='$name'" );
+$res=mysql_query("SELECT * FROM user_student WHERE s_user_name='$name'" );
+	
+$role='student';
+
 if(mysql_num_rows($res)==0){
-	$res=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$name'" );
+	$role='fac';
+	$res=mysql_query("SELECT * FROM user_fac WHERE t_user_name='$name'" );
 
 }
 $name = mysql_result($res,0,"name");
+$sex=  mysql_result($res,0,"sex");
+$pic=  mysql_result($res,0,"pic");
+$dob=  mysql_result($res,0,"dob");
+$email=  mysql_result($res,0,"email");
+
+if($role=='student'){
+	$class=mysql_result($res,0,"class");
+
+	$group=mysql_result($res,0,"group_");
+
+}
+else
+if($role=='fac'){
+	$desig=mysql_result($res,0,"designation");
+
+	$quali=mysql_result($res,0,"qualification");
+
+}
 ?>
 
 <html>
 	<head>
-		<title>Chatbox</title>
+		<title><?php echo $name;?></title>
 		<style>
 		body{
 		background-image:url('../images/background.jpg');
@@ -25,7 +47,7 @@ $name = mysql_result($res,0,"name");
 		
 	background-color:#fff1;
 	margin-top:3%;
-	margin-left:30%;
+	margin-left:40%;
 	
 	}
 	#logs{
@@ -33,7 +55,12 @@ $name = mysql_result($res,0,"name");
 		width:500px;
 		height:80%;
 		padding:2px;
-		background-color:white;
+		background-color:#99FF66;
+		color:#800000;
+		font-weight:12px;
+		font-size:20px;
+		font-family: arial, sans-serif;
+		border: 5px solid #99FF66;	
 	}
 	.box{
 		margin-bottom:1px;
@@ -44,15 +71,35 @@ $name = mysql_result($res,0,"name");
 	}
 	#header{
 		font-size:20px;
-		background-color:#877;
-		width:450px;
-		margin-bottom:1%;
+		background-color:#D6FFC2;
+		width:500px;
+		display:block;
+		border-radius:1px;
+		color:#0099CC;
+		border: 5px solid #99FF66;	
+		font-family:italic bold 12px/30px Georgia, serif;
+	}
+	.profile{
+		float:left;
+		display:block;
+		width:380px;
+		height:400px;
+		background-color:#CCCCFF;
+		margin-top:100px;
+		margin-left:52px;
+		color:#B8B894;
+		font-family:italic bold 20px/30px Georgia, serif;
 	}
 	</style>
 		<link rel="stylesheet" type="text/css" href="../chat/chat.css">
 		
 		<script src = "../js/jquery.js" type = "text/javascript"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 		<script type = "text/javascript">
+		
 		
 			$(document).ready(function(e) {
 				$.ajaxSetup({cache:false});
@@ -115,6 +162,52 @@ $name = mysql_result($res,0,"name");
 	</head>
 	
 	<body>
+	<span class="profile">
+		<table class="table">
+		<th><img src="../students/upload/<?php echo $pic;?>" onerror="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="<?php echo $name;?>"></img></th>
+			<tr>
+			<td>Name: </td>
+			<td> <?php echo $name;?></td>
+			</tr>
+			<tr>
+			<td>Email-id: </td>
+			<td><?php echo $email;?></td>
+			</tr>
+			<tr>
+			<td>Date of Birth: </td>
+			<td><?php echo $dob;?></td>
+			
+			</tr>
+			<tr>
+			<td>Gender: </td>
+			<td><?php echo $sex=='m'?"Male":"Female";?></td>
+			</tr>
+			<?php if($role=='student'){
+				echo '<tr>
+					<td>Year: </td>
+					<td>'.$class.'</td>
+					
+				</tr>
+				<tr>
+				<td>Group: </td>
+				<td>'.$group.'</td>
+				</tr>';
+			}if($role=='fac'){
+				echo '
+				<tr>
+				<td>Designation : </td>
+				<td>'.$desig.'</td>
+				</tr>
+				<tr>
+				<td>Qualification : </td>
+				<td>'.$quali.'</td>
+				</tr>';
+			}?>
+			<tr>
+			</tr>
+		</table>
+	</span>
+	<span>
 	<div id="chat1">
 		<div id="header">You are in conversation with <?php echo $name; ?></div>
 		<div id="logs">
@@ -136,7 +229,7 @@ $name = mysql_result($res,0,"name");
 		
 		
 	</div>
-	
+	</span>
 	<script>
 			$(document).ready(function()
 				{

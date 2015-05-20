@@ -16,7 +16,8 @@
 	mysql_close($con);
 	
 	if($num_rows == 1) {
-	
+		session_destroy();
+		session_start();
 		$_SESSION['s_user_name'] = $user_name;
 		$_SESSION['user'] = $user_name;
 		$_SESSION['class'] = mysql_result($result, 0, "class");
@@ -25,7 +26,6 @@
 		
 	} else {
 	
-		session_destroy();
 		echo "Invalid Email/Password.";
 		
 

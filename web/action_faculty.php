@@ -16,7 +16,8 @@
 	mysql_close($con);
 	
 	if($num_rows == 1) {
-	
+		session_destroy();
+		session_start();
 		$_SESSION['t_user_name'] = $user_name;
 		$_SESSION['user'] = $user_name;
 		

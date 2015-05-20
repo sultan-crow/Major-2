@@ -19,7 +19,7 @@ if (empty($action)) {
 			<label for='contact-keywords'>*Keywords:</label>
 			<input type='text' id='contact-keywords' class='contact-input' name='keyword' tabindex='1003' />
 			
-			<label for='contact-pdf'>*PDF Link</label>
+			<label for='contact-pdf'>*Link</label>
 			<input type='text' id='contact-pdf' class='contact-input' name='pdf' tabindex='1004' />";
 
 	

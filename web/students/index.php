@@ -96,6 +96,16 @@ body{
 		float:top;
 		
 }
+.header{
+	color:#990000;
+	font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.3999996185303px;
+	
+}
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript" src="../js/contact.js"></script>
@@ -169,7 +179,7 @@ body{
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board" ><img src="../images/sticky.png" width="30%"></div></a>
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a>
-<div id="page-header">
+<div id="page-header" class="header">
 <span id="dp">
 <img src="<?php echo "upload/".$detail[5]?>" title="<?php echo $detail[3]?>" style="margin:2px;" onerror="this.src='../images/anonymous.jpg'"height="100" width="100"/>
 </span>
@@ -271,8 +281,10 @@ echo $detail[7];
 <td><?php
 echo $detail[8];
 ?></td>
-</tr><tr>
-<th>Email :</th>
+</tr>
+<tr>
+<th>Email :<?php if($detail[11]=='1'){echo '<span><img src="../images/verified.png" width="15px" height="15px" title="Email verified"></img></span>';}
+ else{echo '<span"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified"></img></span>';}?></th>
 <td><a href="mailto:<?php
 echo $detail[9];
 ?>" target="_blank" title="mail to">
@@ -377,7 +389,7 @@ $count_=mysql_num_rows($count_each);
 <div><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe></div>
 
 <div><a href="images/anonymous.jpg" download="app.jpg" title="Click to download android app"><img src="../images/download.png"></img></a></div>
-<div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.vnb" target="_blank" title="Find our apps on Play store"><img src="../images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
+<div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.mcenetwork" target="_blank" title="Find our apps on Play store"><img src="../images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
 
 </span>
 </div>

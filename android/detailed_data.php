@@ -64,6 +64,7 @@
 				$response['profile']['group'] = mysql_result($result, 0, "group_");
 				$response['profile']['year'] = mysql_result($result, 0, "class");
 				$response['profile']['email'] = mysql_result($result, 0, "email");
+				$response['profile']['username'] = mysql_result($result, 0, "s_user_name");
 				
 			} else {
 				
@@ -87,6 +88,7 @@
 				$response['profile']['designation'] = mysql_result($result, 0, "designation");
 				$response['profile']['qualification'] = mysql_result($result, 0, "qualification");
 				$response['profile']['email'] = mysql_result($result, 0, "email");
+				$response['profile']['username'] = mysql_result($result, 0, "t_user_name");
 				
 			} else {
 				
@@ -124,17 +126,96 @@
 
 		$gcm_ids = array();
 
-		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year'";
+		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
 		$result = mysql_query($query);
 
 		for($i = 0; $i < mysql_num_rows($result); $i++)
 			$gcm_ids[] = mysql_result($result, $i, "gcm_id");
 
-		$message = array("tag" => 0, "content" => $title);
+		$message = array("tag" => "post", "content" => $title);
 
 		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
-		print_r($gcm_ids);
 		
+	} else if($tag == "chat") {
+
+		$sender = $_POST['sender'];
+		$receiver = $_POST['receiver'];
+
+		$query = "SELECT * FROM messages WHERE sent_by IN ('$sender', '$receiver')
+					AND received_by IN ('$sender', '$receiver')
+					ORDER BY message_id DESC LIMIT 100";
+
+		$result = mysql_query($query, $con);
+
+		if($result) {
+
+			$response['success'] = 1;
+			$response['num'] = mysql_num_rows($result);
+			$response['chats'] = array();
+			
+			for ($i = 0; $i < mysql_num_rows($result); $i ++) {
+
+				$response['chats'][$i]['sender'] = mysql_result($result, $i, "sent_by");
+				$response['chats'][$i]['receiver'] = mysql_result($result, $i, "received_by");
+				$response['chats'][$i]['message'] = mysql_result($result, $i, "message");
+				$response['chats'][$i]['date'] = mysql_result($result, $i, "date");
+				$response['chats'][$i]['time'] = mysql_result($result, $i, "time");
+
+			}
+
+			$query = "UPDATE messages SET read_ = '1' WHERE received_by = '$receiver' AND sent_by = '$sender'";
+			mysql_query($query) or die(mysql_error());
+
+		} else {
+
+			$response['error'] = 1;
+			$response['error_message'] = "Could Not Fetch Chats";
+
+		}
+
+	} else if($tag == "chat_send") {
+
+		$sender = $_POST['sender'];
+		$receiver = $_POST['receiver'];
+		$message = $_POST['message'];
+		$message_clean = filter_string($message);
+		date_default_timezone_set('Asia/Kolkata');
+		$date = date('Y-m-d', time());
+		$time = date('H:i:s', time());
+		$name = getNameFromUsername($sender);
+
+		$query = "INSERT INTO messages (sent_by, received_by, message, date, time, read_)
+					VALUES ('$sender', '$receiver', '$message_clean', '$date', '$time', '0');";
+
+		$result = mysql_query($query, $con) or die(mysql_error());
+
+		if($result) {
+
+			$response["success"] = 1;
+			$response["chat"]["message"] = $message;
+			$response["chat"]["sender"] = $sender;
+			$response["chat"]["date"] = $date;
+			$response["chat"]["time"] = $time;
+
+			require_once("gcm.php");
+
+			$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$receiver' AND gcm_id <> ''";
+			$result = mysql_query($query);
+
+			if(mysql_num_rows($result) > 0) {
+				for($i = 0; $i < mysql_num_rows($result); $i++)
+					$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+
+				$message = array("tag" => "message", "content" => $message, "name" => $name, "sender" => $sender, "date" => $date, "time" => $time);
+
+				$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
+			}
+
+		} else {
+			$response['error'] = 1;
+			$response['error_message'] = "Could not send message due to connectivity issues. Please try again.";
+		}
+
 	} else {
 	
 		$response['error'] = 1;
@@ -155,6 +236,11 @@
 		
 		return mysql_num_rows($result1) == 1 ? mysql_result($result1, 0, "name") : mysql_result($result2, 0, "name");
 		
+	}
+
+	function filter_string($str) {
+		$str = str_replace("'", "\'", $str);
+		return preg_replace('/\s+/', ' ', $str);
 	}
 	
 	mysql_close($con);

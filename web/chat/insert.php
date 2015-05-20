@@ -11,7 +11,8 @@
 	}
 	
 	$uname = $_REQUEST['receiver'];
-	$msg = filter_string($_REQUEST['message']);
+	$msg = $_REQUEST['message'];
+	$msg_clean = filter_string($msg);
 	
 	include('../connection.php');
 	date_default_timezone_set('Asia/Calcutta');
@@ -26,8 +27,13 @@
 }
 	
 	
-	$query = "INSERT INTO messages (sent_by, received_by ,message, time, date, read_) VALUES ('$sent_by','$uname', '$msg','$time','$date', '0')";
+	$query = "INSERT INTO messages (sent_by, received_by ,message, time, date, read_) VALUES ('$sent_by','$uname', '$msg_clean','$time','$date', '0')";
 	mysql_query($query, $con) or die(mysql_error());
+
+	require_once('../../android/gcm.php');
+
+	$gcm_ids = array();
+
 	$query = "SELECT * FROM messages WHERE sent_by IN ('$sent_by', '$uname') AND received_by IN ('$uname', '$sent_by') ORDER BY message_id ASC";
 	$result = mysql_query($query, $con) or die(mysql_error());
 	
@@ -47,6 +53,18 @@
 			else{
 					echo "<div class=\"receiver\"><span class=\"uname\">" .$name. ":</span> <span class=\"msg\">" . $extract['message'] . "</span></div>";
 			}
+	}
+
+	$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$uname' AND gcm_id <> ''";
+	$result = mysql_query($query);
+
+	if(mysql_num_rows($result) > 0) {
+		for($i = 0; $i < mysql_num_rows($result); $i++)
+			$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+
+		$message = array("tag" => "message", "content" => $msg, "name" => $name, "sender" => $sent_by, "date" => $date, "time" => $time);
+
+		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
 	}
 	
 ?>

@@ -32,7 +32,7 @@
 				$response['user']['year'] = $year;
 			
 			} else 
-				$error = 1;
+				$error = 0;
 			
 			//Next, we add all classmates of the same year
 			
@@ -87,7 +87,7 @@
 			
 			//First add user details
 			$query = "SELECT * FROM user_fac WHERE t_user_name='$username'";
-			$result = mysql_query($query, $con);
+			$result = mysql_query($query, $con) or die(mysql_error());
 			
 			if(mysql_num_rows($result) == 1) {
 				
@@ -121,14 +121,17 @@
 				$error = 1;
 			
 			//Next, we add research
-			$query = "SELECT r_id, r_text FROM research WHERE t_user_name = '$username' ORDER BY r_id ASC";
+			$query = "SELECT r_id, title, abstract, keyword, link FROM research WHERE user_name = '$username' ORDER BY r_id ASC";
 			$result = mysql_query($query, $con) or die(mysql_error());
 			
 			if(mysql_num_rows($result) > 0) {
 				
 				for($i = 0; $i < mysql_num_rows($result); $i ++) {
 					$response['research'][$i]['r_id'] = mysql_result($result, $i, "r_id");
-					$response['research'][$i]['r_text'] = mysql_result($result, $i, "r_text");
+					$response['research'][$i]['title'] = mysql_result($result, $i, "title");
+					$response['research'][$i]['abstract'] = mysql_result($result, $i, "abstract");
+					$response['research'][$i]['keywords'] = mysql_result($result, $i, "keyword");
+					$response['research'][$i]['link'] = mysql_result($result, $i, "link");
 				}
 				
 			} else

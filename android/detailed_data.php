@@ -89,6 +89,13 @@
 				$response['profile']['qualification'] = mysql_result($result, 0, "qualification");
 				$response['profile']['email'] = mysql_result($result, 0, "email");
 				$response['profile']['username'] = mysql_result($result, 0, "t_user_name");
+				$username = $response['profile']['username'];
+
+				$query = "SELECT title FROM research WHERE user_name='$username'";
+				$result = mysql_result($query, $con);
+
+				for($i = 0; $i < mysql_num_rows($result); $i ++)
+					$response['research'][$i] = mysql_result($result, $i, "title"); 
 				
 			} else {
 				

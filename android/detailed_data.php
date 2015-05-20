@@ -126,16 +126,15 @@
 
 		$gcm_ids = array();
 
-		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year'";
+		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
 		$result = mysql_query($query);
 
 		for($i = 0; $i < mysql_num_rows($result); $i++)
 			$gcm_ids[] = mysql_result($result, $i, "gcm_id");
 
-		$message = array("tag" => 0, "content" => $title);
+		$message = array("tag" => "post", "content" => $title);
 
 		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
-		print_r($gcm_ids);
 		
 	} else if($tag == "chat") {
 
@@ -183,6 +182,7 @@
 		date_default_timezone_set('Asia/Kolkata');
 		$date = date('Y-m-d', time());
 		$time = date('H:i:s', time());
+		$name = getNameFromUsername($sender);
 
 		$query = "INSERT INTO messages (sent_by, received_by, message, date, time, read_)
 					VALUES ('$sender', '$receiver', '$message_clean', '$date', '$time', '0');";
@@ -196,6 +196,20 @@
 			$response["chat"]["sender"] = $sender;
 			$response["chat"]["date"] = $date;
 			$response["chat"]["time"] = $time;
+
+			require_once("gcm.php");
+
+			$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$receiver' AND gcm_id <> ''";
+			$result = mysql_query($query);
+
+			if(mysql_num_rows($result) > 0) {
+				for($i = 0; $i < mysql_num_rows($result); $i++)
+					$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+
+				$message = array("tag" => "message", "content" => $message, "name" => $name, "sender" => $sender, "date" => $date, "time" => $time);
+
+				$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
+			}
 
 		} else {
 			$response['error'] = 1;

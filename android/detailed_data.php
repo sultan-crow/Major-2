@@ -132,7 +132,7 @@
 			$query = "SELECT gcm_id FROM user_student WHERE gcm_id <> ''";
 		else
 			$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
-		
+
 		$result = mysql_query($query);
 
 		for($i = 0; $i < mysql_num_rows($result); $i++)
@@ -190,6 +190,9 @@
 		$time = date('H:i:s', time());
 		$name = getNameFromUsername($sender);
 
+		$role_sender = $_POST["role_sender"];
+		$role_receiver = $_POST["role_receiver"];
+
 		$query = "INSERT INTO messages (sent_by, received_by, message, date, time, read_)
 					VALUES ('$sender', '$receiver', '$message_clean', '$date', '$time', '0');";
 
@@ -205,14 +208,19 @@
 
 			require_once("gcm.php");
 
-			$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$receiver' AND gcm_id <> ''";
+			if($role_receiver == "0")
+				$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$receiver' AND gcm_id <> ''";
+			else
+				$query = "SELECT gcm_id FROM user_fac WHERE t_user_name = '$receiver' AND gcm_id <> ''";
+
 			$result = mysql_query($query);
 
 			if(mysql_num_rows($result) > 0) {
 				for($i = 0; $i < mysql_num_rows($result); $i++)
 					$gcm_ids[] = mysql_result($result, $i, "gcm_id");
 
-				$message = array("tag" => "message", "content" => $message, "name" => $name, "sender" => $sender, "date" => $date, "time" => $time);
+				$message = array("tag" => "message", "content" => $message, "name" => $name, "sender" => $sender, 
+					"date" => $date, "time" => $time, "role" => $role_sender);
 
 				$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
 			}

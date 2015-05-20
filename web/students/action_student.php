@@ -18,6 +18,7 @@
 	if($num_rows == 1) {
 	
 		$_SESSION['s_user_name'] = $user_name;
+		$_SESSION['user'] = $user_name;
 		$_SESSION['class'] = mysql_result($result, 0, "class");
 		$_SESSION['role'] = "student";
 		echo "Success";

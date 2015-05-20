@@ -65,7 +65,7 @@ jQuery(function ($) {
 						$('#contact-container .contact-loading').fadeIn(200, function () {
 							$.ajax({
 								url: 'research/contact.php',
-								data: $('#contact-container form').serialize() + '&action=send',
+								data:  $('#contact-container form').serialize() + '&action=send',
 								type: 'post',
 								cache: false,
 								dataType: 'html',
@@ -73,7 +73,6 @@ jQuery(function ($) {
 									$('#contact-container .contact-loading').fadeOut(200, function () {
 										$('#contact-container .contact-title').html('Thank you!');
 										msg.html(data).fadeIn(200);
-										console.log("HEllo"+data);
 									});
 								},
 								error: contact.error

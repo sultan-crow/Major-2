@@ -57,7 +57,28 @@ else if ($action == "send") {
 	//TODO: Insert to database
 	
 	$query = "INSERT INTO posts (posted_by,class,post_title,post_text,time,date) VALUES ('$user','$class','$title','$text','$time','$date')";
-	mysql_query($query, $con) or die (mysql_error());
+	$res=mysql_query($query, $con) or die (mysql_error());
+	if($res){
+		require_once('../../android/gcm.php');
+
+		$gcm_ids = array();
+
+		if($year == "5")
+		$query = "SELECT gcm_id FROM user_fac WHERE t_user_name <> '$username' AND gcm_id <> ''";
+		else if($year == "12345")
+		$query = "SELECT gcm_id FROM user_student WHERE gcm_id <> ''";
+		else
+		$query = "SELECT gcm_id FROM user_student WHERE s_user_name <> '$username' AND class = '$year' AND gcm_id <> ''";
+
+		$result = mysql_query($query);
+
+		for($i = 0; $i < mysql_num_rows($result); $i++)
+		$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+
+		$message = array("tag" => "post", "content" => $title);
+
+		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
+			}
 	mysql_close($con);
 }
 

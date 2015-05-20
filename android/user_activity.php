@@ -33,7 +33,7 @@
 
 			$query = "UPDATE user_student SET gcm_id = '$regId' WHERE email = '$email' OR s_user_name = '$email'";
 			mysql_query($query, $con);
-			
+
 		} else if(mysql_num_rows($result_admin) == 1) {
 			
 			$response['success'] = 1;
@@ -42,6 +42,9 @@
 			$response['user']['username'] = mysql_result($result_admin, 0, "t_user_name");
 			$response['user']['year'] = 0;
 			$response['user']['role'] = 1;
+
+			$query = "UPDATE user_fac SET gcm_id = '$regId' WHERE email = '$email' OR t_user_name = '$email'";
+			mysql_query($query, $con);
 			
 		} else {
 		

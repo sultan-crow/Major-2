@@ -372,9 +372,14 @@ $count_=mysql_num_rows($count_each);
 
 </div>
 </span>
-<span id="clock"><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe>
 
-	</span>
+	<span  id="clock">
+<div><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe></div>
+
+<div><a href="images/anonymous.jpg" download="app.jpg" title="Click to download android app"><img src="../images/download.png"></img></a></div>
+<div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.vnb" target="_blank" title="Find our apps on Play store"><img src="../images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
+
+</span>
 </div>
 	
 

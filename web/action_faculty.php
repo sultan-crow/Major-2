@@ -6,7 +6,7 @@
 	
 	$user_name = $_POST['t_user_name'];
 	$user_name = mysql_real_escape_string($user_name);
-	$password = ($_POST['password']);
+	$password = md5($_POST['password']);
 	$password = mysql_real_escape_string($password);
 	
 	$query = "SELECT * FROM user_fac WHERE t_user_name = '$user_name' AND Password = '$password'";

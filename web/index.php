@@ -263,7 +263,7 @@ echo $detail[9];
 <?php 
 $count_res = mysql_num_rows($research);
 for($i=0;$i<$count_res;$i++){ 
-	$posted_by= mysql_result($research,$i,2);
+	$posted_by= mysql_result($research,$i,4);
 	$name_=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$posted_by'")or die(mysql_error());
 	$name=mysql_result($name_,0,"name");
 	?>

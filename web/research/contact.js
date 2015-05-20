@@ -3,11 +3,10 @@ jQuery(function ($) {
 	var contact = {
 		message: null,
 		init: function () {
-			$('#newpost').click(function (e) {
+			$('#addnew').click(function (e) {
 				e.preventDefault();
-
 				// load the contact form using ajax
-				$.get("../contact.php", function(data){
+				$.get("research/contact.php", function(data){		
 					// create a modal dialog with the data
 					$(data).modal({
 						closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>",
@@ -50,7 +49,7 @@ jQuery(function ($) {
 			});
 		},
 		show: function (dialog) {
-			$('#contact-container .contact-send').click(function (e) {
+			$('#addnew').click(function (e) {
 				e.preventDefault();
 				// validate form
 				if (contact.validate()) {
@@ -65,15 +64,16 @@ jQuery(function ($) {
 					}, function () {
 						$('#contact-container .contact-loading').fadeIn(200, function () {
 							$.ajax({
-								url: '../contact.php',
+								url: 'contact.php',
 								data: $('#contact-container form').serialize() + '&action=send',
 								type: 'post',
 								cache: false,
 								dataType: 'html',
 								success: function (data) {
 									$('#contact-container .contact-loading').fadeOut(200, function () {
-										$('#contact-container .contact-title').html('Thank you!<br>Your Post has been submitted successfully');
+										$('#contact-container .contact-title').html('Thank you!');
 										msg.html(data).fadeIn(200);
+										console.log("HEllo"+data);
 									});
 								},
 								error: contact.error
@@ -110,26 +110,23 @@ jQuery(function ($) {
 					dialog.container.fadeOut(200, function () {
 						dialog.overlay.fadeOut(200, function () {
 							$.modal.close();
-
 						});
 					});
 				});
 			});
-			location.reload();
 		},
 		error: function (xhr) {
 			alert(xhr.statusText);
 		},
 		validate: function () {
-			
-			
-contact.message="";
-			if (!$('#contact-container #contact-text').val()) {
-				contact.message = 'Message is required.';
+			contact.message = '';
+			if (!$('#contact-container #contact-name').val()) {
+				contact.message += 'Name is required. ';
 			}
+
 			
-			if (!$('#contact-container #contact-title').val()) {
-				contact.message = 'Title is required.';
+			if (!$('#contact-container #contact-message').val()) {
+				contact.message += 'Message is required.';
 			}
 
 			if (contact.message.length > 0) {
@@ -139,7 +136,6 @@ contact.message="";
 				return true;
 			}
 		},
-		
 		showError: function () {
 			$('#contact-container .contact-message')
 				.html($('<div class="contact-error"></div>').append(contact.message))

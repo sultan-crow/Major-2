@@ -51,31 +51,30 @@ $name = mysql_result($res,0,"name");
 		<script type = "text/javascript">
 		
 			$(document).ready(function(e) {
-				
 				$.ajaxSetup({cache:false});
 				
 				setInterval(function() {
 					$('#chatlogs').load('logs.php?id=<?php echo $_GET["id"]; ?>');
+					var h=$('#logs').prop('scrollHeight');
+					$('#logs').scrollTop(h);
+					
 				}, 2000);
 				
 				$('#chat_form').submit(function() { 
 				
+					
+					submit_form(); 
 					var h=$('#logs').prop('scrollHeight');
 					$('#logs').scrollTop(h);
-					submit_form(); 
-				
 					return false;
 				});
 				$('#button').click(function() { 
-					var h=$('#logs').prop('scrollHeight');
-					$('#logs').scrollTop(h);
 					
 					submit_form(); });
 				
 				function submit_form() {
 									
-								var h=$('#logs').prop('scrollHeight');
-								$('#logs').scrollTop(h);
+								
 
 					if(chat.msg.value == '') {
 						

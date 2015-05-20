@@ -20,6 +20,7 @@ if (empty($action)) {
 				<option value=\"3\">Third</option>
 				<option value=\"4\">Fourth</option>
 				<option value=\"1234\">All</option>
+				<option value=\"5\">Faculty</option>
 			</select>"
 			;
 	

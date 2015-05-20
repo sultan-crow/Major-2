@@ -114,6 +114,7 @@ jQuery(function ($) {
 					});
 				});
 			});
+			location.reload();
 		},
 		error: function (xhr) {
 			alert(xhr.statusText);

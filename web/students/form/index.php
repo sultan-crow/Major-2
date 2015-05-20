@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<html lang="en">
+
 <head>
-<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="http://necolas.github.io/normalize.css/2.1.3/normalize.css">
 <link rel="stylesheet" href="css/jquery.idealforms.css">
 <meta charset=utf-8 />
 <title>Registartion Form</title>
@@ -44,6 +41,8 @@
     height: 0;
   }
 </style>
+  <script src="../../js/jquery.js"></script>
+
 <script type="text/javascript">
   
 	$(function() {
@@ -72,8 +71,8 @@
 		$("#file").css("color","green");
 		$('#image_preview').css("display", "block");
 		$('#previewing').attr('src', e.target.result);
-		$('#previewing').attr('width', '250px');
-		$('#previewing').attr('height', '230px');
+		$('#previewing').attr('width', '20px');
+		$('#previewing').attr('height', '180px');
 	};
   
   </script>
@@ -211,8 +210,8 @@
 <div><a href="../login.php">Already Registered? Login</a></div>
   </div>
 
-  <script src="js/jquery-2.1.0.min.js"></script>
-  <script src="js/jquery-ui.min.js"></script>
+  <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
   <script src="js/out/jquery.idealforms.js"></script>
   <script type="text/javascript">
   
@@ -261,7 +260,7 @@
         'password': 'required pass',        
         'confirmpass': 'required equalto:password',
         'date': 'required date',
-        //'pic': 'required extension:jpg:png',
+        'pic': 'required extension:jpg:png',
         'year': 'minoption:1',
         'sex': 'minoption:1',
         'group': 'select:default',
@@ -283,7 +282,6 @@
 			  var name=$('#name').val();
 			  var username=$('#username').val();
 			  var password=$('#password').val();
-			  password=hex_md5(password);
 			  var gender=$('input[name="sex"]:checked').val();
 			  var dob=$('#dob').val();
 			  var year=$('input[name="hobbies"]:checked').val();

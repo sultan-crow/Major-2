@@ -166,7 +166,7 @@ body{
 
 </head>
 <body>
-<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board" ><img src="sticky.png" width="30%"></div></a>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board" ><img src="../images/sticky.png" width="30%"></div></a>
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a>
 <div id="page-header">
@@ -227,7 +227,7 @@ body{
 			
 		</tr>
 		<tr>
-			<label id="text-muted"><td>posted by:<?php echo $name;?></td>
+			<label id="text-muted"><td><?php echo $name;?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
 		</tr>

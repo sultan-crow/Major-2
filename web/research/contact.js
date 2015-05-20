@@ -49,7 +49,7 @@ jQuery(function ($) {
 			});
 		},
 		show: function (dialog) {
-			$('#addnew').click(function (e) {
+			$('#contact-container .contact-send').click(function (e) {
 				e.preventDefault();
 				// validate form
 				if (contact.validate()) {
@@ -64,7 +64,7 @@ jQuery(function ($) {
 					}, function () {
 						$('#contact-container .contact-loading').fadeIn(200, function () {
 							$.ajax({
-								url: 'contact.php',
+								url: 'research/contact.php',
 								data: $('#contact-container form').serialize() + '&action=send',
 								type: 'post',
 								cache: false,
@@ -125,8 +125,16 @@ jQuery(function ($) {
 			}
 
 			
-			if (!$('#contact-container #contact-message').val()) {
-				contact.message += 'Message is required.';
+			if (!$('#contact-container #contact-abstract').val()) {
+				contact.message += 'Abstract of Research';
+			}
+
+			if (!$('#contact-container #contact-keywords').val()) {
+				contact.message += 'Atleast one keyword is required.';
+			}
+
+			if (!$('#contact-container #contact-pdf').val()) {
+				contact.message += 'Select pdf of your research';
 			}
 
 			if (contact.message.length > 0) {

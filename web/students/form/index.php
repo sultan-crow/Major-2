@@ -260,7 +260,7 @@
         'password': 'required pass',        
         'confirmpass': 'required equalto:password',
         'date': 'required date',
-        'pic': 'required extension:jpg:png',
+        //'pic': 'required extension:jpg:png',
         'year': 'minoption:1',
         'sex': 'minoption:1',
         'group': 'select:default',

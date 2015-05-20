@@ -8,7 +8,7 @@ if (empty($action)) {
 	<div class='contact-content'>
 		<div class='contact-loading' style='display:none'></div>
 		<div class='contact-message' style='display:none'></div>
-		<form action='#' style='display:none'>
+		<form action='#' style='display:none' method='POST'>
 		
 			<label for='contact-name'>*Title:</label>
 			<input type='text' id='contact-name' class='contact-input' name='title' tabindex='1001' />

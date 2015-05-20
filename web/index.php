@@ -41,12 +41,14 @@ $word_num=array("Zero", "First", "Second", "Third", "Fourth");
 <link rel="stylesheet" type="text/css" href="css/contact.css">
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/contact.js"></script>
+<script src="research/contact.js"></script>
+
 <script type="text/javascript" src="js/jquery.simplemodal.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 
 <style>
@@ -56,9 +58,13 @@ textarea{
 	resize:none;
 }
 #pub{
-	height:20px;
-	background-color:#000;
-	margin-top:2px;	
+	height:80px;
+	background-color:#fff;
+	margin-top:10px;	
+	display:block;
+	border-radius:5px;
+	border-width:2px;
+		
 }
 .foot{
 	margin-bottom:1%;
@@ -117,6 +123,7 @@ body{
 		float:top;
 		
 }
+
 </style>
 
 </head>
@@ -181,11 +188,11 @@ if(res=="message"){
 }
 </script>
 <body >
-<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board"><img src="sticky.png" width="30%"></div></a>
+<a href="http://vnb.dcetech.com/" target="_blank"><div id="notice" title="Virtual Notice Board"><img src="images/sticky.png" width="30%"></div></a>
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a><div id="page-header">
 <span id="dp">
-<img src="<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
+<img src="images/<?php echo $detail[1].'.jpg'?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -250,24 +257,22 @@ echo $detail[9];
 </div >
 <div id="research_" class="aa">
 <div>
-<form>
-<table>
-<tr><td>Title:</td><td><input type="text"></input></td></tr>
-<tr><td>Abstract:</td><td><textarea></textarea></td>
-<td><input type="button" value="Post" class=""></input></td>
-</tr>
-</table>
-</form>
+<input type="button" class="btn btn-success" value="Add New	" id="addnew"></input>
 </div>
-<div>
+<div class="scroll">
 <?php 
 $count_res = mysql_num_rows($research);
-for($i=0;$i<$count_res;$i++){ ?>
-	<div id="pub"> <?php
-		echo mysql_result($research,$i,0);
-		echo mysql_result($research,$i,1);
-		echo mysql_result($research,$i,2);
-?>
+for($i=0;$i<$count_res;$i++){ 
+	$posted_by= mysql_result($research,$i,2);
+	$name_=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$posted_by'")or die(mysql_error());
+	$name=mysql_result($name_,0,"name");
+	?>
+	<div id="pub"> 
+	<b><?php echo mysql_result($research,$i,0); ?></b><br/>
+		<?php echo mysql_result($research,$i,1); ?><br/>
+	<a href="<?php echo mysql_result($research,$i,3); ?>" title="Click to see the research paper" target="_blank">a	</a><br/>
+	<?php  echo $name;?>
+
 	</div><?php
 }
 ?>
@@ -324,6 +329,11 @@ for($i=0;$i<$count_res;$i++){ ?>
 	for( $i=0;$i<$count_post;$i++){
 	$post_id= mysql_result($posts,$i,0);
 	$posted_by= mysql_result($posts,$i,1);
+	$nam=mysql_query("SELECT name FROM user_fac WHERE t_user_name='$posted_by'");
+	if(mysql_num_rows($nam)==0){
+		$nam=mysql_query("SELECT name FROM user_student WHERE s_user_name='$posted_by'");
+
+	}
 	$post_title= mysql_result($posts,$i,3);
 	$post_text=mysql_result($posts,$i,4);
 	$post_time=mysql_result($posts,$i,5);
@@ -345,7 +355,7 @@ for($i=0;$i<$count_res;$i++){ ?>
 			<td/>
 		</tr>
 		<tr>
-			<label id="text-muted"><td>posted by:<?php echo mysql_result($posts,$i,1);?></td>
+			<label id="text-muted"><td><?php echo mysql_result($nam,0,"name");?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,5);?></td>
 			<td class="text-muted"><?php echo mysql_result($posts,$i,6);?></td></label>
 		</tr>
@@ -365,8 +375,8 @@ for($i=0;$i<$count_res;$i++){ ?>
 for($i=0;$i<$faculty_count;$i++){
 	$receiver=mysql_result($faculty,$i,"t_user_name");
 	//Check on if user it itself
-	if($_SESSION['user']==$receiver ) {$i=$i+1; 	$receiver=mysql_result($faculty,$i,"t_user_name");
-if($i>=$faculty_count) break;}?>
+	if($_SESSION['user']==$receiver ) {$i=$i+1; if($i>=$faculty_count){break;}	else {$receiver=mysql_result($faculty,$i,"t_user_name");}
+ }?>
 	
 <a href="chat/index.php?id=<?php echo $receiver?>" target="_blank">
 <!--Function to call messaging -->

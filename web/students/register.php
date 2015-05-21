@@ -68,11 +68,9 @@ $user=mysql_query("SELECT * FROM user_student WHERE s_user_name='$username' and 
 	Connect with your Friends and Faculty	
 	Click on the link for your email verification
 	Your user-id is :'.$user.'
-	Your password is :**********'
+	Your password is :**********'."\n".
 	
-	.$verification_link.'
-
-Thank You for registering on network.';
+	.$verification_link."\n".'Thank You for registering on network.';
 	
 	$headers="From:no-reply@mce_network.dcetech.com";
 

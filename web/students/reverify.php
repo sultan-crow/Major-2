@@ -24,13 +24,13 @@ $to=$email;
 	Connect with your Friends and Faculty	
 	Click on the link for your email verification
 	Your user-id is :'.$user.'
-	Your password is :**********'
+	Your password is :**********'."\n\n"
 	
-	.$verification_link.'
+	.$verification_link."\n".'
 
 Thank You for registering on network.';
 	
-	$headers="From:no-reply@mce_network.dcetech.com";
+	$headers="From:no-reply@mce.dcetech.com";
 
 	mail($to,$sub,$msg,$headers);
 	

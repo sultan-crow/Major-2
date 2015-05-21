@@ -284,7 +284,7 @@ echo $detail[8];
 </tr>
 <tr>
 <th>Email :<?php if($detail[11]=='1'){echo '<span><img src="../images/verified.png" width="15px" height="15px" title="Email verified"></img></span>';}
- else{echo '<span"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified"></img></span>';}?></th>
+ else{echo '<span"><a href="http://dcetech.com/sagnik/social_network/web/students/reverify.php?id='.$detail[9].'" target="_blank"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified,click to send verification mail again"></img></a></input></span>';}?></th>
 <td><a href="mailto:<?php
 echo $detail[9];
 ?>" target="_blank" title="mail to">
@@ -336,7 +336,7 @@ for($i=0;$i<$faculty_count;$i++){
 <!--Function to call messaging -->
 
 <div id="box">
-<div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><img src="../images/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
 <div style="margin-left:5px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
@@ -388,7 +388,7 @@ $count_=mysql_num_rows($count_each);
 	<span  id="clock">
 <div><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe></div>
 
-<div><a href="images/anonymous.jpg" download="app.jpg" title="Click to download android app"><img src="../images/download.png"></img></a></div>
+<div><a href="../../android/MCE Network.apk" download="Mce-Nietwork.apk" title="Click to download android app"><img src="../images/download.png"></img></a></div>
 <div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.mcenetwork" target="_blank" title="Find our apps on Play store"><img src="../images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
 
 </span>

@@ -22,17 +22,21 @@ $email=  mysql_result($res,0,"email");
 
 if($role=='student'){
 	$class=mysql_result($res,0,"class");
-
+	$pic='../students/upload/'.$pic;
 	$group=mysql_result($res,0,"group_");
+	$verified=mysql_result($res,0,"verified");
 
 }
 else
 if($role=='fac'){
 	$desig=mysql_result($res,0,"designation");
-
+	$pic='../images/'.$pic;
 	$quali=mysql_result($res,0,"qualification");
 
 }
+//converting digit to word
+	$word_num=array("Zero", "First", "Second", "Third", "Fourth");
+
 ?>
 
 <html>
@@ -164,14 +168,18 @@ if($role=='fac'){
 	<body>
 	<span class="profile">
 		<table class="table">
-		<th><img src="../students/upload/<?php echo $pic;?>" onerror="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="<?php echo $name;?>"></img></th>
+		<th><img src="<?php echo $pic;?>" onerror="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="<?php echo $name;?>"></img></th>
 			<tr>
 			<td>Name: </td>
 			<td> <?php echo $name;?></td>
 			</tr>
 			<tr>
 			<td>Email-id: </td>
-			<td><?php echo $email;?></td>
+			<td><?php echo $email;?>
+			<?php if($verified=='1'){echo '<span><img src="../images/verified.png" width="15px" height="15px" title="Email verified"></img></span>';}
+				else{echo '<span"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified"></img></a></input></span>';}?></th>
+
+			</td>
 			</tr>
 			<tr>
 			<td>Date of Birth: </td>
@@ -185,7 +193,7 @@ if($role=='fac'){
 			<?php if($role=='student'){
 				echo '<tr>
 					<td>Year: </td>
-					<td>'.$class.'</td>
+					<td>'.$word_num[$class].'</td>
 					
 				</tr>
 				<tr>

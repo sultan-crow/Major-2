@@ -117,8 +117,9 @@
 		$date = date('Y-m-d', time());
 		$time = date('H:i:s', time());
 		
-		$query = "INSERT INTO posts (posted_by, class, post_title, post_text, time, date, time)
-					VALUES ('$username', '$year', '$title', '$body', '$time', '$date', '$time')";
+
+		$query = "INSERT INTO posts (posted_by, class, post_title, post_text, time, date,time)
+					VALUES ('$username', '$year', '$title', '$body', '$time', '$date' ,'$time')";
 		
 		$result = mysql_query($query, $con);
 		

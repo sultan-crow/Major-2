@@ -50,12 +50,12 @@ $user=mysql_query("SELECT * FROM user_student WHERE s_user_name='$username' and 
 	
 	
 	//Mail Verification
-	$to='ketank90@gmail.com';
+	$to=$email;
 	
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-	$headers .= 'To: <ketank90@gmail.com>' . "\r\n";
+	$headers .= 'To: <'.$email.'>' . "\r\n";
 	$headers .= 'From: <no-reply@mce_network.dcetech.com>' . "\r\n";
 	
 	$sub='Email Verification';
@@ -64,16 +64,13 @@ $user=mysql_query("SELECT * FROM user_student WHERE s_user_name='$username' and 
 	
 	$get_msg=md5($username.$name.$dob);
 	$verification_link=$Url.'/sagnik/social_network/web/students/verifymail.php?tempcode='.$usernamemd5;
-	$msg=	'
-	Welcome to MCE-NETWORK
+	$msg=	'Welcome to MCE-NETWORK
 	Connect with your Friends and Faculty	
 	Click on the link for your email verification
+	Your user-id is :'.$user.'
+	Your password is :**********'."\n".
 	
-	'.$verification_link.'
-	
-	
-	Thank You for registering on network
-	';
+	.$verification_link."\n".'Thank You for registering on network.';
 	
 	$headers="From:no-reply@mce_network.dcetech.com";
 

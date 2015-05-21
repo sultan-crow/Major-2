@@ -199,7 +199,7 @@ if(res=="message"){
 <a href="http://vnb.dcetech.com/" target="_blank"><div id="notice_text" title="Latest Notice"><i>Industrial Training Viva</i></div>
 </a><div id="page-header" class="header">
 <span id="dp">
-<img src="images/<?php echo $detail[1].'.jpg'?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
+<img src="images/<?php echo $detail[5]?>" title="<?php echo $detail[3]?>" onerror="this.src='images/anonymous.jpg'" style="margin-top:5px;"height="100" width="100"/>
 </span>
 <span id="title">
 <h1>Department of Applied Mathematics</h1>
@@ -390,7 +390,7 @@ for($i=0;$i<$faculty_count;$i++){
 <!--Function to call messaging -->
 
 <div id="box">
-<div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><img src="images/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
 <div style="margin-left:5px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
@@ -458,7 +458,7 @@ $count_=mysql_num_rows($count_each);
 <span  id="clock">
 <div><iframe src="http://free.timeanddate.com/clock/i4nschah/n176/fn6/tc0ff/pc99f/fti/tt0/tw0/tm1/ts1/tb1" frameborder="0" width="260" height="25"></iframe></div>
 
-<div><a href="images/anonymous.jpg" download="app.jpg" title="Click to download android app"><img src="images/download.png"></img></a></div>
+<div><a href="../android/MCE Network.apk" download="Mce-Network.apk" title="Click to download android app"><img src="images/download.png"></img></a></div>
 <div><a href="https://play.google.com/store/apps/details?id=scarecrow.beta.mcenetwork" target="_blank" title="Find our apps on Play store"><img src="images/googlePlayLogo.png" width="220px" height="50px"></img></a></div>
 
 </span>

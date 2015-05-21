@@ -59,17 +59,34 @@
 			}
 	}
 
-	$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$uname' AND gcm_id <> ''";
-	$result = mysql_query($query);
+	$query1 = "SELECT gcm_id FROM user_student WHERE s_user_name = '$uname' AND gcm_id <> ''";
+	$result1 = mysql_query($query1);
 
-	if(mysql_num_rows($result) > 0) {
-		for($i = 0; $i < mysql_num_rows($result); $i++)
-			$gcm_ids[] = mysql_result($result, $i, "gcm_id");
+	$query2 = "SELECT gcm_id FROM user_fac WHERE t_user_name = '$uname' AND gcm_id <> ''";
+	$result2 = mysql_query($query2);
+
+	if(mysql_num_rows($result1) > 0) {
+
+		for($i = 0; $i < mysql_num_rows($result1); $i++)
+			$gcm_ids[] = mysql_result($result1, $i, "gcm_id");
 
 		$message = array("tag" => "message", "content" => $msg, "name" => $name, "sender" => $sent_by, "date" => $date, "time" => $time);
 
 		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
 	}
+
+	else if(mysql_num_rows($result2) > 0) {
+
+		for($i = 0; $i < mysql_num_rows($result2); $i++)
+			$gcm_ids[] = mysql_result($result2, $i, "gcm_id");
+
+		$message = array("tag" => "message", "content" => $msg, "name" => $name, "sender" => $sent_by, "date" => $date, "time" => $time);
+
+		$pushStatus = sendPushNotificationToGCM($gcm_ids, $message);
+	}
+
+
+	
 	
 ?>
 

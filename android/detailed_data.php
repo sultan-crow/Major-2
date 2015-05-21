@@ -212,10 +212,11 @@
 			$response["chat"]["sender"] = $sender;
 			$response["chat"]["date"] = $date;
 			$response["chat"]["time"] = $time;
+			$response["chat"]["check"] = ($role_receiver == 0);
 
 			require_once("gcm.php");
 
-			if($role_receiver == "0")
+			if($role_receiver == 0)
 				$query = "SELECT gcm_id FROM user_student WHERE s_user_name = '$receiver' AND gcm_id <> ''";
 			else
 				$query = "SELECT gcm_id FROM user_fac WHERE t_user_name = '$receiver' AND gcm_id <> ''";

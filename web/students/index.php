@@ -284,7 +284,7 @@ echo $detail[8];
 </tr>
 <tr>
 <th>Email :<?php if($detail[11]=='1'){echo '<span><img src="../images/verified.png" width="15px" height="15px" title="Email verified"></img></span>';}
- else{echo '<span"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified"></img></span>';}?></th>
+ else{echo '<span"><a href="http://dcetech.com/sagnik/social_network/web/students/reverify.php?id='.$detail[9].'" target="_blank"><img src="../images/notverified.png" width="15px" height="15px" title="Email not verified,click to send verification mail again"></img></a></input></span>';}?></th>
 <td><a href="mailto:<?php
 echo $detail[9];
 ?>" target="_blank" title="mail to">
@@ -336,7 +336,7 @@ for($i=0;$i<$faculty_count;$i++){
 <!--Function to call messaging -->
 
 <div id="box">
-<div><img src="upload/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
+<div><img src="../images/<?php echo mysql_result($faculty,$i,"pic"); ?>"  onerror ="this.src='../images/anonymous.jpg'" width="100px" height="100px" title="Click to see complete profile"></img></div>
 <div style="margin-left:5px;"><?php echo mysql_result($faculty,$i,"name"); ?></div>
 </div>
 </a>
